@@ -1,0 +1,57 @@
+Mötesprotokoll
+
+Grupp: Grapefruit
+Datum: 03-09-2021
+Lärosäte: Chalmers
+Deltagare: Olivia Månström, Elvina Fahlgren, Tove Nilsson och Ingrid Stake.
+
+Mål (5 min)
+- Hanledning
+- Få förståelse över projektet
+
+Rapport från tidigare möte (15 min)
+- 
+
+Diskussions ämnen (35 min)
+- Presentation av projekt för handledare
+  - App som innehåller flera ”små” sällskapsspel.
+  - Tänkt på att man kan bygga ut den lätt. Lägga till och ta bort.
+  - Vi har tänkt på olika spel vi kan ha med, tex Rygg mot rygg, Pekleken.
+  - Man ska kunna skriva in namn i spelet.,
+  - Möjligt att ändra ”typ” på frågor
+- Vad man bedöms på? kod?
+- Hjälp med user stories. 
+- vad ska upp på git?
+- Vad ska vi tänka på med rapporten?
+- Tips inför projektet!
+
+Resultat och uppgifter (5 min)
+- Kanske lite simpelt spel, kan vara bra att ha någon extra grej. Ett lite mer avancerat spel - det skall vara en komplicarad modell. 
+- Kan vara hur fult som helst - fokus på snygg kod. Bra med objekt som kan ärva. Det är en objektorienterad programmeringskurs!
+- Fokusera på mvc. mvvm?
+- Kolla upp android studio - intelliJ, fast byggt för android, inbyggd design för android.
+- USERSTORIES
+ - skapa scrumboard - userstories, trello vanligast - lägg på github
+ - skriv userstories och programmera utifrån det. 
+ - t.ex. jag vill kunna spela pekleken med mina kompisar - dela upp i mindre tasks.
+ - utgå från task eller userstories när ni programmerar
+ - de ska vara separata, man ska kunna arbeta med de olika tasken separat
+ - kolla föreläsningar de första veckorna för att få tips ang userstories 
+- Ska skrivas tre mötesprotokoll varje vecka  - antingen välja att lägga in filer direkt eller länk till google drive. 
+- Skriv på slack till handledare
+- Vi får lägga till bibliotek men måste källhänvisa till dessa.
+- Viktigt att alla pushar kod
+- Förhoppningsvis skall userstories kunna göra så att vi kan arbeta separat
+- Om vi arbetar tillsammans förtydliga att vi jobbat ihop
+- Skriv @athor i javadoc för att visa vilka som har skrivit i klassen
+- Alla ska ha gjort något!
+- Brainstorma userstories!!!!!!!!!!!!!!
+- Döp branches efter vad vi gör och inte våra namn, t.ex. efter userstories
+- Merga mycket
+- Virtulization ska vara på i datorn.
+- Rapporten - RAD skriva senare (kan vara bra att ha i åtanke vad som skall stå där), SDD kan vi skriva nu om vi vill 
+- Dela upp userstories - vilka som är viktiga och mindre viktiga.
+
+
+Summering 
+- Hanledning 15.15 tors
