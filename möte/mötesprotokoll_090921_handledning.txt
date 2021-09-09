@@ -1,0 +1,59 @@
+Mötesprotokoll
+
+Grupp: Grapefruit
+Datum: 09-09-2021
+Lärosäte: Chalmers
+Deltagare: Olivia Månström, Elvina Fahlgren, Tove Nilsson och Ingrid Stake.
+
+• Mål (5 min)
+- Handledare skall titta på våra userstories
+    - Godkänna samt prioritera vilka vi skall ha med
+- Klara upp oklarheter med handledare
+
+• Rapport från tidigare möte (15 min)
+- Userstories?
+
+• Diskussions ämnen (35 min)
+- Brädspelet
+- Userstories
+- Domänmodel
+- Tasks
+- DoD
+- Trello
+- Maven
+
+• Resultat och uppgifter (5 min)
+- idé godkäd av handledare :)
+- userstories
+    - vi behöver lägga till userstories
+    - vi bör vara mer specifika
+    - dela upp de stories som vi kan dela upp
+- vi måste inte göra tasken nu, det kan vi göra allt eftersom
+- vi behöver tänka igenom våra tasks så att de inte för 
+- vi borde börja med UML diagram
+    - samarbeta
+- vi borde börja koda
+- vi ska "torrköra" program nästa vecka
+- Maven
+    - handlerare tror att vi behöver använda Maven
+- Poängen med Travis är att vi ska se att det funkar
+    - försöker bygga projektet
+    - bygger om de funkar
+    - kör och om det funkar så ger den en grön bock
+- det skall vara 90% cover
+- skriv tester hela tiden
+    - dumt att spara tester till slutet
+- Definition of Done
+    - t.ex. att man har 90% test på ett task innebär att task är klart
+    - vad skall alla user stories uppnå för att det skall klassas som ok 
+    - t.ex. att två andra skall ha gått igenom koden
+    - 
+- Planera mycket!
+- om vi jobbar tillsammans skall vi skriva @athour men OCKSÅ en tag (skickad från handledare)
+
+
+• Summering
+- Nästa möte fredag 10/9 kl.10
+- Till nästa vecka:
+    - UML, DoD, börja koda, skriva klart user stories, Travis
+
