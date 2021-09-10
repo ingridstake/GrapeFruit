@@ -1,0 +1,8 @@
+DoD
+
+- Minst två personer i gruppen ska ha kollat igenom koden så att den är okej 
+- Det ska skrivas javadoc på all kod som är public och som inte är självklart
+- Minst 90 % test coverage
+- Koden ska följa kod standarden
+- Alla tasks ska vara gjorda
+- Travis ska godkänna 
