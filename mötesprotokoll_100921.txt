@@ -1,0 +1,24 @@
+Mötesprotokoll
+Grupp: Datum: Lärosäte: Deltagare:
+• Mål (5 min)
+- Skapa DoD
+- Skriva klart user stories
+- Skriva acceptance kriterier för user stories
+- Påbörja ett UML diagram
+
+• Rapport från tidigare möte (15 min)
+- Vår domän modell är klar 
+
+• Diskussions ämnen (35 min)
+- Fler user stories och dela upp ett par stycken
+- Vad ska vi skriva som acceptance kriterier
+- Vad anser vi vara DoD
+
+• Resultat och uppgifter (5 min)
+- Vi har skrivit user stories och även gjort acceptance kriterier (några kvar)
+- Vi har skrivit en DoD 
+- Vi har påbörjat ett UML diagram
+
+• Summering
+- UML diagram är ej klar
+- Nästa möte: Tisdag kl 9
