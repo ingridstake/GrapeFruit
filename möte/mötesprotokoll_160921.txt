@@ -1,0 +1,47 @@
+MötesprotokollGrupp: GrapefruitDatum: 16-09-21Lärosäte: Chalmers tekniska högskolaDeltagare: Tove Nilsson, Elvina Fahlgren, Ingrid Stake och Olivia Månström
+
+• Mål (5 min)
+- Få råd gällande design modellen. Vi vill ha hjälp med att få bort cirkelberoendet.
+- Få hjälp med att börja lite, skulle behöva få råd gällande det.
+
+• Rapport från tidigare möte (15 min)
+- Vi har genomfört seminariumet och det gick bra.
+- Löst Github problem. Vi la in misc filen i gitignore.
+- Vi har förstått MVC bättre.
+
+• Diskussions ämnen (35 min)
+
+- Designmodellen:
+
+När vi vänder upp en tile, executeRule()? 
+Vi kan returnera en tile, som har några properties. 
+
+Gällande Tileklasserna: Ganska meningslöst/överflödigt att ha flera klasser som gör en sak, därför kanske vi ska gå tillbaka till att ha enums för Tile.
+
+GameBoard tar pengar från player.
+
+Istället för att returnera en hel tile så får gameboard en listener. 
+Listener är egentligen bättre men det är inte säkert att det kommer att fungera så bra. 
+
+GamePiece behövs den? 
+Då utgår vi alltid från att det finns en pjäs. Behövs inte. View behöver endast ha positionen. Ta bort GamePiece.
+
+- Var vi ska börja:
+Borde börja. Hade varit bra att ha något körbart. 
+
+- Var ska vi lägga Test-mappen?
+Ska ligga i src, kanske i Java. Java mappen borde vara rimligast. Men ska inte spela jättestor roll.
+
+Vi diskuterade user stories och tasks. Vi skulle behöva ändra tasks i US om att rulla en tärning.
+
+Epics pratade vi om, typ dela in View i en epic.
+• Resultat och uppgifter (5 min)
+
+Gör om design modellen.
+
+Vi ska numrera user stories. Som epics ex. 1.1, 1.2, osv.
+Vi behöver ändra tasks i user stories. Vi måste lösa "något". Stavfel i user stories. 
+
+Vi måste lägga till Travis i vår repo. (Alla måste göra det.)
+• Summering
+Möte med handledare 23-09-21.
