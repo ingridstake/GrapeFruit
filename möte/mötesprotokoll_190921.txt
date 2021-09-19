@@ -1,0 +1,27 @@
+Mötesprotokoll
+Grupp: Grapefruit
+Datum: 190921
+Lärosäte: Chalmers tekniska högskola
+Deltagare: Tove Nilsson, Elvina Fahlgren, Olivia Månström och Ingrid Stake
+
+• Mål (5 min)
+
+Mål för detta möte är att lösa den första "pull requesten" och planera vad vi ska göra i veckan.
+
+• Rapport från tidigare möte (15 min)
+
+Git problemen från tidigare möte är lösta, GrapeFruit.iml lades till i misc-filen. Alla iml filer lades till i misc. 
+Vi har börjat skriva kod. Vi började med att skapa en spelare och saker som tillhör den. 
+
+• Diskussions ämnen (35 min)
+
+Just nu har vi inte så många problem att lösa. 
+Vi vill ha en spelare som ska kunna förflytta sig tre positioner. Det är det är målet inför veckan som kommer.
+
+• Resultat och uppgifter (5 min)
+
+Vi ska har i uppgift tills på torsdag är att vi tillsammans ska ha en spelare som ska kunna förflytta sig tre positioner. 
+Det ska skrivas tasks till users stories som vi ska använda nu i denna iterationen/sprint. 
+
+• Summering
+Nästa möte är 210921 (utan handledare)
