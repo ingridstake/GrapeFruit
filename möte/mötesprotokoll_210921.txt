@@ -1,0 +1,30 @@
+Mötesprotokoll
+Grupp: Grapefruit
+Datum: 210921
+Lärosäte: Chalmers Tekniska Högskola
+Deltagare: Tove Nilsson, Elvina Fahlgren, Olivia Månström och Ingrid Stake
+
+• Mål (5 min)
+
+Det mål vi jobbar med just nu är att få en spelare att gå runt på en spelplan.
+
+
+• Rapport från tidigare möte (15 min)
+
+Vi har planerat vad vi skall göra i veckan. 
+
+• Diskussions ämnen (35 min)
+
+Vi ska diskutera hur vi skall lösa markörer och positioner.
+
+• Resultat och uppgifter (5 min)
+
+Vi har kommit fram till hur vi skall lösa positioner, för nuläget. 
+Vi kommer att ha olika klasser för de olika typer av positioner som finns i spelet (normal-, start-, stad- och båt-position), som ärver från samma interface iPosition. 
+I PositionFactory kommer positionerna och en HashMap (som kommer att koppla samman alla positioner) att skapas. 
+
+Vi ska fixa positioner i koden.
+
+
+• Summering
+Nästa möte är 230921 (med handledare)
