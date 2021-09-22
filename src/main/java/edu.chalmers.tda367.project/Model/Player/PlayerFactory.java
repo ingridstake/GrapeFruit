@@ -16,14 +16,14 @@ public class PlayerFactory {
      * @param n is the desired number of players in the list, n greater than 4 is not allowed.
      * @return a list with length n containing players
      */
-    public static List<Player> MakePlayers(int n){
+    public static List<IPlayer> MakePlayers(int n){
         if (n>4){
             return null;
         }
 
         List<PlayerColor> colorList = getPlayerColors();
 
-        List<Player> playerList = new ArrayList<>();
+        List<IPlayer> playerList = new ArrayList<>();
         for (int i = 0; i<n; i++){
             playerList.add(new Player(colorList.get(i)));
         }

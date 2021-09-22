@@ -6,7 +6,7 @@ package main.java.edu.chalmers.tda367.project.Model.Player;
  * @author elvina.fahlgren
  * @author olivia.månström
  */
-public class Player {
+public class Player implements IPlayer{
     private int moneyBalance;
     private boolean hasCow;
     private boolean hasVisum;
@@ -17,5 +17,10 @@ public class Player {
         hasCow = false;
         hasVisum = false;
         PLAYER_COLOR = playerColor;
+    }
+
+    @Override
+    public PlayerColor getPlayerColor() {
+        return PLAYER_COLOR;
     }
 }
