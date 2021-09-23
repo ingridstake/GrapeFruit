@@ -2,4 +2,4 @@
 
 Trello: https://trello.com/b/kmqi3NwJ/grapefruit 
 
-UML: https://lucid.app/lucidchart/654cdec1-0af0-49b7-b963-74b6c822ad14/edit?shared=true&page=0_0#
+UML: https://app.diagrams.net/#G1iG93vHK2u4bNr7c1V3XxUbskmbH0dbxU
