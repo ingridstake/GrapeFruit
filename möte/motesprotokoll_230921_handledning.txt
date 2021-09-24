@@ -1,0 +1,39 @@
+Mötesprotokoll med handledareGrupp: GrapefruitDatum: 230921Lärosäte: Chalmers tekniska högskolaDeltagare: Elvina Fahlgren, Tove Nilsson, Ingrid Stake, Olivia Månström och Felix Oliv• Mål (5 min)
+- Presentera vad vi har gjort i veckan.
+	- En spelare kan byta plats
+	- Player US
+	- Position US
+
+• Rapport från tidigare möte (15 min)Vi har jobbat på och skrivit kod tillsammans. Löst GitHub problem. 
+• Diskussions ämnen (35 min)
+
+Ändra till graf med noder. En klass för noder. Lätt att göra själva, onödigt att importera. Det borde vara den bästa lösningen. 
+En klass för grafen, en map med noder och länk till en bild. 
+Inte jättemycket att göra om. Gameboard behövs skrivas om. 
+
+Design modellen, fixa UML.
+
+US påbörjade, 
+
+Vi har jobbat tillsammans, snart kommer vi kunna börja jobba lite mer individuellt.
+
+Försök använda pull requests, då används travis också. Får massa mejl med det är bara att ta bort. 
+
+Beroenden. Vi har tänkt jättemycket på hur vi ska göra det snyggt! Det tar jättelång tid. 
+
+JSON: vi pratade om JSON. Fram och tillbaka. Felix tyckte inte JSON var en bra ide. Han tyckte att vi skulle använda oss av grafer istället. 
+
+Vi har ingen controller.
+
+Vi ska använda JavaFX + Scenebuilder. Vi borde köra på det, så slipper vi lära oss extra grejer.
+
+Om man ska skiva tester och det inte går att skriva ett test så är det inte så bra. och vyn kan antagligen inte använda det alls. 
+
+Nod- och edgetester. Koppliningen mellan projekt och inte metoderna i ett projekt. Kopplingen = Edge. Controllern kanske kan få tag på det om det är package private. 
+
+• Resultat och uppgifter (5 min)
+
+User stories, tester, javadoc, uml är saker som ska fixas till nästa möte.
+Påbörja View lite också! :)
+• Summering
+Vi fick veta ett vi borde tänka om gällande JSON och köra på grafer istället. Vi fick uppgifter till nästa vecka.Nästa möte: 26/9-21 utan handledare.
