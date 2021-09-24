@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 
 public class PositionFactory {
 
@@ -40,6 +39,14 @@ public class PositionFactory {
 
 
         return positionListHashMap;
+    }
+
+    public static List<IPosition> makePositions(int n) {
+        List<IPosition> positions = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            positions.add(new NormalPosition(i));
+        }
+        return positions;
     }
 
 

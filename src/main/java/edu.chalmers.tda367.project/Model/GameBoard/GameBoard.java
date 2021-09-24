@@ -1,36 +1,34 @@
-package main.java.edu.chalmers.tda367.project.Model;
+package main.java.edu.chalmers.tda367.project.Model.GameBoard;
 
 import main.java.edu.chalmers.tda367.project.Model.Player.IPlayer;
 import main.java.edu.chalmers.tda367.project.Model.Player.PlayerFactory;
 import main.java.edu.chalmers.tda367.project.Model.Position.IPosition;
-import main.java.edu.chalmers.tda367.project.Model.Position.PositionFactory;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 public class GameBoard {
 
-    HashMap<IPosition, List<IPosition>> positionsHashMap;
-    HashMap<IPlayer, IPosition> playerPositionHashMap;
+    HashMap<IPlayer, Node> playerPositionHashMap;
     IPlayer currPlayer;
+    Map map;
 
     public GameBoard(int nPlayers){
-        playerPositionHashMap = new HashMap<>();
-        positionsHashMap = PositionFactory.makePositions();
-        List<IPlayer> playerList = PlayerFactory.MakePlayers(nPlayers);
-        currPlayer = playerList.get(0);
-        for (IPlayer player: playerList) {
-            playerPositionHashMap.put(player, PositionFactory.startPosition);
+        List<IPlayer> players = PlayerFactory.MakePlayers(nPlayers);
+        map = MapFactory.createMap(8);
+
+        for (IPlayer player : players) {
+            playerPositionHashMap.put(player, map.getStartNode());
         }
 
+
     }
 
-    public void movePlayer(IPosition newPosition){
-        playerPositionHashMap.replace(currPlayer, newPosition);
+    public void movePlayer(Node newNode){
+        playerPositionHashMap.replace(currPlayer, newNode);
     }
 
+    /*
     public void run (){
         Scanner sc=new Scanner(System.in);
 
@@ -74,4 +72,5 @@ public class GameBoard {
 
         return string.toString();
     }
+     */
 }
