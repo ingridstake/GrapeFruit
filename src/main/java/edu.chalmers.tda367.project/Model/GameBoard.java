@@ -44,6 +44,7 @@ public class GameBoard {
             for (Map.Entry<IPosition, List<IPosition>> positionEntry : positionsHashMap.entrySet()){
                 if (positionEntry.getKey().getId() == ans){
                     movePlayer(positionEntry.getKey());
+                    break;
                 }
             }
 
