@@ -1,0 +1,35 @@
+Mötesprotokoll med handledare
+Grupp: Grapefruit
+Datum: 260921
+Lärosäte: Chalmers tekniska högskola
+Deltagare: Elvina Fahlgren, Tove Nilsson, Ingrid Stake, Olivia Månström
+
+• Mål (5 min)
+- Gå igenom vad vi gjort hittills
+- Skapa fyra olika branches där vi individuellt kan börja arbeta på varsin userstory
+
+• Rapport från tidigare möte (15 min)
+Vi har ändrat spelplanen så att den kommer att bestå av noder istället för att ha en HashMap.
+
+• Diskussions ämnen (35 min)
+- Planera veckan
+- Planera in möten
+
+• Resultat och uppgifter (5 min)
+- Gå igenom koden tillsammans och lägga till javadoc. 
+- Dessa pass kommer vi jobba tillsammans under veckan:
+	- mån 27/9: 9-12
+	- tis 28/9: 9-12
+	- ons 29/9: 10-12 och 15:15-17:00
+	- tors 30/9: 13:15-15:30
+	- fre: 1/10: 11:00-tills färdiga med sista målet för veckan
+- Dessa tider har vi möten:
+	- tis 28/9: kl.09:00
+	- handledarmöte tors
+	- fre 1/10: ca. kl. 14:00
+- Komma på mål 
+
+
+• Summering
+Vi har planerat inför veckan.
+Nästa möte: Tis. kl.9 260921 utan handledare.
