@@ -21,20 +21,12 @@ public class PlayerFactory {
             return null;
         }
 
-        List<PlayerColor> colorList = getPlayerColors();
+        List<PlayerColor> colorList = PlayerColor.getPlayerColors();
 
         List<IPlayer> playerList = new ArrayList<>();
         for (int i = 0; i<n; i++){
             playerList.add(new Player(colorList.get(i)));
         }
         return playerList;
-    }
-
-    private static List<PlayerColor> getPlayerColors() {
-        List<PlayerColor> colorList = new ArrayList<>();
-        for (PlayerColor color: PlayerColor.values()) {
-            colorList.add(color);
-        }
-        return colorList;
     }
 }

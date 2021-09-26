@@ -7,6 +7,12 @@ import main.java.edu.chalmers.tda367.project.Model.Position.IPosition;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author ingrid.stake
+ * @author tove.nilsson
+ * @author elvina.fahlgren
+ * @author olivia.månström
+ */
 public class GameBoard {
 
     HashMap<IPlayer, Node> playerPositionHashMap;

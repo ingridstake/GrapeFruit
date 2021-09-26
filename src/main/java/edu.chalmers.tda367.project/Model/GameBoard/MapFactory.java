@@ -7,8 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author ingrid.stake
+ * @author tove.nilsson
+ * @author elvina.fahlgren
+ * @author olivia.månström
+ */
 public class MapFactory {
 
+    /**
+     * Creates and returns a map with nNodes nodes including a startNode
+     * @param nNodes
+     * @return
+     */
     static Map createMap(int nNodes) {
         List<IPosition> positions = PositionFactory.makePositions(nNodes);
         List<Node> nodes = new ArrayList<>();

@@ -19,6 +19,10 @@ public class Player implements IPlayer{
         PLAYER_COLOR = playerColor;
     }
 
+    /**
+     * Returns the color of the player
+     * @return returns the color of the player
+     */
     @Override
     public PlayerColor getPlayerColor() {
         return PLAYER_COLOR;
