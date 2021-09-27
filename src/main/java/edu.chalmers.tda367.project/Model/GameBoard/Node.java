@@ -77,4 +77,14 @@ public class Node {
     public IPosition getPosition(){
         return position;
     }
+
+    protected List<Node> getAllNodes(List<Node> nodes) {
+        for (Node node : this.getNeighbours()) {
+            if (!nodes.contains(node)){
+                nodes.add(node);
+                node.getAllNodes(nodes);
+            }
+        }
+        return nodes;
+    }
 }

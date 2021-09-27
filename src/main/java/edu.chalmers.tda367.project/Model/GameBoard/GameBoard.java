@@ -26,12 +26,14 @@ public class GameBoard {
         for (IPlayer player : players) {
             playerPositionHashMap.put(player, map.getStartNode());
         }
-
-
     }
 
     public void movePlayer(Node newNode){
         playerPositionHashMap.replace(currPlayer, newNode);
+    }
+
+    public Map getMap() {
+        return map;
     }
 
     /*

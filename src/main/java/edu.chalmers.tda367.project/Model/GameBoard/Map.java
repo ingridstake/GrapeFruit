@@ -1,5 +1,8 @@
 package main.java.edu.chalmers.tda367.project.Model.GameBoard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author ingrid.stake
  * @author tove.nilsson
@@ -13,8 +16,13 @@ public class Map {
         this.startNode = startNode;
     }
 
-    protected Node getStartNode(){
+    public Node getStartNode(){
         return startNode;
+    }
+
+    public List<Node> getAllNodes(){
+        List<Node> allNodes = new ArrayList<>();
+        return startNode.getAllNodes(allNodes);
     }
 
 
