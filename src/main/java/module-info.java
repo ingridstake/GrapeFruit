@@ -6,4 +6,6 @@ module edu.chalmers.grapefruit {
 
     opens edu.chalmers.grapefruit to javafx.fxml;
     exports edu.chalmers.grapefruit;
+    exports edu.chalmers.grapefruit.Controller;
+    opens edu.chalmers.grapefruit.Controller to javafx.fxml;
 }

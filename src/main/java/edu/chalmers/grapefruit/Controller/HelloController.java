@@ -1,4 +1,4 @@
-package edu.chalmers.grapefruit;
+package edu.chalmers.grapefruit.Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
