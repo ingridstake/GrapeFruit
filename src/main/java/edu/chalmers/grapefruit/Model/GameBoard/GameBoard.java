@@ -18,9 +18,8 @@ public class GameBoard {
     IPlayer currPlayer;
     Map map;
 
-    public GameBoard(int nPlayers){
+    public GameBoard(List<IPlayer> players){
         playerPositionHashMap = new HashMap<>();
-        List<IPlayer> players = PlayerFactory.MakePlayers(nPlayers);
         map = MapFactory.createMap(8);
 
         for (IPlayer player : players) {
