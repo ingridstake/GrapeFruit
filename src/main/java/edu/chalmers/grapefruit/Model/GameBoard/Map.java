@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Map {
     private final Node startNode;
+    private int size;
 
     protected Map(Node startNode){
         this.startNode = startNode;
@@ -18,6 +19,10 @@ public class Map {
 
     public Node getStartNode(){
         return startNode;
+    }
+
+    public void add (Node node, List<Node> relatedNodes){
+
     }
 
     public List<Node> getAllNodes(){

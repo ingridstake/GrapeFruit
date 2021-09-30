@@ -8,7 +8,7 @@ import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 import java.util.List;
 
 public class GameModel {
-    GameBoard gameBoard;
+    public GameBoard gameBoard;
     List<IPlayer> players;
 
     public GameModel() {
