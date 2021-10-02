@@ -2,6 +2,7 @@ package edu.chalmers.grapefruit;
 
 import edu.chalmers.grapefruit.Controller.HelloController;
 import edu.chalmers.grapefruit.Model.GameModel;
+import edu.chalmers.grapefruit.View.GameBoardView;
 import edu.chalmers.grapefruit.View.GameView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +15,13 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("background.fxml"));
+        /* FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("background.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+
+         */
+        GameBoardView.Init(stage);
         stage.show();
     }
 
