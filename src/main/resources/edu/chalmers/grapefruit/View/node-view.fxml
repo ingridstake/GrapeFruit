@@ -9,9 +9,9 @@
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="edu.chalmers.grapefruit.View.NodeView">
    <children>
-      <Circle fill="DODGERBLUE" layoutX="290.0" layoutY="184.0" radius="25.0" stroke="BLACK"
+      <Circle fx:id="position" fill="DODGERBLUE" layoutX="290.0" layoutY="184.0" radius="25.0" stroke="BLACK"
               strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 
 </AnchorPane>

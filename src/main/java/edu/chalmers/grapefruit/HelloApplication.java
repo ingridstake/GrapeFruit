@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit;
 
+import edu.chalmers.grapefruit.Controller.GameBoardController;
 import edu.chalmers.grapefruit.Controller.HelloController;
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.View.GameBoardView;
@@ -21,10 +22,12 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
 
          */
-        GameBoardView.Init(stage);
+        GameModel model = new GameModel();
+        GameBoardController controller = new GameBoardController(model, stage);
+
         stage.show();
     }
-
+/*
     public static void main(String[] args) {
         GameModel model = new GameModel();
         GameView view = new GameView(model);
@@ -32,4 +35,5 @@ public class HelloApplication extends Application {
 
         launch();
     }
+ */
 }

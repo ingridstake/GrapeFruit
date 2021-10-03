@@ -1,46 +1,49 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.HelloApplication;
+import edu.chalmers.grapefruit.Controller.GameBoardController;
+import edu.chalmers.grapefruit.Interfaces.IPositionable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class GameBoardView {
-    AnchorPane anchorPane;
 
-    public static GameBoardView Init(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
-        stage.setTitle("Den försvunna kossan!");
-        stage.setScene(scene);
-        stage.show();
-        return fxmlLoader.getController();
+public class GameBoardView {
+
+    @FXML AnchorPane background;
+
+    /**
+     * There need to be a constructor taking no arguments in order for the load of the View's .fxml-file to work
+     */
+    public GameBoardView () { }
+
+    // TODO: Klura ut hur man får controllern att subscribea/lyssna på event/action hos någon av positionerna
+    /**
+     * Populates the GameBoardView with all objects in the positionableList.
+     * @param positionableList is the list of positional objects that populates the view.
+     * @param controller is the controller of the GameBoardView
+     * @throws IOException
+     */
+    public void populate (List<IPositionable> positionableList, GameBoardController controller) throws IOException {
+        for (IPositionable positionable : positionableList ) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(positionable.resourceString()));
+            background.getChildren().add(fxmlLoader.load());
+        }
+
+        int i = 0;
+        for (javafx.scene.Node child : background.getChildren()) {
+            child.relocate(positionableList.get(i).getX(), positionableList.get(i).getY());
+            i++;
+            if (i>= positionableList.size()) {
+                break;
+            }
+        }
     }
 
     @FXML
-    private void initialize() throws IOException {
-
-    }
-
-    private GameBoardView(){
-
-    }
-
-    public GameBoardView ( int nNodes) {
-        anchorPane = new AnchorPane();
-        List<Circle> circleList = new ArrayList<>();
-        for (int i = 0; i<nNodes; i++){
-            circleList.add(new Circle());
-        }
-
-        anchorPane.getChildren().addAll(circleList);
-
+    public void initialize() throws IOException {
+        //inte säkert att denna kommer till använding, men metoden körs efter att konstruktorn och annan setup körts,
+        //
     }
 }

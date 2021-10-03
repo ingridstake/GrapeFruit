@@ -7,8 +7,4 @@ public class GameView {
     public GameView(GameModel model) {
 
     }
-
-    public void init() {
-
-    }
 }

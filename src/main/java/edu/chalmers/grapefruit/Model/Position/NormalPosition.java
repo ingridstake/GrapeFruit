@@ -28,6 +28,11 @@ public class NormalPosition implements IPosition{
         return Y;
     }
 
+    @Override
+    public String resourceString() {
+        return "node-view.fxml";
+    }
+
     /**
      * Changes the state of isHighlighted to true
      */

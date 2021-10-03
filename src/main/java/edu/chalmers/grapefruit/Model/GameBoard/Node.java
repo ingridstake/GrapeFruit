@@ -15,7 +15,6 @@ public class Node {
     List<Node> relatedNodes;
     private final IPosition position;
 
-
     public Node(IPosition position) {
         this.position = position;
         relatedNodes = null;
@@ -88,4 +87,3 @@ public class Node {
         return nodes;
     }
 }
-

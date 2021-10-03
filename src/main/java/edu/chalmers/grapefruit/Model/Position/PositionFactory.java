@@ -24,13 +24,15 @@ public class PositionFactory {
         HashMap<IPosition, List<IPosition>> positionListHashMap = new HashMap<>();
         List<IPosition> positions = new ArrayList<>();
 
-        for(int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                if (!(i == 2 && j==2)){
-                    positions.add(new NormalPosition((i+1)*20, (j+1)*20));
-                }
-            }
-        }
+        positions.add(new NormalPosition(30, 30));
+        positions.add(new NormalPosition(30, 50));
+        positions.add(new NormalPosition(30, 70));
+        positions.add(new NormalPosition(50, 30));
+        positions.add(new NormalPosition(50, 70));
+        positions.add(new NormalPosition(70, 30));
+        positions.add(new NormalPosition(70, 50));
+        positions.add(new NormalPosition(70, 70));
+
         positionListHashMap.put(positions.get(0), Arrays.asList(positions.get(7), positions.get(1)) );
         positionListHashMap.put(positions.get(1), Arrays.asList(positions.get(0), positions.get(2)) );
         positionListHashMap.put(positions.get(2), Arrays.asList(positions.get(1), positions.get(3)) );
@@ -52,13 +54,16 @@ public class PositionFactory {
      */
     public static List<IPosition> makePositions(int n) {
         List<IPosition> positions = new ArrayList<>();
-        for(int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                if (!(i == 2 && j==2)){
-                    positions.add(new NormalPosition((i+1)*20, (j+1)*20));
-                }
-            }
-        }
+
+        positions.add(new NormalPosition(100, 100));
+        positions.add(new NormalPosition(100, 200));
+        positions.add(new NormalPosition(100, 300));
+        positions.add(new NormalPosition(200, 100));
+        positions.add(new NormalPosition(200, 300));
+        positions.add(new NormalPosition(300, 100));
+        positions.add(new NormalPosition(300, 200));
+        positions.add(new NormalPosition(300, 300));
+
         return positions;
     }
 }
