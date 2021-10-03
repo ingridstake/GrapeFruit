@@ -1,0 +1,34 @@
+Mötesprotokoll
+
+Grupp: Grapefruit
+Datum: 01-10-2021
+Lärosäte: Chalmers
+Deltagare: Olivia Månström, Elvina Fahlgren, Tove Nilsson och Ingrid Stake.
+
+• Mål (5 min)
+- bli förberadda inför nästa veckas peer review
+
+• Rapport från tidigare möte (15 min)
+Vi har inte hunnit arbeta sedan förra mötet.
+
+
+• Diskussions ämnen (35 min)
+- RAD
+- SDD
+- MVC ihopkoppling
+
+
+• Resultat och uppgifter (5 min)
+
+- flytta upp attributen från Player till interfacet IPlayer
+
+- ändra behörighet på UML
+- byt ut till nya trello länken på git
+- uppdatera trello
+- Nästa vecka (7e okt) ska vi lämna in för peer review.
+- påbörja SDD och RAD
+
+• Summering
+- Vi borde börja skriva SDD och RAD
+- Nästa möte söndag kl.15/16
+

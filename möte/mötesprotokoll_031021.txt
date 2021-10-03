@@ -1,0 +1,15 @@
+MötesprotokollGrupp: GrapefruitDatum: 031021Lärosäte: Chalmers Tekniska HögskolaDeltagare: Olivia Månström, Elvina Fahlgren, Ingrid Stake och Tove Nilsson
+• Mål (5 min)- Fördela veckans user stories. - Skriva tasks för varje aktuell user story.
+
+• Rapport från tidigare möte (15 min)Vi har påbörjat både SDD och RAD.
+MVC har blivit ihopkopplad. Vår GameboardView är en controller till background.fxml.
+• Diskussions ämnen (35 min)Vi diskuterade vilka undser stories vardera person ska börja med. • Resultat och uppgifter (5 min)Elvina ska ta user story "Vi vill som användare ha olika positioner med/utan markörer för att hitta kossan/pengar/tjuvar/visum och blanka".
+
+Olivia ska ta user story "Vi som användare vill ha spelare för att kunna spela spelet".
+
+Ingrid och Tove tar user story "Jag som användare vill att pjäsen förflyttar sig till den position jag väljer för att spelet ska kunna fortgå".
+
+Ingrid och Olivia tar user story "Vi som användare vill att pjäsen förflyttas till den position man trycker på så länge det är inom det upplysta området". 
+
+Imorgon, den 041021 ska vi ha ett gemensamt arbetspass.
+• SummeringJust nu har vi inte några olösta problem.Nästa möte ska vara 051021.

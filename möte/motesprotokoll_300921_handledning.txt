@@ -1,0 +1,59 @@
+Mötesprotokoll
+
+Grupp: Grapefruit
+Datum: 30-09-2021
+Lärosäte: Chalmers
+Deltagare: Olivia Månström, Elvina Fahlgren, Tove Nilsson och Ingrid Stake.
+
+• Mål (5 min)
+
+
+• Rapport från tidigare möte (15 min)
+
+
+• Diskussions ämnen (35 min)
+- Problem under veckan
+- Hur ska vi koppla samman 
+
+
+• Resultat och uppgifter (5 min)
+- Vi har haft problem med javafx under veckan, vilket har satt käppar i hjulet.
+- Vi ska ha 
+Handledare:
+- En controller kan ha en modell
+- Bäst att bara köra "start" metoden, inte main
+- man skulle kunna ha en SceneHandler klass med tillhörande controller 
+	- vill man byta till spelets fxml fil skapar 
+	- från view till controller okcås ok
+	- okej att ha som vi har nu
+	- varje fxml fil har en tillhörande controller från början
+	- nån grupp har tolkat det soma tt klassen är en view 
+	- det som heter controller kan man 
+	- om vi hanvänder fxml loarde hämtar vi en fxml fil, vilken har en controller kopplat till sig, vyn blir fxml filen och controllen blir 
+		- för att separera: den som heter controller blir view - onbutton osv
+			- ha en separat controller
+	- man kan också göra 
+		- med fxml loder skapar vi 
+		- gör så att controllern skapar view klassen 
+		- eller ScenHandler klass som kan ladda 
+- ska skicka bra länk
+- skapa en controller som bestämmer helka altet och jobba sig därifrån
+
+- UML:
+	- flytta upp attributen från Player till interfacet IPlayer
+	- MapFactory: bästa sättet för factory är det bättre att använda String
+		- vi bör kunna hantera fel inputvärde
+	- populera noder dynamiskt 
+	- förstår ej varför PositionFactory har attribut
+	- IPosition bör ha 
+- Vi borde börja skriva SDD och RAD
+- Nästa vecka (7e okt) ska vi lämna in för peer review.
+- Försök arbete så mycket utifrån stories som möjlig och flytta de till 
+- byt ut till nya trello länken på git
+
+• Summering
+- Vi borde börja skriva SDD och RAD
+- Nästa möte fredag 10/9 kl.10
+- Till nästa vecka:
+    - UML, DoD, börja koda, skriva klart user stories, Travis
+
