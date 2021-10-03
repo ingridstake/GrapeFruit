@@ -8,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.List;
 
-
 public class GameBoardView {
 
     @FXML AnchorPane background;
