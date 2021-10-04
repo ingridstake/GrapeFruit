@@ -1,0 +1,78 @@
+{
+  "PositionList": [
+    {
+      "position": {
+        "postionID": 0,
+        "postionType": "NormalPosition",
+        "X": 100,
+        "Y": 100
+      }
+    },
+    {
+      "position": {
+        "postionID": 1,
+        "postionType": "NormalPosition",
+        "X": 100,
+        "Y": 200
+      }
+    },
+    {
+      "position": {
+        "postionID": 2,
+        "postionType": "NormalPosition",
+        "X": 100,
+        "Y": 300
+      }
+    },
+    {
+      "position": {
+        "postionID": 3,
+        "postionType": "NormalPosition",
+        "X": 200,
+        "Y": 100
+      }
+    },
+    {
+      "position": {
+        "postionID": 4,
+        "postionType": "NormalPosition",
+        "X": 200,
+        "Y": 300
+      }
+    },
+    {
+      "position": {
+        "postionID": 5,
+        "postionType": "NormalPosition",
+        "X": 300,
+        "Y": 100
+      }
+    },
+    {
+      "position": {
+        "postionID": 6,
+        "postionType": "NormalPosition",
+        "X": 300,
+        "Y": 200
+      }
+    },
+    {
+      "position": {
+        "postionID": 7,
+        "postionType": "NormalPosition",
+        "X": 300,
+        "Y": 300
+      }
+    }
+  ],
+  "NeighboursHashMap": {
+    "0": [7, 1],
+    "1": [0, 2],
+    "2": [1, 3],
+    "3": [2, 4],
+    "4": [3, 5],
+    "5": [4, 6],
+    "6": [5, 7],
+    "7": [6, 0]
+  }
+}
