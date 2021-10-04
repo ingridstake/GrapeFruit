@@ -10,6 +10,7 @@ import edu.chalmers.grapefruit.Interfaces.IPositionable;
  */
 public interface IPosition extends IPositionable {
 
+    int getID();
     int getX();
     int getY();
     void highlight();

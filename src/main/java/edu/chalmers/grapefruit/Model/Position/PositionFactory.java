@@ -1,10 +1,8 @@
 package edu.chalmers.grapefruit.Model.Position;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 import org.json.*;
 import java.io.FileReader;
 
@@ -24,21 +22,6 @@ public class PositionFactory {
      */
     public static HashMap<IPosition, List<IPosition>> makePositions() {
         HashMap<IPosition, List<IPosition>> positionListHashMap = new HashMap<>();
-        List<IPosition> positions = new ArrayList<>();
-
-        PositionFactory app = new PositionFactory();
-        // Transforms input for reading
-        JSONTokener jsonTokener = new JSONTokener(app.getJSONFile());
-        JSONObject jsonObject = new JSONObject(jsonTokener);
-        System.out.println(jsonObject.getJSONArray("PositionList"));
-
-        JSONArray jsonArray = jsonObject.getJSONArray("PositionList");
-
-        for(int i = 0; i < jsonArray.length(); i++){
-            JSONObject current = jsonArray.getJSONObject(i);
-            positions.add(new NormalPosition(current.getInt("X"), current.getInt("Y")));
-        }
-
         /*
 
         positions.add(new NormalPosition(30, 30));
@@ -75,19 +58,6 @@ public class PositionFactory {
     public static List<IPosition> makePositions(int n) {
         List<IPosition> positions = new ArrayList<>();
 
-        PositionFactory app = new PositionFactory();
-        // Transforms input for reading
-        JSONTokener jsonTokener = new JSONTokener(app.getJSONFile());
-        JSONObject jsonObject = new JSONObject(jsonTokener);
-        System.out.println(jsonObject.getJSONArray("PositionList"));
-
-        JSONArray jsonArray = jsonObject.getJSONArray("PositionList");
-
-        for(int i = 0; i < jsonArray.length(); i++){
-            JSONObject current = jsonArray.getJSONObject(i);
-            positions.add(new NormalPosition(current.getJSONObject("position").getInt("X"), current.getJSONObject("position").getInt("Y")));
-        }
-
 
         /*
 
@@ -104,52 +74,22 @@ public class PositionFactory {
 
         return positions;
     }
-    public static List<IPosition> makePositions(List<String> positionsStringList) {
+
+    /**
+     *
+     * @param jsonArray
+     * @return a list with IPositions
+     */
+    public static List<IPosition> makePositions(JSONArray jsonArray) {
         List<IPosition> positions = new ArrayList<>();
 
-        for(int i = 0; i < positionsStringList.size(); i++) {
-
-        }
-
-        PositionFactory app = new PositionFactory();
-        // Transforms input for reading
-        JSONTokener jsonTokener = new JSONTokener(app.getJSONFile());
-        JSONObject jsonObject = new JSONObject(jsonTokener);
-        System.out.println(jsonObject.getJSONArray("PositionList"));
-
-        JSONArray jsonArray = jsonObject.getJSONArray("PositionList");
-
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject current = jsonArray.getJSONObject(i);
-            positions.add(new NormalPosition(current.getJSONObject("position").getInt("X"), current.getJSONObject("position").getInt("Y")));
+            positions.add(new NormalPosition(current.getJSONObject("position").getInt("positionID"),
+                    current.getJSONObject("position").getInt("X"), current.getJSONObject("position").getInt("Y")));
         }
-
-
-        /*
-
-        positions.add(new NormalPosition(100, 100));
-        positions.add(new NormalPosition(100, 200));
-        positions.add(new NormalPosition(100, 300));
-        positions.add(new NormalPosition(200, 100));
-        positions.add(new NormalPosition(200, 300));
-        positions.add(new NormalPosition(300, 100));
-        positions.add(new NormalPosition(300, 200));
-        positions.add(new NormalPosition(300, 300));
-
-         */
 
         return positions;
     }
 
-    private InputStream getJSONFile() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("edu/chalmers/grapefruit/Model/board.json");
-
-        // the stream holding the file content
-        if (inputStream == null) {
-            throw new IllegalArgumentException("file not found! " + "edu/chalmers/grapefruit/Model/board.json");
-        } else {
-            return inputStream;
-        }
-    }
 }

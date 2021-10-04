@@ -1,7 +1,11 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Position.IPosition;
+import edu.chalmers.grapefruit.Model.Position.NormalPosition;
 import edu.chalmers.grapefruit.Model.Position.PositionFactory;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,11 +22,25 @@ public class MapFactory {
 
 
     static Map createMap(int nNodes) {
-        List<IPosition> positions = PositionFactory.makePositions(nNodes);
+        MapFactory app = new MapFactory();
+        // Transforms input for reading
+        JSONTokener tokener = new JSONTokener(app.getJSONFile());
+        JSONObject object = new JSONObject(tokener);
+        //System.out.println(object.getJSONArray("PositionList"));
+        JSONArray jsonPositionArray = object.getJSONArray("PositionList");
+        List<IPosition> positions = PositionFactory.makePositions(jsonPositionArray);
+
+        JSONObject jsonNeighbours = object.getJSONObject("NeighboursHashMap");
+
         List<Node> nodes = new ArrayList<>();
+
+
         for (IPosition position : positions) {
             nodes.add(new Node(position));
         }
+
+        
+
         Map map = new Map(nodes.get(0));
         map.add( nodes.get(0), Arrays.asList(nodes.get(7), nodes.get(1)));
         map.add( nodes.get(1), Arrays.asList(nodes.get(0), nodes.get(2)));
@@ -32,6 +50,8 @@ public class MapFactory {
         map.add( nodes.get(5), Arrays.asList(nodes.get(4), nodes.get(6)));
         map.add( nodes.get(6), Arrays.asList(nodes.get(5), nodes.get(7)));
         map.add( nodes.get(7), Arrays.asList(nodes.get(6), nodes.get(0)));
+
+
 
         return map;
     }

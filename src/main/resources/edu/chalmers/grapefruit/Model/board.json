@@ -2,64 +2,64 @@
   "PositionList": [
     {
       "position": {
-        "postionID": 0,
-        "postionType": "NormalPosition",
+        "positionID": 0,
+        "positionType": "NormalPosition",
         "X": 100,
         "Y": 100
       }
     },
     {
       "position": {
-        "postionID": 1,
-        "postionType": "NormalPosition",
+        "positionID": 1,
+        "positionType": "NormalPosition",
         "X": 100,
         "Y": 200
       }
     },
     {
       "position": {
-        "postionID": 2,
-        "postionType": "NormalPosition",
+        "positionID": 2,
+        "positionType": "NormalPosition",
         "X": 100,
         "Y": 300
       }
     },
     {
       "position": {
-        "postionID": 3,
-        "postionType": "NormalPosition",
+        "positionID": 3,
+        "positionType": "NormalPosition",
         "X": 200,
         "Y": 100
       }
     },
     {
       "position": {
-        "postionID": 4,
-        "postionType": "NormalPosition",
+        "positionID": 4,
+        "positionType": "NormalPosition",
         "X": 200,
         "Y": 300
       }
     },
     {
       "position": {
-        "postionID": 5,
-        "postionType": "NormalPosition",
+        "positionID": 5,
+        "positionType": "NormalPosition",
         "X": 300,
         "Y": 100
       }
     },
     {
       "position": {
-        "postionID": 6,
-        "postionType": "NormalPosition",
+        "positionID": 6,
+        "positionType": "NormalPosition",
         "X": 300,
         "Y": 200
       }
     },
     {
       "position": {
-        "postionID": 7,
-        "postionType": "NormalPosition",
+        "positionID": 7,
+        "positionType": "NormalPosition",
         "X": 300,
         "Y": 300
       }
