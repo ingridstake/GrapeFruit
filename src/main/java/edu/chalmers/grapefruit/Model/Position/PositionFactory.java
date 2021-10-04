@@ -104,6 +104,42 @@ public class PositionFactory {
 
         return positions;
     }
+    public static List<IPosition> makePositions(List<String> positionsStringList) {
+        List<IPosition> positions = new ArrayList<>();
+
+        for(int i = 0; i < positionsStringList.size(); i++) {
+
+        }
+
+        PositionFactory app = new PositionFactory();
+        // Transforms input for reading
+        JSONTokener jsonTokener = new JSONTokener(app.getJSONFile());
+        JSONObject jsonObject = new JSONObject(jsonTokener);
+        System.out.println(jsonObject.getJSONArray("PositionList"));
+
+        JSONArray jsonArray = jsonObject.getJSONArray("PositionList");
+
+        for(int i = 0; i < jsonArray.length(); i++){
+            JSONObject current = jsonArray.getJSONObject(i);
+            positions.add(new NormalPosition(current.getJSONObject("position").getInt("X"), current.getJSONObject("position").getInt("Y")));
+        }
+
+
+        /*
+
+        positions.add(new NormalPosition(100, 100));
+        positions.add(new NormalPosition(100, 200));
+        positions.add(new NormalPosition(100, 300));
+        positions.add(new NormalPosition(200, 100));
+        positions.add(new NormalPosition(200, 300));
+        positions.add(new NormalPosition(300, 100));
+        positions.add(new NormalPosition(300, 200));
+        positions.add(new NormalPosition(300, 300));
+
+         */
+
+        return positions;
+    }
 
     private InputStream getJSONFile() {
         ClassLoader classLoader = getClass().getClassLoader();

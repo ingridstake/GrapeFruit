@@ -2,6 +2,8 @@ package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.PositionFactory;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,18 @@ public class MapFactory {
         map.add( nodes.get(7), Arrays.asList(nodes.get(6), nodes.get(0)));
 
         return map;
+    }
+
+    private InputStream getJSONFile() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("edu/chalmers/grapefruit/Model/board.json");
+
+        // the stream holding the file content
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + "edu/chalmers/grapefruit/Model/board.json");
+        } else {
+            return inputStream;
+        }
     }
 }
 
