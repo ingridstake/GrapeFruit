@@ -31,6 +31,9 @@ public class GameBoard {
         gatherPositionableList();
     }
 
+    /**
+     * Gather positionable objects as nodes and players to a list.
+     */
     private void gatherPositionableList(){
         positionableList = new ArrayList<>();
 
@@ -49,6 +52,10 @@ public class GameBoard {
         return positionableList;
     }
 
+    /**
+     * Moves the player and updates its position.
+     * @param newNode is the new position.
+     */
     public void movePlayer(Node newNode){
         playerPositionHashMap.replace(currPlayer, newNode);
         currPlayer.updatePlayerPosition(newNode.getPosition().getX(), newNode.getPosition().getY());

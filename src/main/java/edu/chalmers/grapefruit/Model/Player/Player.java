@@ -16,7 +16,6 @@ public class Player implements IPlayer{
     private int Y;
     private String resourceString;
 
-
     protected Player(PlayerColor playerColor){
         moneyBalance = 5000;
         hasCow = false;
@@ -31,10 +30,15 @@ public class Player implements IPlayer{
         }
     }
 
-
+    /**
+     * Sets hasCow to true if player found the cow.
+     */
     public void playerFoundCow(){
         hasCow = true;
     }
+    /**
+     * Sets hasVisum to true if player found a visum.
+     */
     public void playerFoundVisum(){
         hasVisum = true;
     }
