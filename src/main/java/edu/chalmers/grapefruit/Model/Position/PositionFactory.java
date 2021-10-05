@@ -22,16 +22,17 @@ public class PositionFactory {
      */
     public static HashMap<IPosition, List<IPosition>> makePositions() {
         HashMap<IPosition, List<IPosition>> positionListHashMap = new HashMap<>();
-        /*
 
-        positions.add(new NormalPosition(30, 30));
-        positions.add(new NormalPosition(30, 50));
-        positions.add(new NormalPosition(30, 70));
-        positions.add(new NormalPosition(50, 30));
-        positions.add(new NormalPosition(50, 70));
-        positions.add(new NormalPosition(70, 30));
-        positions.add(new NormalPosition(70, 50));
-        positions.add(new NormalPosition(70, 70));
+        List<IPosition> positions = new ArrayList<>();
+
+        positions.add(new NormalPosition(100, 100));
+        positions.add(new NormalPosition(100, 200));
+        positions.add(new NormalPosition(100, 300));
+        positions.add(new NormalPosition(200, 100));
+        positions.add(new NormalPosition(200, 300));
+        positions.add(new NormalPosition(300, 100));
+        positions.add(new NormalPosition(300, 200));
+        positions.add(new NormalPosition(300, 300));
 
         positionListHashMap.put(positions.get(0), Arrays.asList(positions.get(7), positions.get(1)) );
         positionListHashMap.put(positions.get(1), Arrays.asList(positions.get(0), positions.get(2)) );
@@ -45,39 +46,13 @@ public class PositionFactory {
 
         startPosition = positions.get(0);
 
-         */
-
         return positionListHashMap;
     }
 
-    /**
-     * Returns a list of positions with length n
-     * @param n is the length of the list
-     * @return a list of IPositions with length n
-     */
-    public static List<IPosition> makePositions(int n) {
-        List<IPosition> positions = new ArrayList<>();
-
-
-        /*
-
-        positions.add(new NormalPosition(100, 100));
-        positions.add(new NormalPosition(100, 200));
-        positions.add(new NormalPosition(100, 300));
-        positions.add(new NormalPosition(200, 100));
-        positions.add(new NormalPosition(200, 300));
-        positions.add(new NormalPosition(300, 100));
-        positions.add(new NormalPosition(300, 200));
-        positions.add(new NormalPosition(300, 300));
-
-         */
-
-        return positions;
-    }
 
     /**
-     *
-     * @param jsonArray
+     * Makes positions based on the each JSONObject in the param JSONArray
+     * @param jsonArray contains JSONObjects named "position" with an int "positionID", an int "X" and an int "Y"
      * @return a list with IPositions
      */
     public static List<IPosition> makePositions(JSONArray jsonArray) {
@@ -85,8 +60,7 @@ public class PositionFactory {
 
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject current = jsonArray.getJSONObject(i);
-            positions.add(new NormalPosition(current.getJSONObject("position").getInt("positionID"),
-                    current.getJSONObject("position").getInt("X"), current.getJSONObject("position").getInt("Y")));
+            positions.add(new NormalPosition(current.getJSONObject("position").getInt("X"), current.getJSONObject("position").getInt("Y")));
         }
 
         return positions;

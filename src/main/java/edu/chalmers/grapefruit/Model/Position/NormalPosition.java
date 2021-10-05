@@ -8,14 +8,11 @@ package edu.chalmers.grapefruit.Model.Position;
  */
 public class NormalPosition implements IPosition{
 
-
-    private final int ID;
     private final int X;
     private final int Y;
     boolean isHighlighted;
 
-    protected NormalPosition(int id, int x, int y){
-        ID = id;
+    protected NormalPosition(int x, int y){
         X = x;
         Y = y;
         isHighlighted = false;
@@ -30,9 +27,6 @@ public class NormalPosition implements IPosition{
     public int getY() {
         return Y;
     }
-
-    @Override
-    public int getID() { return ID; }
 
     @Override
     public String resourceString() {
