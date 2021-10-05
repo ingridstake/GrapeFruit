@@ -8,6 +8,6 @@ public interface IPositionable {
      * name of the view-resource
      * @return name of the view-resource
      */
-    String resourceString();
+    String getResourceString();
 
 }
