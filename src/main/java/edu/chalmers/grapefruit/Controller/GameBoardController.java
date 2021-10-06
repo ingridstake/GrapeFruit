@@ -17,7 +17,7 @@ public class GameBoardController {
     private NodeClickHandler nodeClickEventHandler = new NodeClickHandler() {
         @Override
         public void handle(int x, int y) {
-            System.out.println("Nu funkar det snart");
+            model.makePlayerMove(x,y);
         }
     };
 

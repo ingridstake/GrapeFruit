@@ -4,6 +4,8 @@ import edu.chalmers.grapefruit.Interfaces.IPositionable;
 import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
+import edu.chalmers.grapefruit.Model.Position.IPosition;
+import edu.chalmers.grapefruit.Model.Position.NormalPosition;
 
 import java.util.List;
 
@@ -14,6 +16,10 @@ public class GameModel {
     public GameModel() {
         players = PlayerFactory.MakePlayers(1);
         gameBoard = new GameBoard(players);
+    }
+
+    public void makePlayerMove(int x, int y){
+        gameBoard.movePlayer(x, y);
     }
 
     /**
