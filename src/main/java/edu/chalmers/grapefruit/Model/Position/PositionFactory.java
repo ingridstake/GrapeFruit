@@ -26,9 +26,9 @@ public class PositionFactory {
     public static List<IPosition> makePositions(JSONArray jsonArray) {
         List<IPosition> positions = new ArrayList<>();
 
-        for (int i = 0; i < jsonArray.length(); i++){
+        for(int i = 0; i < jsonArray.length(); i++) {
             JSONObject current = jsonArray.getJSONObject(i);
-            switch (current.getJSONObject("position").getString("positionType")) {
+            switch(current.getJSONObject("position").getString("positionType")) {
                 case "NormalPosition":
                     positions.add(new NormalPosition(current.getJSONObject("position").getInt("X"), current.getJSONObject("position").getInt("Y")));
                     break;
@@ -39,5 +39,4 @@ public class PositionFactory {
         }
         return positions;
     }
-
 }

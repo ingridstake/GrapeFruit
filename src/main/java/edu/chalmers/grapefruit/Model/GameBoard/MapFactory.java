@@ -56,7 +56,6 @@ public class MapFactory {
         return map;
     }
 
-
     /**
      * Returns the stream that holds the needed json file which sets up the game's board.
      * Finds the json file using the right path.
@@ -77,7 +76,7 @@ public class MapFactory {
 
     /**
      * Creates Nodes using a JSONArray with JSONObjects in it. Each JSONObject holds information about each IPosition
-     * which is submitted as an argument to create a Node.     *
+     * which is submitted as an argument to create a Node.
      * @param jsonPositionArray is the JSONOArrays that contains information about each IPosition.
      * @return a List of all Nodes.
      */
@@ -90,4 +89,3 @@ public class MapFactory {
         return nodes;
     }
 }
-
