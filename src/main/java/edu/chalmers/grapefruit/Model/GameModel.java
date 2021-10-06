@@ -24,7 +24,6 @@ public class GameModel implements Observable {
 
     public void makePlayerMove(int x, int y){
         gameBoard.movePlayer(x, y);
-        System.out.println("lskjdflakjf");
         notifyObservers();
     }
 

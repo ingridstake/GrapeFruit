@@ -12,6 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author ingrid.stake
+ * @author tove.nilsson
+ */
+
 public class GameBoardView implements Observer {
 
     @FXML AnchorPane background;
@@ -37,12 +42,19 @@ public class GameBoardView implements Observer {
         redrawChildren();
     }
 
+    //TODO: ta bort denna metod om den inte används
     @FXML
     public void initialize() throws IOException {
         //inte säkert att denna kommer till använding, men metoden körs efter att konstruktorn och annan setup körts,
         //
     }
 
+    //TODO: creda den smarta fan som klurade ut hur man gör detta: https://stackoverflow.com/questions/40754454/get-controller-instance-from-node
+    /**
+     * Finds and returns the fx:controller of a Node.
+     * @param node is the node od interest.
+     * @return the fx:controller of the node.
+     */
     public static Object getController(Node node) {
         Object controller = null;
         do {
@@ -52,6 +64,11 @@ public class GameBoardView implements Observer {
         return controller;
     }
 
+    //TODO: Städa upp och snygga till
+    /**
+     * Repopulates the background with new children to update the view.
+     * @throws IOException if any of the fxml objects can't be loaded.
+     */
     private void redrawChildren() throws IOException {
         background.getChildren().removeAll(background.getChildren());
         for (IPositionable positionableObject : positionables) {

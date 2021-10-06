@@ -54,9 +54,13 @@ public class GameBoard {
         return positionableList;
     }
 
+    /**
+     * Gives the current player the position with the current values of x and y.
+     * @param x is the x coordinate of the new position.
+     * @param y is the y coordinate of the new position.
+     */
     public void movePlayer(int x, int y) {
-        for (Node node :
-                map.getAllNodes()) {
+        for (Node node : map.getAllNodes()) {
             if (x == node.getPosition().getX() && y == node.getPosition().getY()) {
                 movePlayer(node);
                 break;

@@ -1,7 +1,13 @@
 package edu.chalmers.grapefruit.Interfaces;
 
+/**
+ * @author ingrid.stake
+ */
+
 public interface IPositionable {
+
     int getX();
+
     int getY();
 
     /**
