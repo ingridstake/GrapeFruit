@@ -28,7 +28,7 @@ public class GameBoardView {
     public void populate (List<IPositionable> positionableList, GameBoardController controller) throws IOException {
 
         for (IPositionable positionable : positionableList ) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(positionable.resourceString()));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(positionable.getResourceString()));
             background.getChildren().add(fxmlLoader.load());
         }
 
@@ -38,7 +38,9 @@ public class GameBoardView {
             int y = positionableList.get(i).getY();
 
             NodeView nodeView = (NodeView) getController(child);
-            nodeView.initialize(controller.getNodeClickEventHandler(), x, y);
+            if (nodeView != null){
+                nodeView.initialize(controller.getNodeClickEventHandler(), x, y);
+            }
             child.relocate(x, y);
 
             i++;
