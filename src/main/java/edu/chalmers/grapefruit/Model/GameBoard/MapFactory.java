@@ -19,37 +19,27 @@ import java.util.*;
  */
 public class MapFactory {
 
+    //TODO TA BORT nNodes parameter!
 
+    /**
+     * Creates a map based on a JSON file.
+     * The JSON file must be structured in the following way:
+     *      - Have a JSONArray named "PositionList" that the class PositionFactory can make IPositions from.
+     *      - Have a JSONObject named "Neighbours" which contains JSONArrays that holds the neighbours for every
+     *      Node, using numbers.
+     * @return
+     */
     static Map createMap(int nNodes) {
         MapFactory app = new MapFactory();
         // Transforms input for reading
         JSONTokener tokener = new JSONTokener(app.getJSONFile());
         JSONObject object = new JSONObject(tokener);
-        //System.out.println(object.getJSONArray("PositionList"));
-        JSONArray jsonPositionArray = object.getJSONArray("PositionList");
-        List<IPosition> positions = PositionFactory.makePositions(jsonPositionArray);
 
-        JSONObject jsonNeighbours = object.getJSONObject("NeighboursHashMap");
+        List<Node> nodes = app.createNodes(object.getJSONArray("PositionList"));
 
-        List<Node> nodes = new ArrayList<>();
-
-
-        for (IPosition position : positions) {
-            nodes.add(new Node(position));
-        }
+        JSONObject jsonNeighbours = object.getJSONObject("Neighbours");
 
         Map map = new Map(nodes.get(0));
-        /*
-        map.add( nodes.get(0), Arrays.asList(nodes.get(7), nodes.get(1)));
-        map.add( nodes.get(1), Arrays.asList(nodes.get(0), nodes.get(2)));
-        map.add( nodes.get(2), Arrays.asList(nodes.get(1), nodes.get(3)));
-        map.add( nodes.get(3), Arrays.asList(nodes.get(2), nodes.get(4)));
-        map.add( nodes.get(4), Arrays.asList(nodes.get(3), nodes.get(5)));
-        map.add( nodes.get(5), Arrays.asList(nodes.get(4), nodes.get(6)));
-        map.add( nodes.get(6), Arrays.asList(nodes.get(5), nodes.get(7)));
-        map.add( nodes.get(7), Arrays.asList(nodes.get(6), nodes.get(0)));
-
-         */
 
         Iterator<?> keys = jsonNeighbours.keys();
         while(keys.hasNext()) {
@@ -66,6 +56,13 @@ public class MapFactory {
         return map;
     }
 
+
+    /**
+     * Returns the stream that holds the needed json file which sets up the game's board.
+     * Finds the json file using the right path.
+     * If the json file couldn't be found, the method will throw an IllegalArgumentException.
+     * @return the stream that holds the json file "board.json"
+     */
     private InputStream getJSONFile() {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("edu/chalmers/grapefruit/Model/board.json");
@@ -76,6 +73,21 @@ public class MapFactory {
         } else {
             return inputStream;
         }
+    }
+
+    /**
+     * Creates Nodes using a JSONArray with JSONObjects in it. Each JSONObject holds information about each IPosition
+     * which is submitted as an argument to create a Node.     *
+     * @param jsonPositionArray is the JSONOArrays that contains information about each IPosition.
+     * @return a List of all Nodes.
+     */
+    private List<Node> createNodes(JSONArray jsonPositionArray) {
+        List<IPosition> positions = PositionFactory.makePositions(jsonPositionArray);
+        List<Node> nodes = new ArrayList<>();
+        for (IPosition position : positions) {
+            nodes.add(new Node(position));
+        }
+        return nodes;
     }
 }
 

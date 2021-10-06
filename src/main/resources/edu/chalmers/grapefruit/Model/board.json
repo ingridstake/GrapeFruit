@@ -65,7 +65,7 @@
       }
     }
   ],
-  "NeighboursHashMap": {
+  "Neighbours": {
     "0": [7, 1],
     "1": [0, 2],
     "2": [1, 3],
