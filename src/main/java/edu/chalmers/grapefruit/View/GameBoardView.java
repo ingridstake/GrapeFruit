@@ -38,7 +38,9 @@ public class GameBoardView {
             int y = positionableList.get(i).getY();
 
             NodeView nodeView = (NodeView) getController(child);
-            nodeView.initialize(controller.getNodeClickEventHandler(), x, y);
+            if (nodeView != null){
+                nodeView.initialize(controller.getNodeClickEventHandler(), x, y);
+            }
             child.relocate(x, y);
 
             i++;
