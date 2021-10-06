@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Circle fill="#ff7ef0" layoutX="24.0" layoutY="12.0" radius="10.0" stroke="#ff7ef0" strokeType="INSIDE" />
+      <Polygon fill="#ff7ef0" layoutX="27.0" layoutY="29.0" points="-18.090194702148438, 14.947296142578125, 12.810037612915039, 14.947303771972656, -3.000002384185791, -12.64483642578125" stroke="#ff7ef0" strokeType="INSIDE" />
+   </children>
+</AnchorPane>

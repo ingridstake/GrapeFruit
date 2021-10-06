@@ -29,7 +29,7 @@ public class NormalPosition implements IPosition{
     }
 
     @Override
-    public String resourceString() {
+    public String getResourceString() {
         return "node-view.fxml";
     }
 
