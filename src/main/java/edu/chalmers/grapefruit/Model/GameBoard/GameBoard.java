@@ -25,18 +25,23 @@ public class GameBoard {
 
         for (IPlayer player : players) {
             playerPositionHashMap.put(player, map.getStartNode());
+            player.updatePlayerPosition(playerPositionHashMap.get(player).getPosition().getX(), playerPositionHashMap.get(player).getPosition().getY());
         }
 
         gatherPositionableList();
     }
 
-    // TODO: Borde även inkludera spelare
+    /**
+     * Gather positionable objects as nodes and players to a list.
+     */
     private void gatherPositionableList(){
         positionableList = new ArrayList<>();
 
         for (Node node : getMap().getAllNodes()) {
             positionableList.add(node.getPosition());
         }
+
+        playerPositionHashMap.forEach((k,v) -> positionableList.add(k));
     }
 
     private Map getMap() {
@@ -47,8 +52,12 @@ public class GameBoard {
         return positionableList;
     }
 
+    /**
+     * Moves the player and updates its position.
+     * @param newNode is the new position.
+     */
     public void movePlayer(Node newNode){
-
         playerPositionHashMap.replace(currPlayer, newNode);
+        currPlayer.updatePlayerPosition(newNode.getPosition().getX(), newNode.getPosition().getY());
     }
 }
