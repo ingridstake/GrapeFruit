@@ -38,7 +38,8 @@ public class GameBoardController {
         stage.setScene(scene);
         stage.show();
 
-        view.populate(model.getPositionables(), this);
+        view.populate(model.getPositionables(), scene, this);
+        model.addObserver(view);
     }
 
     public NodeClickHandler getNodeClickEventHandler(){

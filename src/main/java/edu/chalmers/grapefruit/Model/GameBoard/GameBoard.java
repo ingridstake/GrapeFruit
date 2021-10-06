@@ -28,6 +28,7 @@ public class GameBoard {
             playerPositionHashMap.put(player, map.getStartNode());
             player.updatePlayerPosition(playerPositionHashMap.get(player).getPosition().getX(), playerPositionHashMap.get(player).getPosition().getY());
         }
+        currPlayer = players.get(0);
 
         gatherPositionableList();
     }
