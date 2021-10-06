@@ -10,7 +10,7 @@ package edu.chalmers.grapefruit.Model.Player;
 public class Player implements IPlayer{
     private int moneyBalance;
     private boolean hasCow;
-    private boolean hasVisum;
+    private boolean hasVisa;
     private final PlayerColor PLAYER_COLOR;
     private int X;
     private int Y;
@@ -19,14 +19,24 @@ public class Player implements IPlayer{
     protected Player(PlayerColor playerColor){
         moneyBalance = 5000;
         hasCow = false;
-        hasVisum = false;
+        hasVisa = false;
         PLAYER_COLOR = playerColor;
 
         switch (PLAYER_COLOR) {
-            case PINK -> resourceString = "pink-player-view.fxml";
-            case PURPLE -> resourceString = "purple-player-view.fxml";
-            case TURQUOISE -> resourceString = "turquoise-player-view.fxml";
-            case YELLOW -> resourceString = "yellow-player-view.fxml";
+            case PINK:
+                resourceString = "pink-player-view.fxml";
+                break;
+            case PURPLE:
+                resourceString = "purple-player-view.fxml";
+                break;
+            case TURQUOISE:
+                resourceString = "turquoise-player-view.fxml";
+                break;
+            case YELLOW:
+                resourceString = "yellow-player-view.fxml";
+                break;
+            default:
+                resourceString = "pink-player-view.fxml";
         }
     }
 
@@ -39,16 +49,16 @@ public class Player implements IPlayer{
     /**
      * Sets hasVisum to true if player found a visum.
      */
-    public void playerFoundVisum(){
-        hasVisum = true;
+    public void playerFoundVisa(){
+        hasVisa = true;
     }
 
-    public boolean isHasCow() {
+    public boolean hasCow() {
         return hasCow;
     }
 
-    public boolean isHasVisum() {
-        return hasVisum;
+    public boolean hasVisa() {
+        return hasVisa;
     }
 
     /**
