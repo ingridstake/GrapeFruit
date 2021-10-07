@@ -1,0 +1,23 @@
+Mötesprotokoll
+Grupp: Grapefruit
+Datum: 211006
+Lärosäte: Chalmers Tekniska Högskola
+Deltagare: Olivia Månström, Elvina Fahlgren, Ingrid Stake och Tove Nilsson
+
+• Mål (5 min)
+- Merga in allas olika branches och få de funka tillsammans
+
+• Rapport från tidigare möte (15 min)
+- alla har fullfört sina userstories
+
+• Diskussions ämnen (35 min)
+- Vad som skall vara klart inför inlämning för peer review.
+
+• Resultat och uppgifter (5 min)
+- skriva RAD
+- skriva SDD
+- lämna in för peer review
+
+• Summering
+Vi ska få våra branches att funka ihop.
+Nästa möte med handledare 7/10.

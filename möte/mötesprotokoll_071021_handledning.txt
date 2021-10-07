@@ -1,0 +1,44 @@
+Mötesprotokoll med handledareGrupp: GrapefruitDatum: 071021Lärosäte: Chalmers tekniska högskolaDeltagare: Ingrid Stake, Elvina Fahlgren, Tove Nilsson, Olivia Månström och Felix Oliv
+• Mål (5 min)- Få svar på frågor och hjälp med oklarheter.
+• Rapport från tidigare möte (15 min)
+Vi kan flytta en spelare.
+Vardera gruppmedlem har utfört sina user stories. Dessutom har vi nu slagit ihop allt i main-branchen. Vi har arbetat med SDD och RAD. 
+• Diskussions ämnen (35 min)Frågor:
+
+- OK att initialisera viewn i kontrollen? att kontrollen har ansvar för att sätta upp viewn? 
+Det är inte okej att lägga till javafx-grejer i controllern. Men det som vi har gjort är ganska okej. View behöver ha en positionable som skickas. Men vi ska inte skicka med scene. 
+
+- Vi får inte in  bilder i overleaf. 
+Felix hade ingen bra förklaring varför vi inte kunde lägga in bilder. 
+
+- Pilar i UML-diagram.
+Det ska inte vara en pil till normalposition från positionFactory. Det är onödigt att ha dom extra pilarna även fast det finns beroenden.
+det skadar inte att ha en extra pil från gameboard till mapFactory. 
+Vart ska JSON ligga?  I model. Går att skapa en till map som utility. 
+
+- Lite råd gällande punkt 2 i SDD, system arkitektur.
+Väldigt lite för oss. Hur appen ska "prata med andra komponenter". Vi får skriva om vår app finns lokalt.
+Flow: Var skapas appen, typ att det börjar i main osv.
+
+
+Det finns ett "cykelberoende" i GameBoardView som behöver lösas.
+GameBoardView: ta in en ArrayList<Points> i metoden update. (Förslag)
+Controller kan implementera NodeclickHandler. (Förslag)
+Stage (javaFX) kan flyttas ut från controllern till viewn. Försöka flytta ut den funktionaliteten.
+
+Vi har null i PlayerFactory, vi måste hantera det.
+Flytta ut switch i player till en annan klass.
+• Resultat och uppgifter (5 min)
+
+nästa steg är att fixa spellogik. Vilka drag som är "valid".
+
+Vi borde bryta ut JSONgrejer till en klass. Så vi inte använder JSON på två ställer. En av PositionFactory och MapFactory behöver inte hantera JSON objekt.
+
+Vi kan klippa in en bild på vår mall för pilar i UML. Det finns så många olikas ett att göra det på. Felix tyckte det såg bra ut. Vi kommer att bli bedömda på det men det är inte jätteviktigt. Småfel ska inte göra så mycket.
+
+Ha fyra stycken UML-diagram för olika komponenter. PMD diagram ska vi använda till slutet. 
+
+Vi ska inte påbörja user stories utan tasks. 
+• Summering
+
+Vi har en del refactoring som måste göras. Nästa möte är 7/10-21 10:45
