@@ -2,6 +2,7 @@ package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Interfaces.IPositionable;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
+import edu.chalmers.grapefruit.Model.Position.IPosition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class GameBoard {
             playerPositionHashMap.put(player, map.getStartNode());
             player.updatePlayerPosition(playerPositionHashMap.get(player).getPosition().getX(), playerPositionHashMap.get(player).getPosition().getY());
         }
+        currPlayer = players.get(0);
 
         gatherPositionableList();
     }
@@ -50,6 +52,20 @@ public class GameBoard {
 
     public List<IPositionable> getPositionableList() {
         return positionableList;
+    }
+
+    /**
+     * Gives the current player the position with the current values of x and y.
+     * @param x is the x coordinate of the new position.
+     * @param y is the y coordinate of the new position.
+     */
+    public void movePlayer(int x, int y) {
+        for (Node node : map.getAllNodes()) {
+            if (x == node.getPosition().getX() && y == node.getPosition().getY()) {
+                movePlayer(node);
+                break;
+            }
+        }
     }
 
     /**

@@ -2,15 +2,24 @@ package edu.chalmers.grapefruit.Controller;
 
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.View.GameBoardView;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class GameBoardController {
 
     private GameModel model;
     private GameBoardView view;
+
+    private NodeClickHandler nodeClickEventHandler = new NodeClickHandler() {
+        @Override
+        public void handle(int x, int y) {
+            model.makePlayerMove(x,y);
+        }
+    };
 
     /**
      * Creates and sets up the GameBoardView with background and positions
@@ -29,6 +38,11 @@ public class GameBoardController {
         stage.setScene(scene);
         stage.show();
 
-        view.populate(model.getPositionables(), this);
+        view.populate(model.getPositionables(), scene, this);
+        model.addObserver(view);
+    }
+
+    public NodeClickHandler getNodeClickEventHandler(){
+        return nodeClickEventHandler;
     }
 }
