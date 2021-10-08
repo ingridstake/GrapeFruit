@@ -1,0 +1,21 @@
+MötesprotokollGrupp: GrapefruitDatum: 081021Lärosäte: Chalmers tekniska högskolaDeltagare: Olivia Månström, Elvina Fahlgren, Ingrid Stake och Tove Nilsson
+• Mål (5 min)Fixa problem från tidigare möte. Dela ut uppgifter och påbörja testning.• Rapport från tidigare möte (15 min)Vi har fått i uppgift av vår handledare att göra en del refactoring.
+• Diskussions ämnen (35 min)Vi ska gå igenom vad vår handledae sa igår:
+
+Ta hand om att bryta ut JSON-grejer.
+Ta hand om beroenden gällande viewn.
+Ta hand om null i PlayerFactory, vi måste hantera det. Flytta ut switch i player till en annan klass.
+
+Vi behöver ha tester till det vi har gjort hittills.
+• Resultat och uppgifter (5 min)
+Elvina ska ta hand om att bryta ut JSON-grejer.
+Ingrid och Tove ska ta hand om beroenden gällande viewn.
+Olivia ska ta hand om null i PlayerFactory, vi måste hantera det. Flytta ut switch i player till en annan klass.
+
+Ingrid ska även ta user story nr 8.
+
+
+Alla ska göra tester till vardera branch.
+• SummeringInga olösta problem förutom de uppgifter vi delat ut.
+Vi ska sitta tillsamman på söndag.
+Nästa möte på tisdag 12/10-21.
