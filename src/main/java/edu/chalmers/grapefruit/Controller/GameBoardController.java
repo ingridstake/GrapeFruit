@@ -2,9 +2,6 @@ package edu.chalmers.grapefruit.Controller;
 
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.View.GameBoardView;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,17 +25,12 @@ public class GameBoardController {
      * @throws IOException if the resource-.fxml cannot be loaded
      */
     public GameBoardController(GameModel model, Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
 
-        view = fxmlLoader.getController();
         this.model = model;
 
-        stage.setTitle("Den försvunna kossan!");
-        stage.setScene(scene);
-        stage.show();
+        view = GameBoardView.makeGameBoardView(stage);
 
-        view.populate(model.getPositionables(), scene, this);
+        view.populate(model.getPositionables(), getNodeClickEventHandler());
         model.addObserver(view);
     }
 
