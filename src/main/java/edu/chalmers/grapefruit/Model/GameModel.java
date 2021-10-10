@@ -13,7 +13,12 @@ public class GameModel {
 
     public GameModel() {
         players = PlayerFactory.MakePlayers(1);
-        gameBoard = new GameBoard(players);
+        if (players == null) {
+            throw new IllegalArgumentException("More than 4 players is not allowed");
+        }
+        else {
+            gameBoard = new GameBoard(players);
+        }
     }
 
     /**

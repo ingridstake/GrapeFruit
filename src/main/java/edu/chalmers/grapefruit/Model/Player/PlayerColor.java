@@ -24,7 +24,12 @@ public enum PlayerColor {
         }
         return colorList;
     }
-    
+
+    /**
+     * Evaluate the player color and match it with the right view-resource.
+     * @param PLAYER_COLOR is the color of the player.
+     * @return the view-resource.
+     */
     public static String evaluateResourceString(PlayerColor PLAYER_COLOR){
         String resourceString;
         switch (PLAYER_COLOR) {
