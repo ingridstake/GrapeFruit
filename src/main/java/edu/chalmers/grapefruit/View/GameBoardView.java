@@ -1,14 +1,18 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Controller.GameBoardController;
-import edu.chalmers.grapefruit.Interfaces.IPositionable;
+import edu.chalmers.grapefruit.Utils.NodeClickHandler;
+import edu.chalmers.grapefruit.Utils.IPositionable;
 
-import edu.chalmers.grapefruit.Interfaces.Observer;
+import edu.chalmers.grapefruit.Utils.Observer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -20,8 +24,23 @@ import java.util.List;
 public class GameBoardView implements Observer {
 
     @FXML AnchorPane background;
+    @FXML Button diceBtn;
     List<IPositionable> positionables;
-    GameBoardController controller;
+    NodeClickHandler clickHandler;
+
+    static public GameBoardView makeGameBoardView(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
+        System.setProperty("javafx.sg.warn", "true"); // Förhindrar exception vid scene loading, (https://stackoverflow.com/questions/44684605/javafx-applications-throw-nullpointerexceptions-but-run-anyway)
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
+
+        GameBoardView view = fxmlLoader.getController();
+
+        stage.setTitle("Den försvunna kossan!");
+        stage.setScene(scene);
+        stage.show();
+
+        return view;
+    }
 
     /**
      * There need to be a constructor taking no arguments in order for the load of the View's .fxml-file to work
@@ -30,14 +49,15 @@ public class GameBoardView implements Observer {
 
     /**
      * Populates the GameBoardView with all objects in the positionableList.
-     * @param positionableList is the list of positional objects that populates the view.
-     * @param controller is the controller of the GameBoardView
+     * @param positionableList is the list of Positionable objects that is displayed.
+     * @param clickHandler is the event handler for the Nodes.
      * @throws IOException
      */
-    public void populate (List<IPositionable> positionableList, Scene scene, GameBoardController controller) throws IOException {
+    public void populate (List<IPositionable> positionableList, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
 
         this.positionables = positionableList;
-        this.controller = controller;
+        this.clickHandler = clickHandler;
+        diceBtn.setOnAction(diceHandler);
 
         redrawChildren();
     }
@@ -82,7 +102,7 @@ public class GameBoardView implements Observer {
 
             NodeView nodeView = (NodeView) getController(child);
             if (nodeView != null) {
-                nodeView.initialize(controller.getNodeClickEventHandler(), x, y);
+                nodeView.initialize(clickHandler, x, y);
             }
             child.relocate(x, y);
 
@@ -91,6 +111,7 @@ public class GameBoardView implements Observer {
                 break;
             }
         }
+        background.getChildren().add(diceBtn);
     }
 
     @Override

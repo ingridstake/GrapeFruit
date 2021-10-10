@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit.Model.Player;
 
-import edu.chalmers.grapefruit.Interfaces.IPositionable;
+import edu.chalmers.grapefruit.Utils.IPositionable;
 
 /**
      * @author ingrid.stake
