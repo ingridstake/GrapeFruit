@@ -1,4 +1,4 @@
-package edu.chalmers.grapefruit.Controller;
+package edu.chalmers.grapefruit.Utils;
 
 /**
  * @author ingrid.stake

@@ -1,9 +1,9 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Controller.NodeClickHandler;
-import edu.chalmers.grapefruit.Interfaces.IPositionable;
+import edu.chalmers.grapefruit.Utils.NodeClickHandler;
+import edu.chalmers.grapefruit.Utils.IPositionable;
 
-import edu.chalmers.grapefruit.Interfaces.Observer;
+import edu.chalmers.grapefruit.Utils.Observer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 

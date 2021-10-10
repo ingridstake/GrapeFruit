@@ -1,8 +1,7 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
-import edu.chalmers.grapefruit.Interfaces.IPositionable;
+import edu.chalmers.grapefruit.Utils.IPositionable;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
-import edu.chalmers.grapefruit.Model.Position.IPosition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +14,7 @@ import java.util.List;
  * @author olivia.månström
  */
 public class GameBoard {
+
     HashMap<IPlayer, Node> playerPositionHashMap;
     IPlayer currPlayer;
     Map map;
@@ -69,23 +69,28 @@ public class GameBoard {
     }
 
     /**
-     * Moves the player and updates its position.
+     * Moves the player and updates its position if the new position is a valid move.
+     * Then the all positions on the map are dehighlighted.
      * @param newNode is the new position.
      */
     public void movePlayer(Node newNode, IPlayer player){
-        List<Node> validMoves = playerPositionHashMap.get(player).getValidMoves(new ArrayList<>(), 3);
+        List<Node> validMoves = new ArrayList<>();
+        playerPositionHashMap.get(player).evaluateValidMoves(validMoves, 3);
+
         if (validMoves.contains(newNode)){
             playerPositionHashMap.replace(currPlayer, newNode);
             currPlayer.updatePlayerPosition(newNode.getPosition().getX(), newNode.getPosition().getY());
         }
 
-        map.deHighlightAllNodes();
+        map.deHighlight();
     }
 
+    /**
+     * Rolls dice and then evaluates which moves are valid and highlights them.
+     */
     public void makeDiceRoll(){
         int dice = rollDice();
-        List<Node> nodes = playerPositionHashMap.get(currPlayer).getValidMoves(new ArrayList<>(), dice);
-        int i=0;
+        playerPositionHashMap.get(currPlayer).evaluateValidMoves(new ArrayList<>(), dice);
 
     }
 

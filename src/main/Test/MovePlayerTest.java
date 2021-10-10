@@ -1,4 +1,4 @@
-import edu.chalmers.grapefruit.Interfaces.IPositionable;
+import edu.chalmers.grapefruit.Utils.IPositionable;
 import edu.chalmers.grapefruit.Model.GameModel;
 
 import org.junit.jupiter.api.BeforeEach;
