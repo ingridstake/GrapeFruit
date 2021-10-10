@@ -14,30 +14,12 @@ public class Player implements IPlayer{
     private final PlayerColor PLAYER_COLOR;
     private int X;
     private int Y;
-    private String resourceString;
 
     protected Player(PlayerColor playerColor){
         moneyBalance = 5000;
         hasCow = false;
         hasVisa = false;
         PLAYER_COLOR = playerColor;
-
-        switch (PLAYER_COLOR) {
-            case PINK:
-                resourceString = "pink-player-view.fxml";
-                break;
-            case PURPLE:
-                resourceString = "purple-player-view.fxml";
-                break;
-            case TURQUOISE:
-                resourceString = "turquoise-player-view.fxml";
-                break;
-            case YELLOW:
-                resourceString = "yellow-player-view.fxml";
-                break;
-            default:
-                resourceString = "pink-player-view.fxml";
-        }
     }
 
     /**
@@ -88,7 +70,7 @@ public class Player implements IPlayer{
 
     @Override
     public String getResourceString() {
-        return resourceString;
+        return PlayerColor.evaluateResourceString(PLAYER_COLOR);
     }
 }
 

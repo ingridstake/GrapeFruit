@@ -24,5 +24,26 @@ public enum PlayerColor {
         }
         return colorList;
     }
+    
+    public static String evaluateResourceString(PlayerColor PLAYER_COLOR){
+        String resourceString;
+        switch (PLAYER_COLOR) {
+            case PINK:
+                resourceString = "pink-player-view.fxml";
+                break;
+            case PURPLE:
+                resourceString = "purple-player-view.fxml";
+                break;
+            case TURQUOISE:
+                resourceString = "turquoise-player-view.fxml";
+                break;
+            case YELLOW:
+                resourceString = "yellow-player-view.fxml";
+                break;
+            default:
+                resourceString = "pink-player-view.fxml";
+        }
+        return resourceString;
+    }
 }
 
