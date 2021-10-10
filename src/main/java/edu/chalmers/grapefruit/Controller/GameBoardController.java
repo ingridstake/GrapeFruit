@@ -2,8 +2,12 @@ package edu.chalmers.grapefruit.Controller;
 
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.View.GameBoardView;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class GameBoardController {
@@ -15,6 +19,13 @@ public class GameBoardController {
         @Override
         public void handle(int x, int y) {
             model.makePlayerMove(x,y);
+        }
+    };
+
+    EventHandler diceHandler = new EventHandler() {
+        @Override
+        public void handle(Event event) {
+            model.makeDiceRoll();
         }
     };
 
@@ -30,7 +41,7 @@ public class GameBoardController {
 
         view = GameBoardView.makeGameBoardView(stage);
 
-        view.populate(model.getPositionables(), getNodeClickEventHandler());
+        view.populate(model.getPositionables(), getNodeClickEventHandler(), diceHandler);
         model.addObserver(view);
     }
 

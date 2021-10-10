@@ -12,7 +12,7 @@
    <children>
       <Circle fx:id="position" fill="DODGERBLUE" layoutX="290.0" layoutY="184.0" radius="25.0" stroke="BLACK"
               strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onMouseClicked="#handleOnMouseClicked"/>
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
    </children>
 
    <userData>

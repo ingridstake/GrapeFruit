@@ -27,6 +27,11 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
+    public void makeDiceRoll(){
+        gameBoard.makeDiceRoll();
+        notifyObservers();
+    }
+
     /**
      * Returns a list of all positionable objects for the GameBoard
      * @return a list of all positionable objects of the GameBoard

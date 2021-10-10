@@ -86,4 +86,15 @@ public class Node {
         }
         return nodes;
     }
+
+    protected List<Node> getValidMoves (List<Node> validMoves, int dice) {
+        if(dice>=0 && !validMoves.contains(this) ){
+            validMoves.add(this);
+            position.highlight();
+            for (Node node : relatedNodes) {
+                node.getValidMoves(validMoves, dice-1);
+            }
+        }
+        return validMoves;
+    }
 }

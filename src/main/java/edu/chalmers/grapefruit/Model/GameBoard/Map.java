@@ -46,4 +46,10 @@ public class Map {
     public int getSize() {
         return size;
     }
+
+    public void deHighlightAllNodes() {
+        for (Node node : getAllNodes()) {
+            node.getPosition().deHighlight();
+        }
+    }
 }

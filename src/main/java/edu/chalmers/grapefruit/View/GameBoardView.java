@@ -4,13 +4,16 @@ import edu.chalmers.grapefruit.Controller.NodeClickHandler;
 import edu.chalmers.grapefruit.Interfaces.IPositionable;
 
 import edu.chalmers.grapefruit.Interfaces.Observer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,11 +25,13 @@ import java.util.List;
 public class GameBoardView implements Observer {
 
     @FXML AnchorPane background;
+    @FXML Button diceBtn;
     List<IPositionable> positionables;
     NodeClickHandler clickHandler;
 
     static public GameBoardView makeGameBoardView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
+        System.setProperty("javafx.sg.warn", "true"); // Förhindrar exception vid scene loading, (https://stackoverflow.com/questions/44684605/javafx-applications-throw-nullpointerexceptions-but-run-anyway)
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
 
         GameBoardView view = fxmlLoader.getController();
@@ -49,10 +54,11 @@ public class GameBoardView implements Observer {
      * @param clickHandler is the event handler for the Nodes.
      * @throws IOException
      */
-    public void populate (List<IPositionable> positionableList, NodeClickHandler clickHandler) throws IOException {
+    public void populate (List<IPositionable> positionableList, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
 
         this.positionables = positionableList;
         this.clickHandler = clickHandler;
+        diceBtn.setOnAction(diceHandler);
 
         redrawChildren();
     }
@@ -106,6 +112,7 @@ public class GameBoardView implements Observer {
                 break;
             }
         }
+        background.getChildren().add(diceBtn);
     }
 
     @Override

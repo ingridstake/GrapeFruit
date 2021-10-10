@@ -62,7 +62,7 @@ public class GameBoard {
     public void movePlayer(int x, int y) {
         for (Node node : map.getAllNodes()) {
             if (x == node.getPosition().getX() && y == node.getPosition().getY()) {
-                movePlayer(node);
+                movePlayer(node, currPlayer);
                 break;
             }
         }
@@ -72,8 +72,24 @@ public class GameBoard {
      * Moves the player and updates its position.
      * @param newNode is the new position.
      */
-    public void movePlayer(Node newNode){
-        playerPositionHashMap.replace(currPlayer, newNode);
-        currPlayer.updatePlayerPosition(newNode.getPosition().getX(), newNode.getPosition().getY());
+    public void movePlayer(Node newNode, IPlayer player){
+        List<Node> validMoves = playerPositionHashMap.get(player).getValidMoves(new ArrayList<>(), 3);
+        if (validMoves.contains(newNode)){
+            playerPositionHashMap.replace(currPlayer, newNode);
+            currPlayer.updatePlayerPosition(newNode.getPosition().getX(), newNode.getPosition().getY());
+        }
+
+        map.deHighlightAllNodes();
+    }
+
+    public void makeDiceRoll(){
+        int dice = rollDice();
+        List<Node> nodes = playerPositionHashMap.get(currPlayer).getValidMoves(new ArrayList<>(), dice);
+        int i=0;
+
+    }
+
+    private int rollDice(){
+        return 2;
     }
 }

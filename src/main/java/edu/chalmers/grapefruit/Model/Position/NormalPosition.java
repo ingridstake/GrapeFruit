@@ -30,6 +30,9 @@ public class NormalPosition implements IPosition{
 
     @Override
     public String getResourceString() {
+        if (isHighlighted){
+            return "node-view-highlighted.fxml";
+        }
         return "node-view.fxml";
     }
 
