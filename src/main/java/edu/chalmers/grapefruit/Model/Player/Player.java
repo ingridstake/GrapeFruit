@@ -25,20 +25,25 @@ public class Player implements IPlayer{
     /**
      * Sets hasCow to true if player found the cow.
      */
+    @Override
     public void playerFoundCow(){
         hasCow = true;
     }
+
     /**
      * Sets hasVisum to true if player found a visum.
      */
+    @Override
     public void playerFoundVisa(){
         hasVisa = true;
     }
 
+    @Override
     public boolean hasCow() {
         return hasCow;
     }
 
+    @Override
     public boolean hasVisa() {
         return hasVisa;
     }

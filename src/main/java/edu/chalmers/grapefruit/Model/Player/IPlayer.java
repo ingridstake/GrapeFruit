@@ -21,5 +21,16 @@ public interface IPlayer extends IPositionable {
      * @param y is the y-value of the position.
      */
     void updatePlayerPosition(int x, int y);
+
+    /**
+     * Sets hasCow to true if player found the cow.
+     */
+    void playerFoundCow();
+    /**
+     * Sets hasVisum to true if player found a visum.
+     */
+    void playerFoundVisa();
+    boolean hasCow();
+    boolean hasVisa();
 }
 
