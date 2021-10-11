@@ -1,0 +1,16 @@
+MötesprotokollGrupp: GrapefruitDatum: 111021Lärosäte: Chalmers tekniska högskolaDeltagare: Elvina Fahlgren, Ingrid Stake, Tove Nilsson och Olivia Månström
+• Mål (5 min)- Planera veckan.
+• Rapport från tidigare möte (15 min)Elvina har fixat så att finns en JSON-handler. 
+Ingrid och Tove har har tagit hand om onödiga beroenden och tester.
+Olivia har fixat saker i Player paketet och testat det.
+Peer Review är inlämnat. 
+
+• Diskussions ämnen (35 min)GSON ok? 
+UML diagrammet har vi pratat lite om.
+Planerat veckan.
+• Resultat och uppgifter (5 min)Elvina kan inte onsdag kl 11 & torsdag kl 15. Fråga Felix om vi kan flytta fram mötet.
+Vi har grupprum kl 15-18 onsdag 13/10 och 13-17 torsdag 14/10.
+Tisdag kl 15 sitter vi på allmän plats. 
+
+peer-review ska lämnas in fredag 15/10.
+• SummeringKolla på peer-review.Nästa möte är preliminärt onsdag 13/10.
