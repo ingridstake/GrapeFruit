@@ -1,14 +1,12 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Position.IPosition;
-import edu.chalmers.grapefruit.Model.Position.NormalPosition;
 import edu.chalmers.grapefruit.Model.Position.PositionFactory;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import edu.chalmers.grapefruit.Model.Json.JsonHandler;
+import edu.chalmers.grapefruit.Model.Json.JsonMap;
+import edu.chalmers.grapefruit.Model.Json.JsonNeighbour;
+import edu.chalmers.grapefruit.Model.Json.JsonPosition;
 
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -31,57 +29,28 @@ public class MapFactory {
      */
     static Map createMap(int nNodes) {
         MapFactory app = new MapFactory();
-        // Transforms input for reading
-        JSONTokener tokener = new JSONTokener(app.getJSONFile());
-        JSONObject object = new JSONObject(tokener);
 
-        List<Node> nodes = app.createNodes(object.getJSONArray("PositionList"));
+        JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/Model/board.json");
+        JsonMap jsonMap = handler.getJsonMap();
 
-        JSONObject jsonNeighbours = object.getJSONObject("Neighbours");
-
+        List<Node> nodes = app.createNodes(jsonMap.PositionList);
         Map map = new Map(nodes.get(0));
-
-        Iterator<?> keys = jsonNeighbours.keys();
-        while(keys.hasNext()) {
-            int key = Integer.valueOf((String)keys.next());
-            JSONArray neighboursJSONArray = jsonNeighbours.getJSONArray(String.valueOf(key));
+        for(JsonNeighbour temp : jsonMap.Neighbours){
             List<Node> neighbours = new ArrayList<>();
-
-            for(int i = 0; i < neighboursJSONArray.length(); i++){
-                neighbours.add(nodes.get(neighboursJSONArray.getInt(i)));
-            }
-            map.add(nodes.get(key), neighbours);
+            for(int i : temp.neigbours) neighbours.add(nodes.get(i));
+            map.add(nodes.get(temp.id), neighbours);
         }
-
         return map;
-    }
-
-    /**
-     * Returns the stream that holds the needed json file which sets up the game's board.
-     * Finds the json file using the right path.
-     * If the json file couldn't be found, the method will throw an IllegalArgumentException.
-     * @return the stream that holds the json file "board.json"
-     */
-    private InputStream getJSONFile() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("edu/chalmers/grapefruit/Model/board.json");
-
-        // the stream holding the file content
-        if (inputStream == null) {
-            throw new IllegalArgumentException("JSON file not found!");
-        } else {
-            return inputStream;
-        }
     }
 
     /**
      * Creates Nodes using a JSONArray with JSONObjects in it. Each JSONObject holds information about each IPosition
      * which is submitted as an argument to create a Node.
-     * @param jsonPositionArray is the JSONOArrays that contains information about each IPosition.
+     * @param JsonPos is the JSONOArrays that contains information about each IPosition.
      * @return a List of all Nodes.
      */
-    private List<Node> createNodes(JSONArray jsonPositionArray) {
-        List<IPosition> positions = PositionFactory.makePositions(jsonPositionArray);
+    private List<Node> createNodes(List<JsonPosition> JsonPos) {
+        List<IPosition> positions = PositionFactory.makePositions(JsonPos);
         List<Node> nodes = new ArrayList<>();
         for (IPosition position : positions) {
             nodes.add(new Node(position));
