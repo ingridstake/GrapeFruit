@@ -18,14 +18,19 @@ import java.util.*;
 public class MapFactory {
 
     //TODO TA BORT nNodes parameter!
-
     /**
-     * Creates a map based on a JSON file.
-     * The JSON file must be structured in the following way:
-     *      - Have a JSONArray named "PositionList" that the class PositionFactory can make IPositions from.
-     *      - Have a JSONObject named "Neighbours" which contains JSONArrays that holds the neighbours for every
-     *      Node, using numbers.
-     * @return
+     * Uses JsonHandler to create a map based on a json file.
+     * The json file must be structured in the following way:
+     *      - Have a JSONArray named "PositionList" which contains
+     *              - int positionID
+     *              - String positionType
+     *              - int X
+     *              - int Y
+     *      - Have a JSONObject named "Neighbours" which contains
+     *              - int id
+     *              - List<Integer> neighbours
+     * Creates Nodes and connect neighbours to each node.
+     * @return a Map object
      */
     static Map createMap(int nNodes) {
         MapFactory app = new MapFactory();
@@ -34,20 +39,22 @@ public class MapFactory {
         JsonMap jsonMap = handler.getJsonMap();
 
         List<Node> nodes = app.createNodes(jsonMap.PositionList);
+
         Map map = new Map(nodes.get(0));
         for(JsonNeighbour temp : jsonMap.Neighbours){
             List<Node> neighbours = new ArrayList<>();
             for(int i : temp.neigbours) neighbours.add(nodes.get(i));
             map.add(nodes.get(temp.id), neighbours);
         }
+
         return map;
     }
 
     /**
-     * Creates Nodes using a JSONArray with JSONObjects in it. Each JSONObject holds information about each IPosition
-     * which is submitted as an argument to create a Node.
-     * @param JsonPos is the JSONOArrays that contains information about each IPosition.
-     * @return a List of all Nodes.
+     * Creates a list of Nodes based on a list of JsonPositions.
+     * Uses PositionFactory to to make positions.
+     * @param JsonPos is the list that contains information about each IPosition.
+     * @return a list of all Nodes.
      */
     private List<Node> createNodes(List<JsonPosition> JsonPos) {
         List<IPosition> positions = PositionFactory.makePositions(JsonPos);
