@@ -14,7 +14,15 @@ public class NodeView {
     private int x;
     private int y;
     @FXML public Circle position;
-    NodeClickHandler clickHandler;
+    static NodeClickHandler clickHandler;
+
+    /**
+     * Sets the click handler for all NodeViews
+     * @param nodeClickHandler is the click handler for all node views.
+     */
+    static public void setClickHandler(NodeClickHandler nodeClickHandler){
+        clickHandler = nodeClickHandler;
+    }
 
     /**
      * Forwards the event to the event handler.
@@ -23,8 +31,7 @@ public class NodeView {
         clickHandler.handle(x, y);
     }
 
-    public void initialize(NodeClickHandler clickHandler, int x, int y) {
-        this.clickHandler = clickHandler;
+    public void initialize(int x, int y) {
         this.x = x;
         this.y = y;
     }
