@@ -1,13 +1,11 @@
 package edu.chalmers.grapefruit.Model;
 
-import edu.chalmers.grapefruit.Interfaces.IPositionable;
-import edu.chalmers.grapefruit.Interfaces.Observable;
-import edu.chalmers.grapefruit.Interfaces.Observer;
+import edu.chalmers.grapefruit.Utils.IPositionable;
+import edu.chalmers.grapefruit.Utils.Observable;
+import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
-import edu.chalmers.grapefruit.Model.Position.IPosition;
-import edu.chalmers.grapefruit.Model.Position.NormalPosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +17,21 @@ public class GameModel implements Observable {
 
     public GameModel() {
         players = PlayerFactory.MakePlayers(1);
-        gameBoard = new GameBoard(players);
+        if (players == null) {
+            throw new IllegalArgumentException("More than 4 players is not allowed");
+        }
+        else {
+            gameBoard = new GameBoard(players);
+        }
     }
 
     public void makePlayerMove(int x, int y){
         gameBoard.movePlayer(x, y);
+        notifyObservers();
+    }
+
+    public void makeDiceRoll(){
+        gameBoard.makeDiceRoll();
         notifyObservers();
     }
 

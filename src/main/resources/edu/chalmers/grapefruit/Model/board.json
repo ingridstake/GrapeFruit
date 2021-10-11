@@ -22,31 +22,31 @@
         "positionID": 3,
         "positionType": "NormalPosition",
         "X": 200,
-        "Y": 100
+        "Y": 300
     },
     {
         "positionID": 4,
         "positionType": "NormalPosition",
-        "X": 200,
+        "X": 300,
         "Y": 300
     },
     {
         "positionID": 5,
         "positionType": "NormalPosition",
         "X": 300,
-        "Y": 100
+        "Y": 200
     },
     {
         "positionID": 6,
         "positionType": "NormalPosition",
         "X": 300,
-        "Y": 200
+        "Y": 100
     },
     {
         "positionID": 7,
         "positionType": "NormalPosition",
-        "X": 300,
-        "Y": 300
+        "X": 200,
+        "Y": 100
     }
   ],
   "Neighbours": [

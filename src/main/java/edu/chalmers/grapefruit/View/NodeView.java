@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Controller.NodeClickHandler;
+import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Circle;
 
