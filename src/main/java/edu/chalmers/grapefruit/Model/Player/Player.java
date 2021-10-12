@@ -77,5 +77,4 @@ public class Player implements IPlayer{
     public String getResourceString() {
         return PlayerColor.evaluateResourceString(PLAYER_COLOR);
     }
-}
-
+} 

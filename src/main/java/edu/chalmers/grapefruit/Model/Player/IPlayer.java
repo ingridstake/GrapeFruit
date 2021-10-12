@@ -33,4 +33,3 @@ public interface IPlayer extends IPositionable {
     boolean hasCow();
     boolean hasVisa();
 }
-
