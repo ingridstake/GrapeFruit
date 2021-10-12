@@ -24,9 +24,16 @@ class JsonTests {
     }
 
     @Test
-    public void testCreateJsonHandlerWithWrongWrongStructure(){
+    public void testCreateJsonHandlerWithWrongStructure(){
         assertThrows(IllegalArgumentException.class, () -> {
             JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/ForTesting/incorrectBoard.json");
+        });
+    }
+
+    @Test
+    public void testCreateJsonHandlerWithDifferentListSizes(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/ForTesting/incorrectBoardDiffSizeList.json");
         });
     }
 }

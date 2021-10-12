@@ -1,0 +1,161 @@
+{
+  "PositionList": [
+    {
+      "positionID": 0,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 100
+    },
+    {
+      "positionID": 1,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 200
+    },
+    {
+      "positionID": 2,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 300
+    },
+    {
+      "positionID": 3,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 400
+    },
+    {
+      "positionID": 4,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 500
+    },
+    {
+      "positionID": 5,
+      "positionType": "NormalPosition",
+      "X": 200,
+      "Y": 500
+    },
+    {
+      "positionID": 6,
+      "positionType": "NormalPosition",
+      "X": 300,
+      "Y": 500
+    },
+    {
+      "positionID": 7,
+      "positionType": "NormalPosition",
+      "X": 400,
+      "Y": 500
+    },
+    {
+      "positionID": 8,
+      "positionType": "NormalPosition",
+      "X": 400,
+      "Y": 400
+    },
+    {
+      "positionID": 9,
+      "positionType": "NormalPosition",
+      "X": 400,
+      "Y": 300
+    },
+    {
+      "positionID": 10,
+      "positionType": "NormalPosition",
+      "X": 400,
+      "Y": 200
+    },
+    {
+      "positionID": 11,
+      "positionType": "NormalPosition",
+      "X": 400,
+      "Y": 100
+    },
+    {
+      "positionID": 12,
+      "positionType": "NormalPosition",
+      "X": 300,
+      "Y": 100
+    },
+    {
+      "positionID": 13,
+      "positionType": "NormalPosition",
+      "X": 200,
+      "Y": 100
+    },{
+      "positionID": 14,
+      "positionType": "NormalPosition",
+      "X": 200,
+      "Y": 300
+    },
+    {
+      "positionID": 15,
+      "positionType": "NormalPosition",
+      "X": 300,
+      "Y": 300
+    }
+  ],
+  "Neighbours": [
+    {
+      "id": 0,
+      "neighbours": [13, 1]
+    },
+    {
+      "id": 1,
+      "neighbours": [0, 2]
+    },
+    {
+      "id" : 2,
+      "neighbours": [1, 3, 14]
+    },
+    {
+      "id":3,
+      "neighbours": [2, 4]
+    },
+    {
+      "id":4,
+      "neighbours": [3, 5]
+    },
+    {
+      "id":5,
+      "neighbours": [4, 6]
+    },
+    {
+      "id":6,
+      "neighbours": [5, 7]
+    },
+    {
+      "id":7,
+      "neighbours": [6, 8]
+    },
+    {
+      "id":8,
+      "neighbours": [7, 9]
+    },
+    {
+      "id":9,
+      "neighbours": [8, 10, 15]
+    },
+    {
+      "id":10,
+      "neighbours": [9, 11]
+    },
+    {
+      "id":11,
+      "neighbours": [10, 12]
+    },
+    {
+      "id":12,
+      "neighbours": [11, 13]
+    },
+    {
+      "id":13,
+      "neighbours": [12, 0]
+    },
+    {
+      "id":14,
+      "neighbours": [2, 15]
+    }
+  ]
+}
