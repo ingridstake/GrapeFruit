@@ -24,6 +24,7 @@ För att en JSON fil skall kunna läsas in som spelets spelbräde måste den var
          - neighbours : int Array[]
     
 ### Exempel
+
 {
   "PositionList": [
     {
