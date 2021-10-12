@@ -17,7 +17,7 @@ public class Map {
         this.startNode = startNode;
     }
 
-    public Node getStartNode(){
+    protected Node getStartNode(){
         return startNode;
     }
 
@@ -26,7 +26,7 @@ public class Map {
      * @param node is the new node that is integrated in the map.
      * @param relatedNodes is the related nodes that need to be connected with the new node.
      */
-    public void add (Node node, List<Node> relatedNodes){
+    protected void add (Node node, List<Node> relatedNodes){
         for (Node relatedNode : relatedNodes) {
             relatedNode.addRelatedNode(node);
         }
@@ -38,7 +38,7 @@ public class Map {
      * Returns a list containing all nodes of the map.
      * @return a List of Nodes.
      */
-    public List<Node> getAllNodes(){
+    protected List<Node> getAllNodes(){
         List<Node> allNodes = new ArrayList<>();
         return startNode.getAllNodes(allNodes);
     }

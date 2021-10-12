@@ -1,14 +1,11 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Position.IPosition;
-import edu.chalmers.grapefruit.Model.Position.NormalPosition;
 import edu.chalmers.grapefruit.Model.Position.PositionFactory;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import edu.chalmers.grapefruit.Model.Json.JsonHandler;
+import edu.chalmers.grapefruit.Model.Json.JsonBoardReader;
+import edu.chalmers.grapefruit.Model.Json.JsonPosition;
 
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -19,69 +16,48 @@ import java.util.*;
  */
 public class MapFactory {
 
-    //TODO TA BORT nNodes parameter!
-
     /**
-     * Creates a map based on a JSON file.
-     * The JSON file must be structured in the following way:
-     *      - Have a JSONArray named "PositionList" that the class PositionFactory can make IPositions from.
-     *      - Have a JSONObject named "Neighbours" which contains JSONArrays that holds the neighbours for every
-     *      Node, using numbers.
-     * @return
+     * Uses JsonHandler to create a map based on a json file.
+     * The json file must be structured in the following way:
+     *      - Have a JSONArray named "PositionList" which contains
+     *              - int positionID
+     *              - String positionType
+     *              - int X
+     *              - int Y
+     *      - Have a JSONObject named "Neighbours" which contains
+     *              - int id
+     *              - List<Integer> neighbours
+     * Creates Nodes and connect neighbours to each node.
+     * @return a Map object
      */
-    static Map createMap(int nNodes) {
+    protected static Map createMap(String filePath) {
         MapFactory app = new MapFactory();
-        // Transforms input for reading
-        JSONTokener tokener = new JSONTokener(app.getJSONFile());
-        JSONObject object = new JSONObject(tokener);
 
-        List<Node> nodes = app.createNodes(object.getJSONArray("PositionList"));
+        JsonHandler handler = new JsonHandler(filePath);
+        JsonBoardReader boardReader = handler.getJsonBoardReader();
 
-        JSONObject jsonNeighbours = object.getJSONObject("Neighbours");
+        List<Node> nodes = app.createNodes(boardReader.PositionList);
 
         Map map = new Map(nodes.get(0));
 
-        Iterator<?> keys = jsonNeighbours.keys();
-        while(keys.hasNext()) {
-            int key = Integer.valueOf((String)keys.next());
-            JSONArray neighboursJSONArray = jsonNeighbours.getJSONArray(String.valueOf(key));
+        for (Node node : nodes) {
             List<Node> neighbours = new ArrayList<>();
-
-            for(int i = 0; i < neighboursJSONArray.length(); i++){
-                neighbours.add(nodes.get(neighboursJSONArray.getInt(i)));
+            for (Integer neighbourID : boardReader.Neighbours.get(nodes.indexOf(node)).neighbours) {
+                neighbours.add(nodes.get(neighbourID));
             }
-            map.add(nodes.get(key), neighbours);
+            map.add(node, neighbours);
         }
-
         return map;
     }
 
     /**
-     * Returns the stream that holds the needed json file which sets up the game's board.
-     * Finds the json file using the right path.
-     * If the json file couldn't be found, the method will throw an IllegalArgumentException.
-     * @return the stream that holds the json file "board.json"
+     * Creates a list of Nodes based on a list of JsonPositions.
+     * Uses PositionFactory to to make positions.
+     * @param JsonPos is the list that contains information about each IPosition.
+     * @return a list of all Nodes.
      */
-    private InputStream getJSONFile() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("edu/chalmers/grapefruit/Model/board.json");
-
-        // the stream holding the file content
-        if (inputStream == null) {
-            throw new IllegalArgumentException("JSON file not found!");
-        } else {
-            return inputStream;
-        }
-    }
-
-    /**
-     * Creates Nodes using a JSONArray with JSONObjects in it. Each JSONObject holds information about each IPosition
-     * which is submitted as an argument to create a Node.
-     * @param jsonPositionArray is the JSONOArrays that contains information about each IPosition.
-     * @return a List of all Nodes.
-     */
-    private List<Node> createNodes(JSONArray jsonPositionArray) {
-        List<IPosition> positions = PositionFactory.makePositions(jsonPositionArray);
+    private List<Node> createNodes(List<JsonPosition> JsonPos) {
+        List<IPosition> positions = PositionFactory.makePositions(JsonPos);
         List<Node> nodes = new ArrayList<>();
         for (IPosition position : positions) {
             nodes.add(new Node(position));
