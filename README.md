@@ -11,7 +11,7 @@ RAD: https://www.overleaf.com/read/gfccrqkyfhnj
 
 ## Krav för .json fil
 För att en JSON fil skall kunna läsas in som spelets spelbräde måste den vara uppbyggd på följande sätt:
-    - JSONObject som har
+    * JSONObject som har
         - en JSONArray *PositionList* vilken består av 
             - positionID : int
             - positionType : String 
