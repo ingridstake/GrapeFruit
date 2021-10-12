@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author ingrid.stake
+ */
+
 public class TileFactory {
 
-    static List<ITile> makeTiles(int nTiles){
+    /**
+     * Creates a list of tiles with the right tile type distribution.
+     * @param nTiles is the number of tiles the returned list is to contain, this should not be lower than 15.
+     * @return a list of Tiles in shuffled order.
+     */
+    public static List<ITile> makeTiles(int nTiles) {
         List<ITile> tiles = new ArrayList<>();
 
         tiles.add(new Tile(TileType.COW));
@@ -31,11 +40,7 @@ public class TileFactory {
             tiles.add(new Tile(TileType.BLANK));
         }
 
-        if (tiles.size() == nTiles) {
-            Collections.shuffle(tiles);
-            return tiles;
-        }
-
-        return null;
+        Collections.shuffle(tiles);
+        return tiles;
     }
 }

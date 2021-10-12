@@ -1,8 +1,18 @@
 package edu.chalmers.grapefruit.Model.Tile;
 
+/**
+ * @author ingrid.stake
+ */
+
 public enum TileType {
     COW, HORSE, PIG, POOP, COWBELL, BLANK;
 
+    /**
+     * Evaluates the accurate resource file for the tile type.
+     * @param tileType determines which file name is returned.
+     * @return the accurate file name for the file type.
+     * @throws Exception if there is no existing file for the current file type.
+     */
     public static String evaluateResourceString(TileType tileType) throws Exception {
 
         switch (tileType){
