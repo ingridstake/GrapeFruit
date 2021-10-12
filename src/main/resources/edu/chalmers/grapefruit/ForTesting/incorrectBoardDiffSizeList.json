@@ -1,52 +1,52 @@
 {
   "PositionList": [
     {
-        "positionID": 0,
-        "positionType": "NormalPosition",
-        "X": 100,
-        "Y": 100
+      "positionID": 0,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 100
     },
     {
-        "positionID": 1,
-        "positionType": "NormalPosition",
-        "X": 100,
-        "Y": 200
+      "positionID": 1,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 200
     },
     {
-        "positionID": 2,
-        "positionType": "NormalPosition",
-        "X": 100,
-        "Y": 300
+      "positionID": 2,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 300
     },
     {
-        "positionID": 3,
-        "positionType": "NormalPosition",
-        "X": 100,
-        "Y": 400
+      "positionID": 3,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 400
     },
     {
-        "positionID": 4,
-        "positionType": "NormalPosition",
-        "X": 100,
-        "Y": 500
+      "positionID": 4,
+      "positionType": "NormalPosition",
+      "X": 100,
+      "Y": 500
     },
     {
-        "positionID": 5,
-        "positionType": "NormalPosition",
-        "X": 200,
-        "Y": 500
+      "positionID": 5,
+      "positionType": "NormalPosition",
+      "X": 200,
+      "Y": 500
     },
     {
-        "positionID": 6,
-        "positionType": "NormalPosition",
-        "X": 300,
-        "Y": 500
+      "positionID": 6,
+      "positionType": "NormalPosition",
+      "X": 300,
+      "Y": 500
     },
     {
-        "positionID": 7,
-        "positionType": "NormalPosition",
-        "X": 400,
-        "Y": 500
+      "positionID": 7,
+      "positionType": "NormalPosition",
+      "X": 400,
+      "Y": 500
     },
     {
       "positionID": 8,
@@ -156,10 +156,6 @@
     {
       "id":14,
       "neighbours": [2, 15]
-    },
-    {
-      "id":15,
-      "neighbours": [9, 14]
     }
   ]
 }
