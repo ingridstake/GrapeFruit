@@ -9,5 +9,5 @@ import java.util.List;
  */
 public class JsonNeighbour {
     public int id;
-    public List<Integer> neigbours;
+    public List<Integer> neighbours;
 }

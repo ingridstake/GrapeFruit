@@ -1,16 +1,18 @@
 package edu.chalmers.grapefruit.Model.Json;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
 /**
  * This class uses Gson for converting a Json String into a Java "game board map" object.
+ *
  * @author elvina.fahlgren
  */
-
 public class JsonHandler {
-   private JsonMap map;
+   private JsonBoardReader boardReader;
    private static Gson gson = new Gson();
 
    /**
@@ -28,11 +30,20 @@ public class JsonHandler {
    private void readJson(String filePath){
       Scanner s = new Scanner(getJSONFile(filePath)).useDelimiter("\\A");
       String result = s.hasNext() ? s.next() : "";
-      map = gson.fromJson(result, JsonMap.class);
+      try {
+         boardReader = gson.fromJson(result, JsonBoardReader.class);
+      }
+      catch (JsonParseException e) {
+         throw new IllegalArgumentException("Incorrect json format!");
+      }
+
+      if (boardReader.Neighbours.size() != boardReader.PositionList.size())
+         throw new IllegalArgumentException("Neighbour list and PositionList in json file doesn't match!");
+
    }
 
-   public JsonMap getJsonMap(){
-      return map;
+   public JsonBoardReader getJsonBoardReader(){
+      return boardReader;
    }
 
    /**
@@ -41,9 +52,9 @@ public class JsonHandler {
     * If the json file couldn't be found, the method will throw an IllegalArgumentException.
     * @return the stream that holds the json file
     */
-   private InputStream getJSONFile(String from) {
+   private InputStream getJSONFile(String filePath) {
       ClassLoader classLoader = getClass().getClassLoader();
-      InputStream inputStream = classLoader.getResourceAsStream(from);
+      InputStream inputStream = classLoader.getResourceAsStream(filePath);
 
       // the stream holding the file content
       if (inputStream == null) {

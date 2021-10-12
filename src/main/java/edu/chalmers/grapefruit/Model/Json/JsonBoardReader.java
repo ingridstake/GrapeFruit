@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author elvina.fahlgren
  */
-public class JsonMap {
+public class JsonBoardReader {
     public List<JsonPosition> PositionList;
     public List<JsonNeighbour> Neighbours;
 }

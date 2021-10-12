@@ -22,14 +22,13 @@ public class GameBoard {
 
     public GameBoard(List<IPlayer> players){
         playerPositionHashMap = new HashMap<>();
-        map = MapFactory.createMap(8);
+        map = MapFactory.createMap("edu/chalmers/grapefruit/Model/board.json");
 
         for (IPlayer player : players) {
             playerPositionHashMap.put(player, map.getStartNode());
             player.updatePlayerPosition(playerPositionHashMap.get(player).getPosition().getX(), playerPositionHashMap.get(player).getPosition().getY());
         }
         currPlayer = players.get(0);
-
         gatherPositionableList();
     }
 

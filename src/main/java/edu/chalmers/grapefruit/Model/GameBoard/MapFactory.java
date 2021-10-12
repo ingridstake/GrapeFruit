@@ -3,8 +3,7 @@ package edu.chalmers.grapefruit.Model.GameBoard;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.PositionFactory;
 import edu.chalmers.grapefruit.Model.Json.JsonHandler;
-import edu.chalmers.grapefruit.Model.Json.JsonMap;
-import edu.chalmers.grapefruit.Model.Json.JsonNeighbour;
+import edu.chalmers.grapefruit.Model.Json.JsonBoardReader;
 import edu.chalmers.grapefruit.Model.Json.JsonPosition;
 
 import java.util.*;
@@ -17,7 +16,6 @@ import java.util.*;
  */
 public class MapFactory {
 
-    //TODO TA BORT nNodes parameter!
     /**
      * Uses JsonHandler to create a map based on a json file.
      * The json file must be structured in the following way:
@@ -32,21 +30,23 @@ public class MapFactory {
      * Creates Nodes and connect neighbours to each node.
      * @return a Map object
      */
-    static Map createMap(int nNodes) {
+    protected static Map createMap(String filePath) {
         MapFactory app = new MapFactory();
 
-        JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/Model/board.json");
-        JsonMap jsonMap = handler.getJsonMap();
+        JsonHandler handler = new JsonHandler(filePath);
+        JsonBoardReader boardReader = handler.getJsonBoardReader();
 
-        List<Node> nodes = app.createNodes(jsonMap.PositionList);
+        List<Node> nodes = app.createNodes(boardReader.PositionList);
 
         Map map = new Map(nodes.get(0));
-        for(JsonNeighbour temp : jsonMap.Neighbours){
-            List<Node> neighbours = new ArrayList<>();
-            for(int i : temp.neigbours) neighbours.add(nodes.get(i));
-            map.add(nodes.get(temp.id), neighbours);
-        }
 
+        for (Node node : nodes) {
+            List<Node> neighbours = new ArrayList<>();
+            for (Integer neighbourID : boardReader.Neighbours.get(nodes.indexOf(node)).neighbours) {
+                neighbours.add(nodes.get(neighbourID));
+            }
+            map.add(node, neighbours);
+        }
         return map;
     }
 
