@@ -26,7 +26,6 @@ public class GameBoardView implements Observer {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
     List<IPositionable> positionables;
-    NodeClickHandler clickHandler;
 
     static public GameBoardView makeGameBoardView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
@@ -56,7 +55,7 @@ public class GameBoardView implements Observer {
     public void populate (List<IPositionable> positionableList, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
 
         this.positionables = positionableList;
-        this.clickHandler = clickHandler;
+        NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
 
         redrawChildren();
@@ -102,7 +101,7 @@ public class GameBoardView implements Observer {
 
             NodeView nodeView = (NodeView) getController(child);
             if (nodeView != null) {
-                nodeView.initialize(clickHandler, x, y);
+                nodeView.initialize(x, y);
             }
             child.relocate(x, y);
 

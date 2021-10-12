@@ -39,6 +39,27 @@ public class MovePlayerTest {
             }
             index++;
         }
+    }
 
+    @Test
+    public void dicePlayerMove(){
+        List<IPositionable> positionables = model.getPositionables();
+        model.makeDiceRoll();
+
+        int oldPlayerPositionX, oldPlayerPositionY, newPlayerPositionX, newPlayerPositionY;
+
+        for (IPositionable positionable : positionables ) {
+            if (!positionable.getResourceString().equals("node-view.fxml")){
+                oldPlayerPositionX = positionable.getX();
+                oldPlayerPositionY = positionable.getY();
+                model.makePlayerMove(300, 300);
+                newPlayerPositionX = positionable.getX();
+                newPlayerPositionY = positionable.getY();
+
+                assert (oldPlayerPositionX == newPlayerPositionX || oldPlayerPositionY == newPlayerPositionY);
+                assert (newPlayerPositionX !=300 && newPlayerPositionY != 300);
+                break;
+            }
+        }
     }
 }
