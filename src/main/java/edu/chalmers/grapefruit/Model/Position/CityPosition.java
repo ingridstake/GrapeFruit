@@ -1,23 +1,20 @@
 package edu.chalmers.grapefruit.Model.Position;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author tovenilsson
  */
-public class NormalPosition implements IPosition{
+
+public class CityPosition implements IPosition{
 
     private final int X;
     private final int Y;
     boolean isHighlighted;
 
-    protected NormalPosition(int x, int y){
+    protected CityPosition(int x, int y){
         X = x;
         Y = y;
         isHighlighted = false;
     }
-
     @Override
     public int getX() {
         return X;
@@ -31,9 +28,9 @@ public class NormalPosition implements IPosition{
     @Override
     public String getResourceString() {
         if (isHighlighted){
-            return "node-view-highlighted.fxml";
+            return "cityPosition-highlighted-view.fxml";
         }
-        return "node-view.fxml";
+        return "cityPosition-view.fxml";
     }
 
     /**
@@ -48,7 +45,7 @@ public class NormalPosition implements IPosition{
      * Changes the state of isHighlighted to false
      */
     @Override
-    public void deHighlight(){
+    public void deHighlight() {
         isHighlighted = false;
     }
 }

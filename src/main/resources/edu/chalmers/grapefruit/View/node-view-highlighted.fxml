@@ -8,7 +8,7 @@
             prefHeight="50.0" prefWidth="50.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="edu.chalmers.grapefruit.View.NodeView" fx:id="anchorPane">
    <children>
-      <Circle fx:id="position" fill="#9ac6ee" layoutX="24.0" layoutY="27.0" radius="25.0"
+      <Circle fx:id="position" fill="#9ac6ee" layoutX="24.0" layoutY="27.0" radius="20.0"
               stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: #FFFFFF;
               -fx-stroke-width: 4;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"
               onMouseClicked="#handleOnMouseClicked"
