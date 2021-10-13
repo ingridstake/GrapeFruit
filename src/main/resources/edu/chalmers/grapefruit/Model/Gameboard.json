@@ -2,14 +2,14 @@
   "PositionList": [
     {
       "positionID": 0,
-      "positionType": "NormalPosition",
-      "X": 100,
-      "Y": 100
+      "positionType": "StartPosition",
+      "X": 45,
+      "Y": 30
     },
     {
       "positionID": 1,
       "positionType": "NormalPosition",
-      "X": 180,
+      "X": 170,
       "Y": 100
     },
     {

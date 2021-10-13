@@ -29,6 +29,9 @@ public class PositionFactory {
                 case "CityPosition":
                     positions.add(new CityPosition(pos.X, pos.Y));
                     break;
+                case "StartPosition":
+                    positions.add(new StartPosition(pos.X, pos.Y));
+                    break;
                 default:
                     throw new IllegalArgumentException(pos.positionType
                             + " is not an acceptable IPosition!");
