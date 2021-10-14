@@ -34,7 +34,7 @@ public class Tile implements ITile {
      * @return the name of the fxml file for the tile.
      */
     @Override
-    public String getResourceString() {
+    public String getResourceString() throws Exception {
         if (isTurned()) {
             try {
                 return TileType.evaluateResourceString(TILE_TYPE);
@@ -42,6 +42,6 @@ public class Tile implements ITile {
                 e.printStackTrace();
             }
         }
-            return "tile-unturned.fxml";
+            return TileType.evaluateResourceString(TILE_TYPE);
     }
 }

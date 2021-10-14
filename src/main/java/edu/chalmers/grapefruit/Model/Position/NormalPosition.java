@@ -51,4 +51,9 @@ public class NormalPosition implements IPosition{
     public void deHighlight(){
         isHighlighted = false;
     }
+
+    @Override
+    public boolean isHighlighted() {
+        return isHighlighted;
+    }
 }

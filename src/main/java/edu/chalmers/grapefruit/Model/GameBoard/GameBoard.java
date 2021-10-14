@@ -82,6 +82,10 @@ public class GameBoard {
         }
 
         map.deHighlight();
+
+        if (playerPositionHashMap.get(player).getPosition().getClass().toString().equals("CityPosition")){
+            System.out.println("yey");
+        }
     }
 
     /**

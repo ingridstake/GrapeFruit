@@ -21,7 +21,7 @@ public interface ITile {
      * Returns the file name of the tile.
      * @return the file name of the tile
      */
-    String getResourceString();
+    String getResourceString() throws Exception;
 
     /**
      * Returns the type of the tile

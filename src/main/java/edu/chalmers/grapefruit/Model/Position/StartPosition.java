@@ -49,4 +49,9 @@ public class StartPosition implements IPosition{
     public void deHighlight() {
         isHighlighted = false;
     }
+
+    @Override
+    public boolean isHighlighted() {
+        return isHighlighted;
+    }
 }

@@ -14,4 +14,5 @@ public interface IPosition extends IPositionable {
     int getY();
     void highlight();
     void deHighlight();
+    boolean isHighlighted();
 }

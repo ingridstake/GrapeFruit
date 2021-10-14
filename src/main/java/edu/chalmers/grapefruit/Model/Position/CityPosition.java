@@ -1,51 +1,59 @@
 package edu.chalmers.grapefruit.Model.Position;
 
+import edu.chalmers.grapefruit.Model.Tile.ITile;
+
 /**
  * @author tovenilsson
  */
 
 public class CityPosition implements IPosition{
 
-    private final int X;
-    private final int Y;
-    boolean isHighlighted;
+    private final IPosition POSITION;
+    private ITile TILE;
 
     protected CityPosition(int x, int y){
-        X = x;
-        Y = y;
-        isHighlighted = false;
+        POSITION = new NormalPosition(x, y);
     }
+
+    public void setTile(ITile tile) {
+        TILE = tile;
+    }
+
     @Override
     public int getX() {
-        return X;
+        return POSITION.getX();
     }
 
     @Override
     public int getY() {
-        return Y;
+        return POSITION.getY();
     }
 
     @Override
     public String getResourceString() {
-        if (isHighlighted){
-            return "cityPosition-highlighted-view.fxml";
+        if (POSITION.isHighlighted()) {
+            return "tile-view-highlighted.fxml";
         }
-        return "cityPosition-view.fxml";
+        try {
+            return TILE.getResourceString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    /**
-     * Changes the state of isHighlighted to true
-     */
     @Override
     public void highlight() {
-        isHighlighted = true;
+        POSITION.highlight();
     }
 
-    /**
-     * Changes the state of isHighlighted to false
-     */
     @Override
     public void deHighlight() {
-        isHighlighted = false;
+        POSITION.deHighlight();
+    }
+
+    @Override
+    public boolean isHighlighted() {
+        return false;
     }
 }
