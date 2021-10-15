@@ -1,5 +1,7 @@
 package edu.chalmers.grapefruit.Model.Player;
 
+import java.awt.*;
+
 /**
  * The Player class contains the functionality of a Player.
  * @author ingrid.stake
@@ -12,11 +14,11 @@ public class Player implements IPlayer{
     private boolean hasCow;
     private boolean hasVisa;
     private final PlayerColor PLAYER_COLOR;
-    private int X;
-    private int Y;
+    private Point point;
 
     protected Player(PlayerColor playerColor){
         moneyBalance = 5000;
+        point = new Point(0,0);
         hasCow = false;
         hasVisa = false;
         PLAYER_COLOR = playerColor;
@@ -59,22 +61,16 @@ public class Player implements IPlayer{
 
     @Override
     public void updatePlayerPosition(int x, int y) {
-        this.X = x;
-        this.Y = y;
+        point.x = x;
+        point.y = y;
+    }
+
+    public Point getPoint() {
+        return point;
     }
 
     @Override
-    public int getX() {
-        return X;
-    }
-
-    @Override
-    public int getY() {
-        return Y;
-    }
-
-    @Override
-    public String getResourceString() {
-        return PlayerColor.evaluateResourceString(PLAYER_COLOR);
+    public String getResourceString() throws Exception {
+       return PlayerColor.evaluateResourceString(PLAYER_COLOR);
     }
 } 

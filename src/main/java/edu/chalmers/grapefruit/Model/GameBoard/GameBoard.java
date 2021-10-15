@@ -1,6 +1,7 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
-import edu.chalmers.grapefruit.Utils.IPositionable;
+import edu.chalmers.grapefruit.Model.Position.IPosition;
+import edu.chalmers.grapefruit.Model.ViewEntityFactory;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ public class GameBoard {
     HashMap<IPlayer, Node> playerPositionHashMap;
     IPlayer currPlayer;
     Map map;
-    List<IPositionable> positionableList;
 
     public GameBoard(List<IPlayer> players){
         playerPositionHashMap = new HashMap<>();
@@ -26,31 +26,20 @@ public class GameBoard {
 
         for (IPlayer player : players) {
             playerPositionHashMap.put(player, map.getStartNode());
-            player.updatePlayerPosition(playerPositionHashMap.get(player).getPosition().getX(), playerPositionHashMap.get(player).getPosition().getY());
+            IPosition position = playerPositionHashMap.get(player).getPosition();
+            player.updatePlayerPosition(position.getPoint().x, position.getPoint().y);
         }
         currPlayer = players.get(0);
-        gatherPositionableList();
+
+        createViewEntities();
     }
 
-    /**
-     * Gather positionable objects as nodes and players to a list.
-     */
-    private void gatherPositionableList(){
-        positionableList = new ArrayList<>();
+    private void createViewEntities(){
 
-        for (Node node : getMap().getAllNodes()) {
-            positionableList.add(node.getPosition());
+        for (Node node :  map.getAllNodes()) {
+            ViewEntityFactory.addEntity(node.getPosition());
         }
-
-        playerPositionHashMap.forEach((k,v) -> positionableList.add(k));
-    }
-
-    private Map getMap() {
-        return map;
-    }
-
-    public List<IPositionable> getPositionableList() {
-        return positionableList;
+        playerPositionHashMap.forEach((k,v) -> ViewEntityFactory.addEntity(k));
     }
 
     /**
@@ -60,7 +49,7 @@ public class GameBoard {
      */
     public void movePlayer(int x, int y) {
         for (Node node : map.getAllNodes()) {
-            if (x == node.getPosition().getX() && y == node.getPosition().getY()) {
+            if (x == node.getPosition().getPoint().x && y == node.getPosition().getPoint().y) {
                 movePlayer(node, currPlayer);
                 break;
             }
@@ -78,7 +67,7 @@ public class GameBoard {
 
         if (validMoves.contains(newNode)){
             playerPositionHashMap.replace(currPlayer, newNode);
-            currPlayer.updatePlayerPosition(newNode.getPosition().getX(), newNode.getPosition().getY());
+            currPlayer.updatePlayerPosition(newNode.getPosition().getPoint().x, newNode.getPosition().getPoint().y);
         }
 
         map.deHighlight();
