@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="startPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ChoiceBox layoutX="300.0" layoutY="128.0" prefWidth="150.0" AnchorPane.bottomAnchor="247.0" AnchorPane.topAnchor="128.0" />
+      <Text layoutX="149.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Välj antal spelare:" />
+      <Button layoutX="259.0" layoutY="236.0" mnemonicParsing="false" text="Starta spelet" />
+   </children>
+</AnchorPane>

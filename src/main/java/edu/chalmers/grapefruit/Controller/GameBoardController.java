@@ -3,6 +3,7 @@ package edu.chalmers.grapefruit.Controller;
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 import edu.chalmers.grapefruit.View.GameBoardView;
+import edu.chalmers.grapefruit.View.MainView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -12,7 +13,8 @@ import java.io.IOException;
 public class GameBoardController {
 
     private GameModel model;
-    private GameBoardView view;
+    //private GameBoardView view;
+    private MainView view;
 
     /**
      * Creates and sets up the GameBoardView with background and positions
@@ -38,8 +40,17 @@ public class GameBoardController {
             }
         };
 
+
+        view = MainView.makeMainView(stage);
+        //view.loadStartPage();
+        view.loadGameBoardPage();
+        view.populate(model.getPositionables(), nodeClickEventHandler, diceHandler);
+        //model.addObserver(view);
+        /*
         view = GameBoardView.makeGameBoardView(stage);
         view.populate(model.getPositionables(), nodeClickEventHandler, diceHandler);
         model.addObserver(view);
+
+         */
     }
 }
