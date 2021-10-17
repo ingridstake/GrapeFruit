@@ -55,7 +55,6 @@ public class GameBoardViewTest implements Observer {
      * @throws IOException
      */
     public void populate (List<IPositionable> positionableList, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
-
         this.positionables = positionableList;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
@@ -82,6 +81,7 @@ public class GameBoardViewTest implements Observer {
             controller = node.getUserData();
             node = node.getParent();
         } while (controller == null && node != null);
+        System.out.println(controller);
         return controller;
     }
 
@@ -96,12 +96,17 @@ public class GameBoardViewTest implements Observer {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(positionableObject.getResourceString()));
             background.getChildren().add(fxmlLoader.load());
         }
+
         int i = 0;
         for (javafx.scene.Node child : background.getChildren()) {
             int x = positionables.get(i).getX();
             int y = positionables.get(i).getY();
 
-            NodeView nodeView = (NodeView) getController(child);
+            //NodeView nodeView = (NodeView) getController(child);
+
+            Object obj = getController(child);
+            NodeView nodeView = obj instanceof NodeView ? (NodeView) obj : null;
+
             if (nodeView != null) {
                 nodeView.initialize(x, y);
             }

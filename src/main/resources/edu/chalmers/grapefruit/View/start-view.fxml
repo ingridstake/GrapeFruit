@@ -6,11 +6,12 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane fx:id="startViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.chalmers.grapefruit.View.StartView">
+<AnchorPane fx:id="startViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.chalmers.grapefruit.View.StartView">
    <children>
-      <ChoiceBox layoutX="286.0" layoutY="135.0" prefWidth="150.0" />
-      <Button fx:id="startGameButton" layoutX="361.0" layoutY="229.0" mnemonicParsing="false" text="Starat spelet" />
-      <Text layoutX="117.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Välj antal spelare" />
+      <ChoiceBox fx:id="playerAmountChoiceBox" layoutX="600.0" layoutY="350.0" prefWidth="150.0" />
+      <Button fx:id="startGameButton" layoutX="700.0" layoutY="500.0" mnemonicParsing="false" text="Starta spelet" />
+      <Text layoutX="470.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Välj antal spelare" />
    </children>
    <userData>
       <fx:reference source="controller" />
