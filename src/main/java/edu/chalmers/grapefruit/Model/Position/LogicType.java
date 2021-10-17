@@ -28,17 +28,17 @@ public enum LogicType {
             case NONE:
                 return "node-view-highLighted.fxml";
             case COW :
-                return "cow-tile.fxml";
+                return "cow-tile-highlighted.fxml";
             case PIG :
-                return "pig-tile.fxml";
+                return "pig-tile-highlighted.fxml";
             case POOP :
-                return "poop-tile.fxml";
+                return "poop-tile-highlighted.fxml";
             case BLANK :
-                return "blank-tile.fxml";
+                return "blank-tile-highlighted.fxml";
             case HORSE :
-                return "horse-tile.fxml";
+                return "horse-tile-highlighted.fxml";
             case COWBELL :
-                return "cowbell-tile.fxml";
+                return "cowbell-tile-highlighted.fxml";
             case START:
                 return "startPosition-highlighted-view.fxml";
             case UNTURNED_TILE:

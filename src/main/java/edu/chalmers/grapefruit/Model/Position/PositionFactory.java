@@ -55,7 +55,7 @@ public class PositionFactory {
         List<LogicType> tiles = getTileTypes(tilePositions.size());
 
         for (int i = 0; i < tilePositions.size(); i++) {
-            tilePositions.get(1).setLogicType(tiles.get(i));
+            tilePositions.get(i).setLogicType(tiles.get(i));
         }
     }
 

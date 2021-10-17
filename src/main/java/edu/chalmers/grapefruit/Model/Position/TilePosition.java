@@ -20,9 +20,14 @@ public class TilePosition extends Position{
      */
     @Override
     public LogicType getLogicType() {
-        if (isTurned) {
+        //if (isTurned) {
             return super.getLogicType();
-        }
-        return LogicType.UNTURNED_TILE;
+        //}
+        //return LogicType.UNTURNED_TILE;
+    }
+
+    @Override
+    public void setLogicType(LogicType logicType){
+        super.setLogicType(logicType);
     }
 }

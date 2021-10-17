@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
@@ -13,5 +15,10 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <ImageView fitHeight="48.0" fitWidth="38.0" layoutX="15.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/pig.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

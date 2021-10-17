@@ -28,4 +28,8 @@ public class ViewEntityFactory {
     public static List<ViewEntity> getViewEntities() {
         return viewEntities;
     }
+
+    public static void clearViewEntityFactory(){
+        viewEntities = new ArrayList<>();
+    }
 }
