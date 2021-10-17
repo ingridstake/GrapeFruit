@@ -45,7 +45,7 @@ public class GameBoardController {
                 //TODO skulle man kunna lägga in och kolla så att comboboxen är ikryssad här?
                 try {
                     view.loadGameBoardPage();
-                    view.populateGameBoardPage(model.getPositionables(), nodeClickEventHandler, diceHandler);
+                    view.populateGameBoardView(model.getPositionables(), nodeClickEventHandler, diceHandler);
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }
@@ -54,7 +54,7 @@ public class GameBoardController {
 
         view = MainView.makeMainView(stage);
         view.loadStartPage();
-        view.populateStartPage(startGameHandler, 4);
+        view.populateStartView(startGameHandler, 4);
         model.addObserver(view);
     }
 }
