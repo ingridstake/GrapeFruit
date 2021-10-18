@@ -50,7 +50,6 @@ public class GameModel implements Observable {
 
     @Override
     public void notifyObservers() {
-        System.out.println(observerList);
         for (Observer observer : observerList) {
             observer.update();
         }
