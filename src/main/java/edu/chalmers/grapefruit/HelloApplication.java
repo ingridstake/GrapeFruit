@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit;
 
-import edu.chalmers.grapefruit.Controller.GameBoardController;
+import edu.chalmers.grapefruit.Controller.GameController;
 import edu.chalmers.grapefruit.Model.GameModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         GameModel model = new GameModel();
-        GameBoardController controller = new GameBoardController(model, stage);
+        GameController controller = new GameController(model, stage);
 
         stage.show();
     }
