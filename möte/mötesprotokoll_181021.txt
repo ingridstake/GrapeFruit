@@ -1,0 +1,11 @@
+MötesprotokollGrupp: GrapefruitDatum: 181021Lärosäte: Chalmers tekniska högskolaDeltagare: Olivia Månström, Elvina Fahlgren, Ingrid Stake och Tove Nilsson
+• Mål (5 min)- Mergea/slå ihop det vi har jobbat på förra veckan. 
+- Planera veckan.
+• Rapport från tidigare möte (15 min)Olivia och Elvina har fixat viewn med en main view.
+Tove och Ingrid har gjort tester och fixat med tiles.• Diskussions ämnen (35 min)
+Vi visade upp vad vi har gjort sen senaste mötet så vi kan göra en pull request.
+• Resultat och uppgifter (5 min)Den här veckan ska vi göra det sista som är kvar. 
+Det är främst spellogik.
+Vi ska även skriva klart SDD och RAD. 
+
+• SummeringNästa möte är torsdag 21/10-21
