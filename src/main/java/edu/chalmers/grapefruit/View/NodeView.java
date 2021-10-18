@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.shape.Circle;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
+ * @author olimanstorm
+ * @author elvinafahlgren
  */
 
 public class NodeView {

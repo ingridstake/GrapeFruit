@@ -1,0 +1,17 @@
+MötesprotokollGrupp: GrapefruitDatum: 081021Lärosäte: Chalmers tekniska högskolaDeltagare: Olivia Månström, Elvina Fahlgren, Ingrid Stake och Tove Nilsson
+• Mål (5 min)- Synka inför helgen så vi kan jobba på varsitt håll.
+- Kolla på peer-review innan inlämning.
+• Rapport från tidigare möte (15 min)Vi har genomfört det mesta på peer-review. 
+Ingrid och Tove har gjort user story nr 4 och flyttat den till testning.
+Olivia och Elvina håller på user story nr 10 och View.• Diskussionsämnen (35 min)Vad vi ska jobba på i helgen:
+
+Tester till MapFactory. Skicka in fel namn och testa felmeddelande, osv. Fel som inte syns i JSON. 
+
+Jobba vidare på View och relaterade US.
+
+Vi pratade om att lägga till GitHub pro.
+• Resultat och uppgifter (5 min)
+En del tester går inte igenom då vi har gjort en del refractoring. Vi måste fixa så testerna funkar igen. 
+
+Det vi ska jobba på i helgen, under diskussion. 
+• SummeringMöte söndagkväll 17/10-21.

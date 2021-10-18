@@ -1,0 +1,54 @@
+Mötesprotokoll med handledareGrupp: GrapefruitDatum: 141021Lärosäte: Chalmers tekniska högskolaDeltagare: Elvina Fahlgren, Olivia Månström, Tove Nilsson, Ingrid Stake och Felix Oliv
+• Mål (5 min)- Få svar på frågor gällande peer review
+- Få svar på allmänna frågor
+- Få svar på frågor gällande stage/scene
+
+• Rapport från tidigare möte (15 min)Vi har nu en spelplan. Nu har vi en JSONHandler som använder GSON.
+
+• Diskussions ämnen (35 min)Stage/scene: Det bäst att göra på det sättet som känns lättast. Vi kan köra på båda sätt, både med en stage/scene-handler och en enda FXML-fil som sätter olika Panes to front.
+
+Peer review: Det vi ska kritisera är modellen. 
+Finns det beroenden som inte borde vara där? 
+Cirkel-beroenden? 
+Följa SOLID-principerna?
+Skriv hur dom följt principerna och varför dom har gjort det bra.
+Vi ska visa att vi förstår hur man programmerar objekt orienterat. 
+"Det är perfekt för att....".
+
+IPositionable i mappen utils: Varför finns den inte i modellen? Vi har den där nu för att den kommunicerar mellan view och modellen. Men Felix tyckte att vi ska flytta den till modellen.
+
+Testning: Vi får testa metoder separat och testa hur moduler interagerar med varandra. Vi kan ta bort att dom är private/protected för att testa. Felix sa att man inte använder protected så ofta. 
+
+Dice vi ska bestämma vart den ska vara i modellen och då rätta till i UML-diagrammet.
+
+90% av raderna ska vara testade. 
+
+20 min presentation. Prata om vad vi har gjort utifrån SDD och RAD. Det ska vara "PowerPoint-presentation". 15 min pratar vi och 5 min frågor. 
+• Resultat och uppgifter (5 min)
+
+Saker som vi ska fixa:
+
+Vi ska in GitHub > insights > contributors
+Det är viktigt att vi alla har skrivit någon kod med substans. Alla ska ha skrivit ungefär lika mycket kod. Github pro eller gör repo public.
+
+Ta bort branches som har blivit "mergeade". Ta bort jättegamla. 
+
+GameBoard klassen: metod som är private med map. getMap(). Kan ta bort.Controller: kollar "player make move", det finns ingen feedback på om det går att göra det draget. 
+På något sätt få tillbaka feedback. Respons till Controllern. Ha en text view som controller kan visa om någon "går fel".  
+
+IPositionable i mappen utils kanske flytta till model?
+
+getNeighbours som inte tar med den föregående noden kan tas bort. Den används inte. 
+
+Bilder för noder: ex CityPos. har resourceString i sig. Gör gärna något liknade som i player enum med color.
+
+Skapa en abstract klass / interface för positioner. Det som står kan vara kvar men lyft upp duplicerad kod.
+
+Trello - uppdatera hela tiden. Ta bort Tasks kategorin.
+
+En viktig sak för betygssättningen: Viktigt att det finns en tydlig koppling mellan US, tasks, SDD och RAD. Visa att det finns en US med tasks som blivit kod. 
+
+Fixa så att det finns en fungerande app. Strunta i onödiga grejer. 
+• SummeringVi har en del saker att fixa från delen resultat och uppgifter. 
+
+09:00 möte med handledare nästa vecka 21/10-21.
