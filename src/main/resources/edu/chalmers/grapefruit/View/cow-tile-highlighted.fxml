@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="60.0" prefWidth="60.0" xmlns="http://javafx.com/javafx/16"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.chalmers.grapefruit.View.NodeView">
+   <children>
+      <Circle fill="DODGERBLUE" layoutX="28.0" layoutY="29.0" radius="30.0" stroke="BLACK"
+              strokeType="INSIDE" style="-fx-fill: #FFFFFF; -fx-stroke: #9ac6ee; -fx-stroke-width: 4;"
+              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" onMouseClicked="#handleOnMouseClicked"/>
+      <ImageView fitHeight="36.0" fitWidth="31.0" layoutX="17.0" layoutY="13.0" pickOnBounds="true"
+                 preserveRatio="true" onMouseClicked="#handleOnMouseClicked">
+         <image>
+            <Image url="@images/cow.png" />
+         </image>
+      </ImageView>
+   </children>
+   <userData>
+      <fx:reference source="controller" />
+   </userData>
+</AnchorPane>

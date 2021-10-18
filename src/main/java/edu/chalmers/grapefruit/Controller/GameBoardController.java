@@ -1,6 +1,7 @@
 package edu.chalmers.grapefruit.Controller;
 
 import edu.chalmers.grapefruit.Model.GameModel;
+import edu.chalmers.grapefruit.Model.ViewEntityFactory;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 import edu.chalmers.grapefruit.View.MainView;
 import javafx.event.Event;
@@ -44,7 +45,7 @@ public class GameBoardController {
                 //TODO skulle man kunna lägga in och kolla så att comboboxen är ikryssad här?
                 try {
                     view.loadGameBoardPage();
-                    view.populateGameBoardView(model.getPositionables(), nodeClickEventHandler, diceHandler);
+                    view.populateGameBoardView(ViewEntityFactory.getViewEntities(), nodeClickEventHandler, diceHandler);
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }

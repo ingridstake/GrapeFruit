@@ -1,6 +1,8 @@
 package edu.chalmers.grapefruit.Model.Player;
 
-import edu.chalmers.grapefruit.Utils.IPositionable;
+import edu.chalmers.grapefruit.Utils.ViewEntityResource;
+
+import java.awt.*;
 
 /**
      * @author ingrid.stake
@@ -8,7 +10,7 @@ import edu.chalmers.grapefruit.Utils.IPositionable;
      * @author elvina.fahlgren
      * @author olivia.månström
      */
-public interface IPlayer extends IPositionable {
+public interface IPlayer extends ViewEntityResource {
     /**
      * Returns the color of the player.
      * @return the color of the player.
@@ -32,4 +34,5 @@ public interface IPlayer extends IPositionable {
     void playerFoundVisa();
     boolean hasCow();
     boolean hasVisa();
+    Point getPoint();
 }

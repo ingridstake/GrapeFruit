@@ -1,7 +1,7 @@
 package edu.chalmers.grapefruit.View;
 
+import edu.chalmers.grapefruit.Model.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
-import edu.chalmers.grapefruit.Utils.IPositionable;
 
 import edu.chalmers.grapefruit.Utils.Observer;
 import javafx.event.EventHandler;
@@ -24,7 +24,7 @@ import java.util.List;
 public class GameBoardView implements Observer {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
-    List<IPositionable> positionables;
+    List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
 
     /**
@@ -36,12 +36,12 @@ public class GameBoardView implements Observer {
 
     /**
      * Populates the GameBoardView with all objects in the positionableList.
-     * @param positionableList is the list of Positionable objects that is displayed.
+     * @param viewEntities is the list of Positionable objects that is displayed.
      * @param clickHandler is the event handler for the Nodes.
      * @throws IOException
      */
-    public void populate (List<IPositionable> positionableList, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
-        this.positionables = positionableList;
+    public void populate (List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
+        this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
 
@@ -74,15 +74,15 @@ public class GameBoardView implements Observer {
      */
     private void redrawChildren() throws IOException {
         background.getChildren().removeAll(background.getChildren());
-        for (IPositionable positionableObject : positionables) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(positionableObject.getResourceString()));
+        for (ViewEntity viewEntity : viewEntities) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(viewEntity.getResourceString()));
             background.getChildren().add(fxmlLoader.load());
         }
 
         int i = 0;
         for (javafx.scene.Node child : background.getChildren()) {
-            int x = positionables.get(i).getX();
-            int y = positionables.get(i).getY();
+            int x = viewEntities.get(i).getX();
+            int y = viewEntities.get(i).getY();
 
             Object obj = getController(child);
             NodeView nodeView = obj instanceof NodeView ? (NodeView) obj : null;
@@ -93,7 +93,7 @@ public class GameBoardView implements Observer {
             child.relocate(x, y);
 
             i++;
-            if (i >= positionables.size()) {
+            if (i >= viewEntities.size()) {
                 break;
             }
         }

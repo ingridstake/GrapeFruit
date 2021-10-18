@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Utils.IPositionable;
+import edu.chalmers.grapefruit.Model.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 import edu.chalmers.grapefruit.Utils.Observer;
 import javafx.event.EventHandler;
@@ -77,13 +77,13 @@ public class MainView implements Observer {
 
     /**
      * Populates the game board view by calling the game board view's populate method.
-     * @param positionableList is the list of IPositionable components in game board
+     * @param viewEntities is the list of viewEntities components in game board
      * @param clickHandler is the event handler that listens to an action from a click on the game board
      * @param diceHandler is the event handler that listens to an action roll the dice
      * @throws IOException
      */
-    public void populateGameBoardView (List<IPositionable> positionableList, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
-        gameBoardView.populate(positionableList, clickHandler, diceHandler);
+    public void populateGameBoardView (List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
+        gameBoardView.populate(viewEntities, clickHandler, diceHandler);
     }
 
     private void createStartView () throws IOException {

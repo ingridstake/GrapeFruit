@@ -1,18 +1,20 @@
 package edu.chalmers.grapefruit.Utils;
 
+import java.awt.*;
+
 /**
  * @author ingrid.stake
+ * @author tovenilsson
  */
 
-public interface IPositionable {
+public interface ViewEntityResource {
 
-    int getX();
-    int getY();
+    Point getPoint();
 
     /**
      * name of the view-resource
      * @return name of the view-resource
      */
-    String getResourceString();
+    String getResourceString() throws Exception;
 
 }

@@ -1,6 +1,5 @@
 package edu.chalmers.grapefruit.Model;
 
-import edu.chalmers.grapefruit.Utils.IPositionable;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
@@ -20,9 +19,7 @@ public class GameModel implements Observable {
         if (players == null) {
             throw new IllegalArgumentException("More than 4 players is not allowed");
         }
-        else {
-            gameBoard = new GameBoard(players);
-        }
+        gameBoard = new GameBoard(players);
     }
 
     public void makePlayerMove(int x, int y){
@@ -39,8 +36,8 @@ public class GameModel implements Observable {
      * Returns a list of all positionable objects for the GameBoard
      * @return a list of all positionable objects of the GameBoard
      */
-    public  List<IPositionable> getPositionables(){
-        return gameBoard.getPositionableList();
+    public  List<ViewEntity> getViewEntities(){
+        return ViewEntityFactory.getViewEntities();
     }
 
     @Override
