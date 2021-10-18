@@ -32,7 +32,7 @@ public class StartView {
      * Populates the start view.
      * Sets action to the start game button.
      * Adds items, as numbers, to the choice box.
-     * @param startGameHandler is the event handler that listens to an action to start a game
+     * @param startGameHandler is the event handler that listens to an action to start a game.
      * @param playerAmount is the amount of players
      */
     public void populate (EventHandler startGameHandler, int playerAmount) {
