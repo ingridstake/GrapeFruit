@@ -50,6 +50,21 @@ public class Player implements IPlayer{
         return hasVisa;
     }
 
+    @Override
+    public void makeHorsePayment() {
+        moneyBalance += 1000;
+    }
+
+    @Override
+    public void makePoopRobbery() {
+        moneyBalance = 0;
+    }
+
+    @Override
+    public void makePigPayment() {
+        moneyBalance += 500;
+    }
+
     /**
      * Returns the color of the player
      * @return returns the color of the player
