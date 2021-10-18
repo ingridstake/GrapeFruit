@@ -12,7 +12,6 @@ import java.io.IOException;
 public class GameBoardController {
 
     private GameModel model;
-    //private GameBoardView view;
     private MainView view;
 
     /**

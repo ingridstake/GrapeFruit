@@ -12,8 +12,8 @@ import java.io.IOException;
 
 /**
  * The start view.
- * @author Olivia Månström
- * @author Elvina Fahlgren
+ * @author olimanstorm
+ * @author elvinafahlgren
  */
 public class StartView {
     @FXML AnchorPane startViewPane;

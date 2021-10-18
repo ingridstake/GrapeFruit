@@ -18,11 +18,11 @@ import java.util.List;
  * This is the main view that is created by the Controller.
  * The class holds the views of the game. Can switch between the views.
  *
- * @author Olivia Månström
- * @author Elvina Fahlgren
+ * @author olimanstorm
+ * @author elvinafahlgren
  */
 public class MainView implements Observer {
-    @FXML AnchorPane mainViewPane;
+    private @FXML AnchorPane mainViewPane;
     private GameBoardView gameBoardView = new GameBoardView();
     private StartView startView = new StartView();
 
@@ -96,7 +96,6 @@ public class MainView implements Observer {
         mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
         mainViewPane.getChildren().add(gameBoardView.getFXMLLoader().load());
         javafx.scene.Node child = mainViewPane.getChildren().get(0);
-        System.out.println(mainViewPane.getChildren());
         gameBoardView = (GameBoardView) getController(child);
     }
 

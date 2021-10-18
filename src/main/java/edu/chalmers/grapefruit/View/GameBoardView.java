@@ -17,6 +17,8 @@ import java.util.List;
 /**
  * @author ingrid.stake
  * @author tove.nilsson
+ * @author olimanstorm
+ * @author elvinafahlgren
  */
 
 public class GameBoardView implements Observer {
