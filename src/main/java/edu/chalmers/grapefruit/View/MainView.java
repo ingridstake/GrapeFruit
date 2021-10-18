@@ -22,6 +22,7 @@ import java.util.List;
  * @author elvinafahlgren
  */
 public class MainView implements Observer {
+    //TODO LÄGG TILL HASHMAP
     private @FXML AnchorPane mainViewPane;
     private GameBoardView gameBoardView = new GameBoardView();
     private StartView startView = new StartView();
