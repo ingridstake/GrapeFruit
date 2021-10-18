@@ -77,7 +77,7 @@ public class MainView implements Observer {
 
     /**
      * Populates the game board view by calling the game board view's populate method.
-     * @param viewEntities is the list of IPositionable components in game board
+     * @param viewEntities is the list of viewEntities components in game board
      * @param clickHandler is the event handler that listens to an action from a click on the game board
      * @param diceHandler is the event handler that listens to an action roll the dice
      * @throws IOException

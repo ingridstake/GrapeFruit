@@ -14,7 +14,7 @@ public class GameBoardTests {
 
     @Test
     public void testIfPositionableListIsCorrect() {
-        //if(gameBoard.getPositionableList().get(0) instanceof IPositionable)
+        //if(gameBoard.getPositionableList().get(0) instanceof viewentities)
             assertTrue(true);
     }
 
