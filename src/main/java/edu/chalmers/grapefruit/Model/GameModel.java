@@ -8,14 +8,23 @@ import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author ingrid.stake
+ * @author tove.nilsson
+ * @author elvina.fahlgren
+ * @author olivia.månström
+ */
 public class GameModel implements Observable {
     public GameBoard gameBoard;
     List<IPlayer> players;
     List<Observer> observerList = new ArrayList<>();
 
-    public GameModel() {
-        players = PlayerFactory.MakePlayers(1);
+    /**
+     * Creates n players and a game board depending on the created players.
+     * @param n is the amount of players.
+     */
+    public void initialize(int n){
+        players = PlayerFactory.MakePlayers(n);
         if (players == null) {
             throw new IllegalArgumentException("More than 4 players is not allowed");
         }
@@ -36,7 +45,7 @@ public class GameModel implements Observable {
      * Returns a list of all positionable objects for the GameBoard
      * @return a list of all positionable objects of the GameBoard
      */
-    public  List<ViewEntity> getViewEntities(){
+    public List<ViewEntity> getViewEntities(){
         return ViewEntityFactory.getViewEntities();
     }
 

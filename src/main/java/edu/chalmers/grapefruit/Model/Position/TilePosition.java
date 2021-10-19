@@ -30,4 +30,8 @@ public class TilePosition extends Position{
     public void setLogicType(LogicType logicType){
         super.setLogicType(logicType);
     }
+
+    public void turnTile(){
+        isTurned = true;
+    }
 }

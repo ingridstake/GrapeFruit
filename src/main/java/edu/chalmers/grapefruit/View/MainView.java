@@ -114,6 +114,14 @@ public class MainView implements Observer {
         return controller;
     }
 
+    /**
+     * Returns the selected amount of players.
+     * @return the selected amount of players.
+     */
+    public int getSelectedPlayerAmount(){
+        return startView.getSelectedPlayerAmount();
+    }
+
     @Override
     public void update() {
         gameBoardView.update();

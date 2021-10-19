@@ -38,7 +38,9 @@ public interface IPlayer extends ViewEntityResource, Observable {
 
     boolean hasVisa();
 
+    void makePigPayment();
+    void makeHorsePayment();
+    void makePoopRobbery();
     Point getPoint();
-
     int getMoneyBalance();
 }

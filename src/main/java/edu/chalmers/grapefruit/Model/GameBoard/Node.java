@@ -68,7 +68,7 @@ public class Node {
      * Returns the position of the node
      * @return thw position of the node
      */
-    protected IPosition getPosition(){
+    public IPosition getPosition(){
         return position;
     }
 

@@ -41,6 +41,15 @@ public class StartView {
         for(int i = 1; i <= playerAmount; i++) {
             playerAmountChoiceBox.getItems().add(i);
         }
+        playerAmountChoiceBox.getSelectionModel().select(1);
+    }
+
+    /**
+     * Returns a int from the choice box.
+     * @return a int from the choice box.
+     */
+    public int getSelectedPlayerAmount(){
+        return Integer.parseInt(playerAmountChoiceBox.getValue().toString());
     }
 
     public FXMLLoader getFXMLLoader() {
