@@ -10,7 +10,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GameBoardController {
+/**
+ * @author ingrid.stake
+ * @author tove.nilsson
+ * @author elvina.fahlgren
+ * @author olivia.månström
+ */
+public class GameController {
 
     private GameModel model;
     private MainView view;
@@ -21,7 +27,7 @@ public class GameBoardController {
      * @param stage is the stage of the application
      * @throws IOException if the gameboard cannot be created.
      */
-    public GameBoardController(GameModel model, Stage stage) throws IOException {
+    public GameController(GameModel model, Stage stage) throws IOException {
 
         this.model = model;
 
@@ -44,6 +50,7 @@ public class GameBoardController {
             public void handle(Event event) {
                 //TODO skulle man kunna lägga in och kolla så att comboboxen är ikryssad här?
                 try {
+                    model.initialize(view.getSelectedPlayerAmount());
                     view.loadGameBoardPage();
                     view.populateGameBoardView(ViewEntityFactory.getViewEntities(), nodeClickEventHandler, diceHandler);
                 } catch (IOException exception) {

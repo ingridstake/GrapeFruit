@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
+import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.ViewEntityFactory;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
@@ -72,9 +73,7 @@ public class GameBoard {
 
         map.deHighlight();
 
-        if (playerPositionHashMap.get(player).getPosition().getClass().toString().equals("CityPosition")){
-            System.out.println("yey");
-        }
+        GameLogic.executeGameLogic(player, newNode);
     }
 
     /**
