@@ -46,6 +46,7 @@ public class GameBoardController {
                 try {
                     view.loadGameBoardPage();
                     view.populateGameBoardView(ViewEntityFactory.getViewEntities(), nodeClickEventHandler, diceHandler);
+                    view.addPlayerCards(model.getPlayerCardResources());
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }

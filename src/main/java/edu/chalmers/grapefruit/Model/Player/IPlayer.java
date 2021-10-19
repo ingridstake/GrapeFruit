@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.Model.Player;
 
+import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.ViewEntityResource;
 
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.*;
      * @author elvina.fahlgren
      * @author olivia.månström
      */
-public interface IPlayer extends ViewEntityResource {
+public interface IPlayer extends ViewEntityResource, Observable {
     /**
      * Returns the color of the player.
      * @return the color of the player.
@@ -32,7 +33,12 @@ public interface IPlayer extends ViewEntityResource {
      * Sets hasVisum to true if player found a visum.
      */
     void playerFoundVisa();
+
     boolean hasCow();
+
     boolean hasVisa();
+
     Point getPoint();
+
+    int getMoneyBalance();
 }

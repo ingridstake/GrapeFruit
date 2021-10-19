@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
+import edu.chalmers.grapefruit.Model.PlayerCardResourceFactory;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.ViewEntityFactory;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
@@ -32,6 +33,7 @@ public class GameBoard {
         currPlayer = players.get(0);
 
         createViewEntities();
+        createPlayerCardResources();
     }
 
     private void createViewEntities(){
@@ -40,6 +42,10 @@ public class GameBoard {
             ViewEntityFactory.addEntity(node.getPosition());
         }
         playerPositionHashMap.forEach((k,v) -> ViewEntityFactory.addEntity(k));
+    }
+
+    private void createPlayerCardResources() {
+        playerPositionHashMap.forEach((k,v) -> PlayerCardResourceFactory.addPlayerCardResource(k));
     }
 
     /**

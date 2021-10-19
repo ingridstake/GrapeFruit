@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
+import edu.chalmers.grapefruit.Model.PlayerCardResource;
 import edu.chalmers.grapefruit.Model.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 
@@ -46,6 +47,26 @@ public class GameBoardView implements Observer {
         diceBtn.setOnAction(diceHandler);
 
         redrawChildren();
+    }
+
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources) throws IOException {
+
+        int i = 0;
+        for (PlayerCardResource playerCardResource : playerCardResources) {
+            FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource(playerCardResource.getResourceString()));
+            Node card = fxmlLoader.load();
+            Object obj = getController(card);
+
+            PlayerCardView playerCardView = obj instanceof PlayerCardView ? (PlayerCardView) obj : null;
+            if (playerCardView != null) {
+                playerCardView.setPlayerCardResource(playerCardResource);
+                playerCardResource.addPlayerObserver(playerCardView);
+
+                background.getChildren().add(card);
+                AnchorPane.setBottomAnchor(card, 0.0);
+                AnchorPane.setRightAnchor(card, 10.0 + i * 155);
+            }
+        }
     }
 
     public FXMLLoader getFXMLLoader() {

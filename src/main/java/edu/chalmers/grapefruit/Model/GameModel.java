@@ -40,6 +40,8 @@ public class GameModel implements Observable {
         return ViewEntityFactory.getViewEntities();
     }
 
+    public List<PlayerCardResource> getPlayerCardResources() { return PlayerCardResourceFactory.getPlayerCardResources(); }
+
     @Override
     public void addObserver(Observer observer) {
         observerList.add(observer);
