@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class GameBoardView implements Observer {
     @FXML Button diceBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
+    List<Node> constantElements = new ArrayList<>();
 
     /**
      * Creates a FXMLLoader that represents the game board view.
@@ -45,6 +47,7 @@ public class GameBoardView implements Observer {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
+        constantElements.add(diceBtn);
 
         redrawChildren();
     }
@@ -55,6 +58,8 @@ public class GameBoardView implements Observer {
         for (PlayerCardResource playerCardResource : playerCardResources) {
             FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource(playerCardResource.getResourceString()));
             Node card = fxmlLoader.load();
+            constantElements.add(card);
+
             Object obj = getController(card);
 
             PlayerCardView playerCardView = obj instanceof PlayerCardView ? (PlayerCardView) obj : null;
@@ -118,7 +123,10 @@ public class GameBoardView implements Observer {
                 break;
             }
         }
-        background.getChildren().add(diceBtn);
+
+        for (Node node : constantElements) {
+            background.getChildren().add(node);
+        }
     }
 
     @Override
