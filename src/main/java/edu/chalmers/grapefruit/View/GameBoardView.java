@@ -71,6 +71,7 @@ public class GameBoardView implements Observer {
                 AnchorPane.setBottomAnchor(card, 0.0);
                 AnchorPane.setRightAnchor(card, 10.0 + i * 155);
             }
+            i++;
         }
     }
 

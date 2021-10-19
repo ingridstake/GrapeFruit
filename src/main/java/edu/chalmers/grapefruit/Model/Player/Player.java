@@ -63,6 +63,7 @@ public class Player implements IPlayer{
     @Override
     public void makeHorsePayment() {
         moneyBalance += 1000;
+        notifyObservers();
     }
 
     /**
@@ -71,6 +72,7 @@ public class Player implements IPlayer{
     @Override
     public void makePoopRobbery() {
         moneyBalance = 0;
+        notifyObservers();
     }
 
     /**
@@ -79,6 +81,7 @@ public class Player implements IPlayer{
     @Override
     public void makePigPayment() {
         moneyBalance += 500;
+        notifyObservers();
     }
 
     /**
@@ -118,7 +121,7 @@ public class Player implements IPlayer{
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.notify();
+            observer.update();
         }
     }
 }
