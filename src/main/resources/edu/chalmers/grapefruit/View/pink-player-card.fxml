@@ -6,14 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="250.0" prefWidth="145.0" style="-fx-background-color: #ff7ef0;
-            -fx-border-color: #ff7ef0; -fx-border-radius: 15px; -fx-background-radius:
-            15px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.chalmers.grapefruit.View.PlayerCardView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="145.0" style="-fx-background-color: #ff7ef0; -fx-border-color: #ff7ef0; -fx-border-radius: 15px; -fx-background-radius: 15px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.chalmers.grapefruit.View.PlayerCardView">
    <children>
-      <AnchorPane layoutX="39.0" layoutY="147.0" prefHeight="30.0" prefWidth="67.0">
+      <AnchorPane prefHeight="250.0" prefWidth="145.0" style="-fx-background-color: #ff7ef0; -fx-background-radius: 15;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="39.0" layoutY="144.0" prefHeight="30.0" prefWidth="67.0">
          <children>
             <Label fx:id="moneyBalanceLabel1" layoutX="34.0" layoutY="5.0" text="5000" AnchorPane.rightAnchor="-5.599999999999994">
                <font>
@@ -32,14 +28,14 @@
             <Image url="@images/farmer.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="cowImage1" fitHeight="150.0" fitWidth="30.0" layoutX="58.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/cow.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="cowbellImage1" fitHeight="36.0" fitWidth="30.0" layoutX="58.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/cowbell.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cowImage1" fitHeight="150.0" fitWidth="30.0" layoutX="58.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/cow.png" />
          </image>
       </ImageView>
    </children>
