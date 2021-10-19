@@ -11,7 +11,7 @@ import java.awt.*;
      * @author elvina.fahlgren
      * @author olivia.månström
      */
-public interface IPlayer extends ViewEntityResource, Observable {
+public interface IPlayer extends ViewEntityResource {
     /**
      * Returns the color of the player.
      * @return the color of the player.
@@ -39,8 +39,12 @@ public interface IPlayer extends ViewEntityResource, Observable {
     boolean hasVisa();
 
     void makePigPayment();
+
     void makeHorsePayment();
+
     void makePoopRobbery();
+
     Point getPoint();
+
     int getMoneyBalance();
 }

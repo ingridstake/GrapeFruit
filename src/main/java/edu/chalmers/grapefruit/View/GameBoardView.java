@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
+import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Model.PlayerCardResource;
 import edu.chalmers.grapefruit.Model.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
@@ -28,7 +29,8 @@ public class GameBoardView implements Observer {
     @FXML Button diceBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
-    List<Node> constantElements = new ArrayList<>();
+    List<Node> playerCards = new ArrayList<>();
+    CurrentPlayer currentPlayer;
 
     /**
      * Creates a FXMLLoader that represents the game board view.
@@ -47,30 +49,33 @@ public class GameBoardView implements Observer {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
-        constantElements.add(diceBtn);
 
         redrawChildren();
     }
 
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources) throws IOException {
+    /**
+     * Creates a PlayerCardView for each playerCardResource, and makes the gameBoard keep track of which one represents the current player.
+     * @param playerCardResources is the list from which the cards are created.
+     * @param currentPlayer is the current player of the game.
+     * @throws IOException if a node cannot be loaded from a playerCardResource.
+     */
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) {
+
+        this.currentPlayer = currentPlayer;
 
         int i = 0;
         for (PlayerCardResource playerCardResource : playerCardResources) {
-            FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource(playerCardResource.getResourceString()));
-            Node card = fxmlLoader.load();
-            constantElements.add(card);
-
-            Object obj = getController(card);
-
-            PlayerCardView playerCardView = obj instanceof PlayerCardView ? (PlayerCardView) obj : null;
-            if (playerCardView != null) {
-                playerCardView.setPlayerCardResource(playerCardResource);
-                playerCardResource.addPlayerObserver(playerCardView);
-
+            try {
+                Node card  = PlayerCardView.createPlayerCardNode(playerCardResource);
+                playerCards.add(card);
                 background.getChildren().add(card);
                 AnchorPane.setBottomAnchor(card, 0.0);
                 AnchorPane.setRightAnchor(card, 10.0 + i * 155);
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
             i++;
         }
     }
@@ -82,10 +87,10 @@ public class GameBoardView implements Observer {
     //TODO: creda den smarta fan som klurade ut hur man gör detta: https://stackoverflow.com/questions/40754454/get-controller-instance-from-node
     /**
      * Finds and returns the fx:controller of a Node.
-     * @param node is the node od interest.
+     * @param node is the node of interest.
      * @return the fx:controller of the node.
      */
-    private static Object getController(Node node) {
+    public static Object getController(Node node) {
         Object controller = null;
         do {
             controller = node.getUserData();
@@ -125,9 +130,30 @@ public class GameBoardView implements Observer {
             }
         }
 
-        for (Node node : constantElements) {
+        for (Node node : playerCards) {
+            updatePlayerCard(node);
             background.getChildren().add(node);
         }
+
+        background.getChildren().add(diceBtn);
+    }
+
+    /**
+     * Updates the parameter node so that it represents its player's current state.
+     * @param node should have a fx:controller that is an instance of PlayerCardView.
+     */
+    private void updatePlayerCard(Node node) {
+            try {
+                PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
+                playerCardView.update();
+                if (playerCardView.representsCurrentPlayer(currentPlayer)) {
+                    AnchorPane.setBottomAnchor(node, 15.0);
+                } else {
+                    AnchorPane.setBottomAnchor(node, 0.0);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
+import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Model.PlayerCardResource;
 import edu.chalmers.grapefruit.Model.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
@@ -87,8 +88,8 @@ public class MainView implements Observer {
         gameBoardView.populate(viewEntities, clickHandler, diceHandler);
     }
 
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources) throws IOException {
-        gameBoardView.addPlayerCards(playerCardResources);
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) throws IOException {
+        gameBoardView.addPlayerCards(playerCardResources, currentPlayer);
     }
 
     private void createStartView () throws IOException {
