@@ -17,13 +17,12 @@ public class GameLogic {
      * @param currentPlayer is the current player.
      * @param newNode is the new position of the player.
      */
-
     public static void executeGameLogic(IPlayer currentPlayer, Node newNode) {
         IPosition position = newNode.getPosition();
         if (position.getLogicType() == LogicType.UNTURNED_TILE) {
             TilePosition tilePosition = position instanceof TilePosition ? (TilePosition) position : null;
             if (tilePosition != null){
-                gameLogicPlayer(currentPlayer, newNode);
+                gameLogicPlayerAction(currentPlayer, newNode);
             }
         }
     }
@@ -33,8 +32,7 @@ public class GameLogic {
      * @param currentPlayer is the current player.
      * @param newNode is the new position of the player.
      */
-
-    public static void gameLogicPlayer(IPlayer currentPlayer, Node newNode){
+    public static void gameLogicPlayerAction(IPlayer currentPlayer, Node newNode){
         IPosition position = newNode.getPosition();
         TilePosition tilePosition = position instanceof TilePosition ? (TilePosition) position : null;
 
@@ -56,5 +54,10 @@ public class GameLogic {
             case POOP:
                 currentPlayer.makePoopRobbery();
         }
+    }
+
+    public static void gameLogicStartPos(IPlayer currentPlayer, Node newNode){
+        // Om spelaren har ett kossan och kommer till start vinner spelaren
+        // Om en annan spelare1 har kossan och spelaren2 som kommer in till start har hittat ett visum vinner spelaren2
     }
 }

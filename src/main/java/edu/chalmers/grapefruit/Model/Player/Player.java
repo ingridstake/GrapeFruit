@@ -50,16 +50,25 @@ public class Player implements IPlayer{
         return hasVisa;
     }
 
+    /**
+     * Gives the player 1000kr.
+     */
     @Override
     public void makeHorsePayment() {
         moneyBalance += 1000;
     }
 
+    /**
+     * Robs the player of all their money.
+     */
     @Override
     public void makePoopRobbery() {
         moneyBalance = 0;
     }
 
+    /**
+     * Gives the player 500kr.
+     */
     @Override
     public void makePigPayment() {
         moneyBalance += 500;
