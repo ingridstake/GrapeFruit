@@ -52,4 +52,6 @@ public interface IPlayer extends ViewEntityResource {
     Point getPoint();
 
     int getMoneyBalance();
+
+    void makeTurnPayment();
 }

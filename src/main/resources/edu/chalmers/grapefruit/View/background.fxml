@@ -7,13 +7,13 @@
    <children>
 
    <AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: green;">
-      <Button fx:id="diceBtn" AnchorPane.topAnchor="60" AnchorPane.rightAnchor="30" mnemonicParsing="false" text="Slå tärning" />
+      <Button fx:id="diceBtn" AnchorPane.topAnchor="100" AnchorPane.rightAnchor="10" mnemonicParsing="false" text="Slå tärning" />
 
    </AnchorPane>
 
    <AnchorPane fx:id="tileButtonsPane" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" prefWidth="300">
-      <Button fx:id="payToOpenBtn" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" text="Betala för att öppna"/>
-      <Button fx:id="diceToOpenBtn" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="10" text="Slå tärning för att öppna"/>
+      <Button fx:id="payToOpenBtn" AnchorPane.topAnchor="55" AnchorPane.rightAnchor="10" text="Betala för att öppna"/>
+      <Button fx:id="diceToOpenBtn" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" text="Slå tärning för att öppna"/>
    </AnchorPane>
    </children>
 

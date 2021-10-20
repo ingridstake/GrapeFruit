@@ -43,7 +43,12 @@ public class GameModel implements Observable {
     }
 
     public void payToOpen(){
-        gameBoard.openTile();
+        gameBoard.openTileWithPayment();
+        notifyObservers();
+    }
+
+    public void diceToOpen(){
+        gameBoard.openTileWithDice();
         notifyObservers();
     }
 

@@ -27,7 +27,6 @@ import java.util.List;
 public class GameBoardView implements Observer {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
-    @FXML AnchorPane tileButtonsPane;
     @FXML Button payToOpenBtn;
     @FXML Button diceToOpenBtn;
     List<ViewEntity> viewEntities;
@@ -47,13 +46,15 @@ public class GameBoardView implements Observer {
      * @param viewEntities is the list of Positionable objects that is displayed.
      * @param clickHandler is the event handler for the Nodes.
      * @param payToOpenBtnHandler
+     * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler) throws IOException {
+    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
         payToOpenBtn.setOnAction(payToOpenBtnHandler);
+        diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
 
         redrawChildren();
     }
@@ -141,7 +142,10 @@ public class GameBoardView implements Observer {
         }
 
         background.getChildren().add(diceBtn);
-        background.getChildren().add(tileButtonsPane);
+        background.getChildren().add(diceToOpenBtn);
+        if (currentPlayer != null && currentPlayer.currentPlayerHasMoneyToTurnTile()) {
+            background.getChildren().add(payToOpenBtn);
+        }
     }
 
     /**

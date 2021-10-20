@@ -1,7 +1,6 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Dice;
-import edu.chalmers.grapefruit.Model.Player.Player;
 import edu.chalmers.grapefruit.Model.PlayerCardResourceFactory;
 import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
@@ -23,7 +22,7 @@ public class GameBoard {
     private List<IPlayer> playerList;
     private HashMap<IPlayer, Node> playerPositionHashMap;
     private Map map;
-    private CurrentPlayer currentPlayer;
+    private static CurrentPlayer currentPlayer;
     private Dice dice;
 
     public GameBoard(List<IPlayer> players){
@@ -91,9 +90,14 @@ public class GameBoard {
         currentPlayer.setNewCurrentPlayer(getNextPlayer(currentPlayer.getCurrentPlayer()));
     }
 
-    public void openTile(){
+    public void openTileWithPayment(){
         IPlayer player = currentPlayer.getCurrentPlayer();
-        GameLogic.executeGameLogic(player, playerPositionHashMap.get(player));
+        GameLogic.executeGameLogicWithPayment(player, playerPositionHashMap.get(player));
+    }
+
+    public void openTileWithDice(){
+        IPlayer player = currentPlayer.getCurrentPlayer();
+        GameLogic.executeGameLogicWithDice(player, playerPositionHashMap.get(player));
     }
 
     /**
@@ -124,7 +128,6 @@ public class GameBoard {
      * Rolls dice and then evaluates which moves are valid and highlights them.
      */
     public void makeDiceRoll(){
-        //int dice = rollDice();
         playerPositionHashMap.get(currentPlayer.getCurrentPlayer()).evaluateValidMoves(new ArrayList<>(), dice.roll());
     }
 
@@ -134,9 +137,5 @@ public class GameBoard {
      */
     public CurrentPlayer getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    private int rollDice(){
-        return 2;
     }
 }

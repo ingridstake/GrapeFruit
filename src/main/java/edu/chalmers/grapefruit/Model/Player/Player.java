@@ -22,7 +22,7 @@ public class Player implements IPlayer{
     private boolean isWinner;
 
     protected Player(PlayerColor playerColor){
-        moneyBalance = 5000;
+        moneyBalance = 3000;
         point = new Point(0,0);
         hasCow = false;
         hasVisa = false;
@@ -113,6 +113,11 @@ public class Player implements IPlayer{
     @Override
     public int getMoneyBalance() {
         return moneyBalance;
+    }
+
+    @Override
+    public void makeTurnPayment() {
+        moneyBalance -= 1000;
     }
 
     @Override

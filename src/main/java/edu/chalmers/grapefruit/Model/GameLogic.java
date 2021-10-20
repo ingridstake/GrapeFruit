@@ -19,7 +19,6 @@ public class GameLogic {
     private static boolean cowIsFound = false;
 
     //TODO ändra currentplayer när turen faktiskt är slut
-    //TODO dra pengar från spelaren
 
     /**
      * The gameLogic for "Den försvunna kossan".
@@ -36,6 +35,21 @@ public class GameLogic {
             }
         } else if (newNode.getPosition().getLogicType() == LogicType.START){
             gameLogicStartPos(currentPlayer);
+        }
+    }
+
+    public static void executeGameLogicWithPayment(IPlayer currentPlayer, Node newNode){
+        if (currentPlayer.getMoneyBalance() >= 1000){
+            currentPlayer.makeTurnPayment();
+            gameLogicPlayerAction(currentPlayer, newNode);
+        }
+    }
+
+    public static void executeGameLogicWithDice(IPlayer currentPlayer, Node newNode){
+        Dice dice = new Dice(6);
+        dice.roll();
+        if (dice.getValue() >= 4 ){
+            gameLogicPlayerAction(currentPlayer, newNode);
         }
     }
 
