@@ -13,6 +13,7 @@ public class MovePlayerTest {
     @BeforeEach
     public void testSetUp(){
         model = new GameModel();
+        model.initialize(1);
         ViewEntityFactory.clearViewEntityFactory();
         viewEntities = ViewEntityFactory.getViewEntities();
     }
