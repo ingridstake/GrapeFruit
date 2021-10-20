@@ -36,4 +36,42 @@ public class PlayerTest {
         assert (players.get(0).getPoint().equals(new Point(1,2)));
     }
 
+    @Test
+    public void playerGotMoneyTest(){
+        List<IPlayer> players = PlayerFactory.MakePlayers(1);
+        assert (players.get(0).getMoneyBalance() == 5000);
+    }
+
+    @Test
+    public void playerGotHorseTest(){
+        List<IPlayer> players = PlayerFactory.MakePlayers(1);
+        players.get(0).makeHorsePayment();
+        assert (players.get(0).getMoneyBalance() == 6000);
+    }
+
+    @Test
+    public void playerGotPoopTest(){
+        List<IPlayer> players = PlayerFactory.MakePlayers(1);
+        players.get(0).makePoopRobbery();
+        assert (players.get(0).getMoneyBalance() == 0);
+    }
+
+    @Test
+    public void playerGotPigTest(){
+        List<IPlayer> players = PlayerFactory.MakePlayers(1);
+        players.get(0).makePigPayment();
+        assert (players.get(0).getMoneyBalance() == 5500);
+    }
+
+    @Test
+    public void playerColorFxmlFilesTest() throws Exception {
+        List<IPlayer> players = PlayerFactory.MakePlayers(4);
+        for (int i = 0; i < players.size(); i++) {
+            for (int j = 0; j < players.size(); j++){
+                if (i != j ) {
+                    assert (players.get(i).getResourceString() != players.get(j).getResourceString());
+                }
+            }
+        }
+    }
 }
