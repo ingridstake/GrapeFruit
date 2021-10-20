@@ -85,14 +85,14 @@ public class Node {
     /**
      * Checks if current node is within range of the dice and then does the same with its neighbours.
      * @param validMoves is the list of nodes all valid move-nodes are added to.
-     * @param dice is the valid move range based on the dice.
+     * @param diceValue is the valid move range based on the dice.
      */
-    protected void evaluateValidMoves(List<Node> validMoves, int dice) {
-        if(dice>=0 && !validMoves.contains(this) ){
+    protected void evaluateValidMoves(List<Node> validMoves, int diceValue) {
+        if(diceValue >= -1 && !validMoves.contains(this)) {
             validMoves.add(this);
             position.highlight();
             for (Node node : relatedNodes) {
-                node.evaluateValidMoves(validMoves, dice-1);
+                node.evaluateValidMoves(validMoves, diceValue - 1);
             }
         }
     }

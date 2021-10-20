@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
+import edu.chalmers.grapefruit.Model.Dice;
 import edu.chalmers.grapefruit.Model.Player.Player;
 import edu.chalmers.grapefruit.Model.PlayerCardResourceFactory;
 import edu.chalmers.grapefruit.Model.GameLogic;
@@ -19,10 +20,11 @@ import java.util.List;
  */
 public class GameBoard {
 
-    List<IPlayer> playerList;
-    HashMap<IPlayer, Node> playerPositionHashMap;
-    Map map;
-    CurrentPlayer currentPlayer;
+    private List<IPlayer> playerList;
+    private HashMap<IPlayer, Node> playerPositionHashMap;
+    private Map map;
+    private CurrentPlayer currentPlayer;
+    private Dice dice;
 
     public GameBoard(List<IPlayer> players){
         playerList = players;
@@ -39,6 +41,8 @@ public class GameBoard {
 
         createViewEntities();
         createPlayerCardResources();
+
+        this.dice = new Dice(6);
     }
 
     private void createViewEntities(){
@@ -74,7 +78,7 @@ public class GameBoard {
      */
     public void movePlayer(Node newNode, IPlayer player){
         List<Node> validMoves = new ArrayList<>();
-        playerPositionHashMap.get(player).evaluateValidMoves(validMoves, 3);
+        playerPositionHashMap.get(player).evaluateValidMoves(validMoves, dice.getValue() + 1);
 
         if (validMoves.contains(newNode)){
             playerPositionHashMap.replace(currentPlayer.getCurrentPlayer(), newNode);
@@ -115,8 +119,8 @@ public class GameBoard {
      * Rolls dice and then evaluates which moves are valid and highlights them.
      */
     public void makeDiceRoll(){
-        int dice = rollDice();
-        playerPositionHashMap.get(currentPlayer.getCurrentPlayer()).evaluateValidMoves(new ArrayList<>(), dice);
+        //int dice = rollDice();
+        playerPositionHashMap.get(currentPlayer.getCurrentPlayer()).evaluateValidMoves(new ArrayList<>(), dice.roll());
     }
 
     /**
