@@ -50,5 +50,19 @@ public enum PlayerColor {
         }
         return resourceString;
     }
-}
 
+    public static String evaluateCardResourceString(PlayerColor playerColor) {
+        switch (playerColor) {
+            case PINK:
+                return "pink-player-card.fxml";
+            case PURPLE:
+                return "purple-player-card.fxml";
+            case YELLOW:
+                return "yellow-player-card.fxml";
+            case TURQUOISE:
+                return "turquoise-player-card.fxml";
+            default:
+                return null;
+        }
+    }
+}

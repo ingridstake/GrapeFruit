@@ -1,6 +1,10 @@
 package edu.chalmers.grapefruit.Model.Player;
 
+import edu.chalmers.grapefruit.Utils.Observer;
+
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Player class contains the functionality of a Player.
@@ -15,6 +19,7 @@ public class Player implements IPlayer{
     private boolean hasVisa;
     private final PlayerColor PLAYER_COLOR;
     private Point point;
+    private List<Observer> observers = new ArrayList<>();
 
     protected Player(PlayerColor playerColor){
         moneyBalance = 5000;
@@ -94,7 +99,12 @@ public class Player implements IPlayer{
     }
 
     @Override
+    public int getMoneyBalance() {
+        return moneyBalance;
+    }
+
+    @Override
     public String getResourceString() throws Exception {
        return PlayerColor.evaluateResourceString(PLAYER_COLOR);
     }
-} 
+}

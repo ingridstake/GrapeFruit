@@ -1,5 +1,6 @@
 package edu.chalmers.grapefruit.Model;
 
+import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
@@ -15,9 +16,9 @@ import java.util.List;
  * @author olivia.månström
  */
 public class GameModel implements Observable {
-    public GameBoard gameBoard;
-    List<IPlayer> players;
-    List<Observer> observerList = new ArrayList<>();
+    private GameBoard gameBoard;
+    private List<IPlayer> players;
+    private List<Observer> observerList = new ArrayList<>();
 
     /**
      * Creates n players and a game board depending on the created players.
@@ -41,6 +42,10 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
+    public CurrentPlayer getCurrentPlayer() {
+        return gameBoard.getCurrentPlayer();
+    }
+
     /**
      * Returns a list of all positionable objects for the GameBoard
      * @return a list of all positionable objects of the GameBoard
@@ -48,6 +53,8 @@ public class GameModel implements Observable {
     public List<ViewEntity> getViewEntities(){
         return ViewEntityFactory.getViewEntities();
     }
+
+    public List<PlayerCardResource> getPlayerCardResources() { return PlayerCardResourceFactory.getPlayerCardResources(); }
 
     @Override
     public void addObserver(Observer observer) {

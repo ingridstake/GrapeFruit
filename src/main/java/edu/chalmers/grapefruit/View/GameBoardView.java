@@ -1,5 +1,7 @@
 package edu.chalmers.grapefruit.View;
 
+import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
+import edu.chalmers.grapefruit.Model.PlayerCardResource;
 import edu.chalmers.grapefruit.Model.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +29,8 @@ public class GameBoardView implements Observer {
     @FXML Button diceBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
+    List<Node> playerCards = new ArrayList<>();
+    CurrentPlayer currentPlayer;
 
     /**
      * Creates a FXMLLoader that represents the game board view.
@@ -48,6 +53,33 @@ public class GameBoardView implements Observer {
         redrawChildren();
     }
 
+    /**
+     * Creates a PlayerCardView for each playerCardResource, and makes the gameBoard keep track of which one represents the current player.
+     * @param playerCardResources is the list from which the cards are created.
+     * @param currentPlayer is the current player of the game.
+     * @throws IOException if a node cannot be loaded from a playerCardResource.
+     */
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) {
+
+        this.currentPlayer = currentPlayer;
+
+        int i = 0;
+        for (PlayerCardResource playerCardResource : playerCardResources) {
+            try {
+                Node card  = PlayerCardView.createPlayerCardNode(playerCardResource);
+                playerCards.add(card);
+                background.getChildren().add(card);
+                AnchorPane.setBottomAnchor(card, 0.0);
+                AnchorPane.setRightAnchor(card, 10.0 + i * 155);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            i++;
+        }
+    }
+
     public FXMLLoader getFXMLLoader() {
         return fxmlLoader;
     }
@@ -55,10 +87,10 @@ public class GameBoardView implements Observer {
     //TODO: creda den smarta fan som klurade ut hur man gör detta: https://stackoverflow.com/questions/40754454/get-controller-instance-from-node
     /**
      * Finds and returns the fx:controller of a Node.
-     * @param node is the node od interest.
+     * @param node is the node of interest.
      * @return the fx:controller of the node.
      */
-    private static Object getController(Node node) {
+    public static Object getController(Node node) {
         Object controller = null;
         do {
             controller = node.getUserData();
@@ -97,7 +129,31 @@ public class GameBoardView implements Observer {
                 break;
             }
         }
+
+        for (Node node : playerCards) {
+            updatePlayerCard(node);
+            background.getChildren().add(node);
+        }
+
         background.getChildren().add(diceBtn);
+    }
+
+    /**
+     * Updates the parameter node so that it represents its player's current state.
+     * @param node should have a fx:controller that is an instance of PlayerCardView.
+     */
+    private void updatePlayerCard(Node node) {
+            try {
+                PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
+                playerCardView.update();
+                if (playerCardView.representsCurrentPlayer(currentPlayer)) {
+                    AnchorPane.setBottomAnchor(node, 15.0);
+                } else {
+                    AnchorPane.setBottomAnchor(node, 0.0);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     @Override
