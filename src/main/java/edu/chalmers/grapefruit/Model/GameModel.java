@@ -16,7 +16,8 @@ import java.util.List;
  * @author olivia.månström
  */
 public class GameModel implements Observable {
-    private GameBoard gameBoard;
+    //private GameBoard gameLogic;
+    private GameLogic gameLogic;
     private List<IPlayer> players;
     private List<Observer> observerList = new ArrayList<>();
 
@@ -29,31 +30,31 @@ public class GameModel implements Observable {
         if (players == null) {
             throw new IllegalArgumentException("More than 4 players is not allowed");
         }
-        gameBoard = new GameBoard(players);
+        gameLogic = GameLogic.createGameLogic(players);
     }
 
     public void makePlayerMove(int x, int y){
-        gameBoard.movePlayer(x, y);
+        gameLogic.movePlayer(x, y);
         notifyObservers();
     }
 
     public void makeDiceRoll(){
-        gameBoard.makeDiceRoll();
+        gameLogic.makeDiceRoll();
         notifyObservers();
     }
 
     public void payToOpen(){
-        gameBoard.openTileWithPayment();
+        gameLogic.openTileWithPayment();
         notifyObservers();
     }
 
     public void diceToOpen(){
-        gameBoard.openTileWithDice();
+        gameLogic.openTileWithDice();
         notifyObservers();
     }
 
     public CurrentPlayer getCurrentPlayer() {
-        return gameBoard.getCurrentPlayer();
+        return gameLogic.getCurrentPlayer();
     }
 
     /**
