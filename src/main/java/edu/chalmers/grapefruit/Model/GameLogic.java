@@ -7,7 +7,6 @@ import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,6 +17,8 @@ public class GameLogic {
 
     private static List<IPlayer> tileTurnIsOngoingForPlayer = new ArrayList<>();
 
+    //TODO ändra currentplayer när turen faktiskt är slut
+    //TODO dra pengar från spelaren
 
     /**
      * The gameLogic for "Den försvunna kossan".
