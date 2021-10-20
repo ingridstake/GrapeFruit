@@ -24,6 +24,8 @@ public class GameLogic {
             if (tilePosition != null){
                 gameLogicPlayerAction(currentPlayer, newNode);
             }
+        } else if (newNode.getPosition().getLogicType() == LogicType.START){
+            gameLogicStartPos(currentPlayer);
         }
     }
 
@@ -56,8 +58,9 @@ public class GameLogic {
         }
     }
 
-    public static void gameLogicStartPos(IPlayer currentPlayer, Node newNode){
-        // Om spelaren har ett kossan och kommer till start vinner spelaren
-        // Om en annan spelare1 har kossan och spelaren2 som kommer in till start har hittat ett visum vinner spelaren2
+    public static void gameLogicStartPos(IPlayer currentPlayer){
+        if (currentPlayer.hasCow() || currentPlayer.hasVisa()){
+            currentPlayer.setWinner();
+        }
     }
 }

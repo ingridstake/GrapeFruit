@@ -34,9 +34,14 @@ public interface IPlayer extends ViewEntityResource {
      */
     void playerFoundVisa();
 
+    void setWinner();
+
+    boolean isWinner();
+
     boolean hasCow();
 
     boolean hasVisa();
+
 
     void makePigPayment();
 

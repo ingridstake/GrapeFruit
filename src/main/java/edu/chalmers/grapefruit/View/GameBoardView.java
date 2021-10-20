@@ -146,7 +146,10 @@ public class GameBoardView implements Observer {
             try {
                 PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
                 playerCardView.update();
-                if (playerCardView.representsCurrentPlayer(currentPlayer)) {
+                if (playerCardView.representsWinner()){
+                    AnchorPane.setBottomAnchor(node, 400.0);
+                    AnchorPane.setRightAnchor(node, 615.0);
+                } else if (playerCardView.representsCurrentPlayer(currentPlayer)) {
                     AnchorPane.setBottomAnchor(node, 15.0);
                 } else {
                     AnchorPane.setBottomAnchor(node, 0.0);
