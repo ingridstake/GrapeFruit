@@ -30,7 +30,7 @@ public enum LogicType {
     private static String getHighLightedResource(LogicType logicType) throws Exception {
         switch (logicType){
             case NONE:
-                return "node-view-highLighted.fxml";
+                return "node-view-highlighted.fxml";
             case COW :
                 return "cow-tile-highlighted.fxml";
             case PIG :
