@@ -16,6 +16,7 @@ import java.util.List;
 public class GameLogic {
 
     private static List<IPlayer> tileTurnIsOngoingForPlayer = new ArrayList<>();
+    private static boolean cowIsFound = false;
 
     //TODO ändra currentplayer när turen faktiskt är slut
     //TODO dra pengar från spelaren
@@ -55,10 +56,13 @@ public class GameLogic {
 
         switch (tilePosition.getLogicType()){
             case COW:
+                cowIsFound = true;
                 currentPlayer.playerFoundCow();
                 return;
             case COWBELL:
-                currentPlayer.playerFoundVisa();
+                if (cowIsFound) {
+                    currentPlayer.playerFoundVisa();
+                }
                 return;
             case PIG:
                 currentPlayer.makePigPayment();
