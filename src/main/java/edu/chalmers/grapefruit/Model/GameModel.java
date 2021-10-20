@@ -3,7 +3,6 @@ package edu.chalmers.grapefruit.Model;
 import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
-import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 
@@ -16,7 +15,7 @@ import java.util.List;
  * @author olivia.månström
  */
 public class GameModel implements Observable {
-    //private GameBoard gameLogic;
+
     private GameLogic gameLogic;
     private List<IPlayer> players;
     private List<Observer> observerList = new ArrayList<>();

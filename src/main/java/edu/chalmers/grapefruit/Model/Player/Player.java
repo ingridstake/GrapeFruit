@@ -1,10 +1,6 @@
 package edu.chalmers.grapefruit.Model.Player;
 
-import edu.chalmers.grapefruit.Utils.Observer;
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Player class contains the functionality of a Player.

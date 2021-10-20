@@ -2,7 +2,6 @@ package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Dice;
 import edu.chalmers.grapefruit.Model.PlayerCardResourceFactory;
-import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.ViewEntityFactory;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
@@ -39,6 +38,9 @@ public class GameBoard {
         this.dice = new Dice(6);
     }
 
+    /**
+     * Add all view elements to the viewEntityFactory.
+     */
     private void createViewEntities(){
 
         for (Node node :  map.getAllNodes()) {
@@ -47,6 +49,9 @@ public class GameBoard {
         playerPositionHashMap.forEach((k,v) -> ViewEntityFactory.addEntity(k));
     }
 
+    /**
+     * Add all players to the playerCardResourceFactory.
+     */
     private void createPlayerCardResources() {
         playerPositionHashMap.forEach((k,v) -> PlayerCardResourceFactory.addPlayerCardResource(k));
     }
@@ -55,6 +60,7 @@ public class GameBoard {
      * Gives the current player the position with the current values of x and y.
      * @param x is the x coordinate of the new position.
      * @param y is the y coordinate of the new position.
+     * @param player is the player that is moved.
      */
     public Node movePlayer(int x, int y, IPlayer player) {
         for (Node node : map.getAllNodes()) {
@@ -70,8 +76,9 @@ public class GameBoard {
      * Moves the player and updates its position if the new position is a valid move.
      * Then the all positions on the map are dehighlighted.
      * @param newNode is the new position.
+     * @param player is the player that is moved.
      */
-    public void movePlayer(Node newNode, IPlayer player){
+    private void movePlayer(Node newNode, IPlayer player){
         List<Node> validMoves = new ArrayList<>();
         playerPositionHashMap.get(player).evaluateValidMoves(validMoves, dice.getValue() + 1);
 
@@ -90,6 +97,11 @@ public class GameBoard {
         playerPositionHashMap.get(player).evaluateValidMoves(new ArrayList<>(), dice.roll());
     }
 
+    /**
+     * Returns the corresponding node from the player position map.
+     * @param player is the player whose node is wanted.
+     * @return the corresponding node.
+     */
     public Node getNode(IPlayer player) {
         return playerPositionHashMap.get(player);
     }
