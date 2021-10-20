@@ -42,6 +42,11 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
+    public void payToOpen(){
+        gameBoard.openTile();
+        notifyObservers();
+    }
+
     public CurrentPlayer getCurrentPlayer() {
         return gameBoard.getCurrentPlayer();
     }

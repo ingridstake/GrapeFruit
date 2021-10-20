@@ -27,6 +27,9 @@ import java.util.List;
 public class GameBoardView implements Observer {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
+    @FXML AnchorPane tileButtonsPane;
+    @FXML Button payToOpenBtn;
+    @FXML Button diceToOpenBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
     List<Node> playerCards = new ArrayList<>();
@@ -43,12 +46,14 @@ public class GameBoardView implements Observer {
      * Populates the GameBoardView with all objects in the positionableList.
      * @param viewEntities is the list of Positionable objects that is displayed.
      * @param clickHandler is the event handler for the Nodes.
+     * @param payToOpenBtnHandler
      * @throws IOException
      */
-    public void populate (List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
+    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
+        payToOpenBtn.setOnAction(payToOpenBtnHandler);
 
         redrawChildren();
     }
@@ -136,6 +141,7 @@ public class GameBoardView implements Observer {
         }
 
         background.getChildren().add(diceBtn);
+        background.getChildren().add(tileButtonsPane);
     }
 
     /**
