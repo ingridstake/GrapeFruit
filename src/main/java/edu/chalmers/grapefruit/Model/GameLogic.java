@@ -54,6 +54,8 @@ public class GameLogic {
             }
         } else if (newNode.getPosition().getLogicType() == LogicType.START){
             gameLogicStartPos(currentPlayer);
+        } else {
+            setNextCurrentPlayer();
         }
     }
 
@@ -71,6 +73,8 @@ public class GameLogic {
         dice.roll();
         if (dice.getValue() >= 4 ){
             gameLogicPlayerAction(player, gameBoard.getNode(player));
+        } else {
+            setNextCurrentPlayer();
         }
     }
 
@@ -93,22 +97,24 @@ public class GameLogic {
             case COW:
                 cowIsFound = true;
                 currentPlayer.playerFoundCow();
-                return;
+                break;
             case COWBELL:
                 if (cowIsFound) {
                     currentPlayer.playerFoundVisa();
                 }
-                return;
+                break;
             case PIG:
                 currentPlayer.makePigPayment();
-                return;
+                break;
             case HORSE:
                 currentPlayer.makeHorsePayment();
-                return;
+                break;
             case POOP:
                 currentPlayer.makePoopRobbery();
+                break;
         }
         tileTurnIsOngoingForPlayer.remove(currentPlayer);
+        setNextCurrentPlayer();
     }
 
     public static void gameLogicStartPos(IPlayer currentPlayer){
@@ -118,9 +124,12 @@ public class GameLogic {
     }
 
     public void movePlayer(int x, int y) {
-        Node newNode = gameBoard.movePlayer(x,y, currentPlayer.getCurrentPlayer());
-        executeGameLogic(currentPlayer.getCurrentPlayer(), newNode);
-        //currentPlayer.setNewCurrentPlayer(getNextPlayer(currentPlayer.getCurrentPlayer()));
+        IPlayer player = currentPlayer.getCurrentPlayer();
+        if (tileTurnIsOngoingForPlayer.contains(player)){
+            tileTurnIsOngoingForPlayer.remove(player);
+        }
+        Node newNode = gameBoard.movePlayer(x,y, player);
+        executeGameLogic(player, newNode);
     }
 
     public void makeDiceRoll() {
@@ -133,25 +142,23 @@ public class GameLogic {
 
     /**
      * Iterates through the list of players to find the next player in the list from the referencePlayer.
-     * @param referencePlayer is the player the next player is evaluated from.
      * @return the IPlayer that is next in the playerList.
      */
-    private IPlayer getNextPlayer(IPlayer referencePlayer) {
+    private void setNextCurrentPlayer() {
         boolean referencePlayerIsFound = false;
 
         for (int i = 1; i <= players.size(); i++) {
             if (referencePlayerIsFound) {
-                return players.get(i-1);
+                currentPlayer.setNewCurrentPlayer(players.get(i-1));
+                return;
             }
 
-            if (players.get(i-1) == referencePlayer) {
+            if (players.get(i-1) == currentPlayer.getCurrentPlayer()) {
                 referencePlayerIsFound = true;
             }
             if (i >= players.size()) {
                 i = 0;
             }
         }
-
-        return referencePlayer;
     }
 }
