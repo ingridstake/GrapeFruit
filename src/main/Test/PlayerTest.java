@@ -1,7 +1,6 @@
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerColor;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
-import javafx.fxml.FXMLLoader;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
