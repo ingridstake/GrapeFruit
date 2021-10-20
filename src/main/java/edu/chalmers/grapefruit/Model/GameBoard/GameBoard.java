@@ -91,6 +91,11 @@ public class GameBoard {
         currentPlayer.setNewCurrentPlayer(getNextPlayer(currentPlayer.getCurrentPlayer()));
     }
 
+    public void openTile(){
+        IPlayer player = currentPlayer.getCurrentPlayer();
+        GameLogic.executeGameLogic(player, playerPositionHashMap.get(player));
+    }
+
     /**
      * Iterates through the list of players to find the next player in the list from the referencePlayer.
      * @param referencePlayer is the player the next player is evaluated from.

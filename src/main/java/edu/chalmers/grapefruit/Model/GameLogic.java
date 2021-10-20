@@ -6,11 +6,18 @@ import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * @author tovenilsson
  */
 
 public class GameLogic {
+
+    private static List<IPlayer> tileTurnIsOngoingForPlayer = new ArrayList<>();
+
 
     /**
      * The gameLogic for "Den försvunna kossan".
@@ -20,11 +27,16 @@ public class GameLogic {
     public static void executeGameLogic(IPlayer currentPlayer, Node newNode) {
         IPosition position = newNode.getPosition();
         if (position.getLogicType() == LogicType.UNTURNED_TILE) {
-            TilePosition tilePosition = position instanceof TilePosition ? (TilePosition) position : null;
-            if (tilePosition != null){
-                gameLogicPlayerAction(currentPlayer, newNode);
+            if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
+                    gameLogicPlayerAction(currentPlayer, newNode);
+            } else {
+                beginPlayerMove(currentPlayer);
             }
         }
+    }
+
+    private static void beginPlayerMove(IPlayer currentPlayer){
+        tileTurnIsOngoingForPlayer.add(currentPlayer);
     }
 
     /**
@@ -54,6 +66,7 @@ public class GameLogic {
             case POOP:
                 currentPlayer.makePoopRobbery();
         }
+        tileTurnIsOngoingForPlayer.remove(currentPlayer);
     }
 
     public static void gameLogicStartPos(IPlayer currentPlayer, Node newNode){
