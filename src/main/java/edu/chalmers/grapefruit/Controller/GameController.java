@@ -45,6 +45,20 @@ public class GameController {
             }
         };
 
+        EventHandler payToOpenBtnHandler = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                model.payToOpen();
+            }
+        };
+
+        EventHandler diceToOpenBtnHandler = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                model.diceToOpen();
+            }
+        };
+
         EventHandler startGameHandler = new EventHandler() {
             @Override
             public void handle(Event event) {
@@ -52,7 +66,7 @@ public class GameController {
                 try {
                     model.initialize(view.getSelectedPlayerAmount());
                     view.loadGameBoardPage();
-                    view.populateGameBoardView(ViewEntityFactory.getViewEntities(), nodeClickEventHandler, diceHandler);
+                    view.populateGameBoardView(model.getViewEntities(), nodeClickEventHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
                     view.addPlayerCards(model.getPlayerCardResources(), model.getCurrentPlayer());
                 } catch (IOException exception) {
                     exception.printStackTrace();

@@ -40,6 +40,10 @@ public class PlayerCardResource {
         return playerResource.hasVisa();
     }
 
+    public boolean isWinner(){
+        return playerResource.isWinner();
+    }
+
     /**
      * Evaluates and returns the resource string of the player resource's color.
      * @return the resource string of the player resource's color.

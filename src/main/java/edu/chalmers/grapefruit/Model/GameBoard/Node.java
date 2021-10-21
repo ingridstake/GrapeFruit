@@ -15,7 +15,7 @@ public class Node {
     private List<Node> relatedNodes;
     private final IPosition position;
 
-    protected Node(IPosition position) {
+    public Node(IPosition position) {
         this.position = position;
         relatedNodes = null;
     }

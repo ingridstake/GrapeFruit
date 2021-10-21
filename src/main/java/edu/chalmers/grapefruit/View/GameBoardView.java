@@ -27,6 +27,8 @@ import java.util.List;
 public class GameBoardView implements Observer {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
+    @FXML Button payToOpenBtn;
+    @FXML Button diceToOpenBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
     List<Node> playerCards = new ArrayList<>();
@@ -43,12 +45,16 @@ public class GameBoardView implements Observer {
      * Populates the GameBoardView with all objects in the positionableList.
      * @param viewEntities is the list of Positionable objects that is displayed.
      * @param clickHandler is the event handler for the Nodes.
+     * @param payToOpenBtnHandler
+     * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populate (List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
+    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
+        payToOpenBtn.setOnAction(payToOpenBtnHandler);
+        diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
 
         redrawChildren();
     }
@@ -136,6 +142,10 @@ public class GameBoardView implements Observer {
         }
 
         background.getChildren().add(diceBtn);
+        background.getChildren().add(diceToOpenBtn);
+        if (currentPlayer != null && currentPlayer.currentPlayerHasMoneyToTurnTile()) {
+            background.getChildren().add(payToOpenBtn);
+        }
     }
 
     /**
@@ -146,7 +156,10 @@ public class GameBoardView implements Observer {
             try {
                 PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
                 playerCardView.update();
-                if (playerCardView.representsCurrentPlayer(currentPlayer)) {
+                if (playerCardView.representsWinner()){
+                    AnchorPane.setBottomAnchor(node, 400.0);
+                    AnchorPane.setRightAnchor(node, 615.0);
+                } else if (playerCardView.representsCurrentPlayer(currentPlayer)) {
                     AnchorPane.setBottomAnchor(node, 15.0);
                 } else {
                     AnchorPane.setBottomAnchor(node, 0.0);

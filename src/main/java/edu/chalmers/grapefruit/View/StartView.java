@@ -1,14 +1,11 @@
 package edu.chalmers.grapefruit.View;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
-
-import java.io.IOException;
 
 /**
  * The start view.

@@ -1,9 +1,7 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Dice;
-import edu.chalmers.grapefruit.Model.Player.Player;
 import edu.chalmers.grapefruit.Model.PlayerCardResourceFactory;
-import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.ViewEntityFactory;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
@@ -20,14 +18,11 @@ import java.util.List;
  */
 public class GameBoard {
 
-    private List<IPlayer> playerList;
     private HashMap<IPlayer, Node> playerPositionHashMap;
     private Map map;
-    private CurrentPlayer currentPlayer;
     private Dice dice;
 
     public GameBoard(List<IPlayer> players){
-        playerList = players;
         playerPositionHashMap = new HashMap<>();
         map = MapFactory.createMap("edu/chalmers/grapefruit/Model/Gameboard.json");
 
@@ -37,14 +32,15 @@ public class GameBoard {
             player.updatePlayerPosition(position.getPoint().x, position.getPoint().y);
         }
 
-        currentPlayer = new CurrentPlayer(players.get(0));
-
         createViewEntities();
         createPlayerCardResources();
 
         this.dice = new Dice(6);
     }
 
+    /**
+     * Add all view elements to the viewEntityFactory.
+     */
     private void createViewEntities(){
 
         for (Node node :  map.getAllNodes()) {
@@ -53,6 +49,9 @@ public class GameBoard {
         playerPositionHashMap.forEach((k,v) -> ViewEntityFactory.addEntity(k));
     }
 
+    /**
+     * Add all players to the playerCardResourceFactory.
+     */
     private void createPlayerCardResources() {
         playerPositionHashMap.forEach((k,v) -> PlayerCardResourceFactory.addPlayerCardResource(k));
     }
@@ -61,77 +60,49 @@ public class GameBoard {
      * Gives the current player the position with the current values of x and y.
      * @param x is the x coordinate of the new position.
      * @param y is the y coordinate of the new position.
+     * @param player is the player that is moved.
      */
-    public void movePlayer(int x, int y) {
+    public Node movePlayer(int x, int y, IPlayer player) {
         for (Node node : map.getAllNodes()) {
             if (x == node.getPosition().getPoint().x && y == node.getPosition().getPoint().y) {
-                movePlayer(node, currentPlayer.getCurrentPlayer());
-                break;
+                movePlayer(node, player);
+                return node;
             }
         }
+        return null;
     }
 
     /**
      * Moves the player and updates its position if the new position is a valid move.
      * Then the all positions on the map are dehighlighted.
      * @param newNode is the new position.
+     * @param player is the player that is moved.
      */
-    public void movePlayer(Node newNode, IPlayer player){
+    private void movePlayer(Node newNode, IPlayer player){
         List<Node> validMoves = new ArrayList<>();
         playerPositionHashMap.get(player).evaluateValidMoves(validMoves, dice.getValue() + 1);
 
         if (validMoves.contains(newNode)){
-            playerPositionHashMap.replace(currentPlayer.getCurrentPlayer(), newNode);
-            currentPlayer.getCurrentPlayer().updatePlayerPosition(newNode.getPosition().getPoint().x, newNode.getPosition().getPoint().y);
+            playerPositionHashMap.replace(player, newNode);
+            player.updatePlayerPosition(newNode.getPosition().getPoint().x, newNode.getPosition().getPoint().y);
         }
 
         map.deHighlight();
-
-        GameLogic.executeGameLogic(player, newNode);
-        currentPlayer.setNewCurrentPlayer(getNextPlayer(currentPlayer.getCurrentPlayer()));
-    }
-
-    /**
-     * Iterates through the list of players to find the next player in the list from the referencePlayer.
-     * @param referencePlayer is the player the next player is evaluated from.
-     * @return the IPlayer that is next in the playerList.
-     */
-    private IPlayer getNextPlayer(IPlayer referencePlayer) {
-        boolean referencePlayerIsFound = false;
-
-        for (int i = 1; i <= playerList.size(); i++) {
-            if (referencePlayerIsFound) {
-                return playerList.get(i-1);
-            }
-
-            if (playerList.get(i-1) == referencePlayer) {
-                referencePlayerIsFound = true;
-            }
-            if (i >= playerList.size()) {
-                i = 0;
-            }
-        }
-
-        return referencePlayer;
     }
 
     /**
      * Rolls dice and then evaluates which moves are valid and highlights them.
      */
-    public void makeDiceRoll(){
-        //int dice = rollDice();
-        playerPositionHashMap.get(currentPlayer.getCurrentPlayer()).evaluateValidMoves(new ArrayList<>(), dice.roll());
+    public void makeDiceRoll(IPlayer player){
+        playerPositionHashMap.get(player).evaluateValidMoves(new ArrayList<>(), dice.roll());
     }
 
     /**
-     * Returns the current player of the game.
-     * @return the current player of the game.
+     * Returns the corresponding node from the player position map.
+     * @param player is the player whose node is wanted.
+     * @return the corresponding node.
      */
-    public CurrentPlayer getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    private int rollDice(){
-        return 2;
+    public Node getNode(IPlayer player) {
+        return playerPositionHashMap.get(player);
     }
 }

@@ -82,10 +82,12 @@ public class MainView implements Observer {
      * @param viewEntities is the list of viewEntities components in game board
      * @param clickHandler is the event handler that listens to an action from a click on the game board
      * @param diceHandler is the event handler that listens to an action roll the dice
+     * @param payToOpenBtnHandler
+     * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populateGameBoardView (List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler) throws IOException {
-        gameBoardView.populate(viewEntities, clickHandler, diceHandler);
+    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
+        gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) throws IOException {

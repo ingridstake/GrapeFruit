@@ -29,4 +29,11 @@ public class CurrentPlayer {
     public IPlayer getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public boolean currentPlayerHasMoneyToTurnTile() {
+        if (currentPlayer != null && currentPlayer.getMoneyBalance() >= 1000){
+            return true;
+        }
+        return false;
+    }
 }

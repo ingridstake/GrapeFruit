@@ -3,7 +3,6 @@ package edu.chalmers.grapefruit.Model;
 import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
-import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 
@@ -16,7 +15,8 @@ import java.util.List;
  * @author olivia.månström
  */
 public class GameModel implements Observable {
-    private GameBoard gameBoard;
+
+    private GameLogic gameLogic;
     private List<IPlayer> players;
     private List<Observer> observerList = new ArrayList<>();
 
@@ -29,21 +29,31 @@ public class GameModel implements Observable {
         if (players == null) {
             throw new IllegalArgumentException("More than 4 players is not allowed");
         }
-        gameBoard = new GameBoard(players);
+        gameLogic = GameLogic.createGameLogic(players);
     }
 
     public void makePlayerMove(int x, int y){
-        gameBoard.movePlayer(x, y);
+        gameLogic.movePlayer(x, y);
         notifyObservers();
     }
 
     public void makeDiceRoll(){
-        gameBoard.makeDiceRoll();
+        gameLogic.makeDiceRoll();
+        notifyObservers();
+    }
+
+    public void payToOpen(){
+        gameLogic.openTileWithPayment();
+        notifyObservers();
+    }
+
+    public void diceToOpen(){
+        gameLogic.openTileWithDice();
         notifyObservers();
     }
 
     public CurrentPlayer getCurrentPlayer() {
-        return gameBoard.getCurrentPlayer();
+        return gameLogic.getCurrentPlayer();
     }
 
     /**

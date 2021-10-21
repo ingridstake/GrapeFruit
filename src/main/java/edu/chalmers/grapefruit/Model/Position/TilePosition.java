@@ -9,7 +9,7 @@ public class TilePosition extends Position{
 
     private boolean isTurned;
 
-    protected TilePosition(int x, int y) {
+    public TilePosition(int x, int y) {
         super(x, y);
         isTurned = false;
     }

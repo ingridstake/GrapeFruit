@@ -14,13 +14,13 @@ public class Position implements IPosition{
     boolean isHighlighted;
     private LogicType logicType;
 
-    protected Position(int x, int y){
+    public Position(int x, int y){
         point = new Point(x, y);
         isHighlighted = false;
         this.logicType = LogicType.NONE;
     }
 
-    protected Position (int x, int y, LogicType logicType) {
+    public Position (int x, int y, LogicType logicType) {
         point = new Point(x, y);
         isHighlighted = false;
         this.logicType = logicType;
