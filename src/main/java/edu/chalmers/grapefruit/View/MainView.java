@@ -1,10 +1,11 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Model.PlayerCardResource;
 import edu.chalmers.grapefruit.Model.ViewEntity;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 import edu.chalmers.grapefruit.Utils.Observer;
+import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,8 +87,8 @@ public class MainView implements Observer {
      * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler, boolean currentPlayerHasMoneyToOpenTile) throws IOException {
-        gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler, currentPlayerHasMoneyToOpenTile);
+    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
+        gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
     /*
@@ -95,8 +96,8 @@ public class MainView implements Observer {
         gameBoardView.addPlayerCards(playerCardResources, currentPlayer);
     }
     */
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources, int currentPlayerId) throws IOException {
-        gameBoardView.addPlayerCards(playerCardResources, currentPlayerId);
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) throws IOException {
+        gameBoardView.addPlayerCards(playerCardResources, ids);
     }
 
     private void createStartView () throws IOException {
@@ -128,6 +129,14 @@ public class MainView implements Observer {
      */
     public int getSelectedPlayerAmount(){
         return startView.getSelectedPlayerAmount();
+    }
+
+    public NewTurnListener getNewTurnListener() {
+        return gameBoardView;
+    }
+
+    public OpenTileListener getOpenTileListener() {
+        return gameBoardView;
     }
 
     @Override

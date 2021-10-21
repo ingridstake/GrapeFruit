@@ -1,12 +1,13 @@
 package edu.chalmers.grapefruit.Model;
 
-import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
 import edu.chalmers.grapefruit.Model.GameBoard.Node;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
+import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,11 @@ import java.util.List;
  */
 
 public class GameLogic {
+
+    private List<NewTurnListener> newTurnListeners = new ArrayList<>();
+    private List<OpenTileListener> openTileListeners = new ArrayList<>();
+    private boolean canRollDiceToOpenTile = false;
+    private boolean canPayToOpenTile = false;
 
     /**
      * Creates a new instance of gameLogic ig there is not already one and returns it.
@@ -70,7 +76,6 @@ public class GameLogic {
      * Turns the current tile by charging the player.
      */
     public void openTileWithPayment(){
-        //IPlayer player = currentPlayer.getCurrentPlayer();
         if (currentPlayer.getMoneyBalance() >= 1000){
             currentPlayer.makeTurnPayment();
             executeTileTurn(currentPlayer, gameBoard.getNode(currentPlayer));
@@ -81,7 +86,6 @@ public class GameLogic {
      * Turns the current tile if the dice's value is grater than 4. Else the turn is passed on to the next player.
      */
     public void openTileWithDice(){
-        //IPlayer player = currentPlayer.getCurrentPlayer();
         Dice dice = new Dice(6);
         dice.roll();
         if (dice.getValue() >= 4 ){
@@ -95,7 +99,10 @@ public class GameLogic {
      * Adds the current player to the list of players who are allowed to turn a tile.
      */
     private void beginTurnTileForPlayer(){
-        //tileTurnIsOngoingForPlayer.add(currentPlayer.getCurrentPlayer());
+        canRollDiceToOpenTile = true;
+        if (currentPlayer.getMoneyBalance() >= 1000)
+            canPayToOpenTile = true;
+        notifyOpenTileListeners();
         tileTurnIsOngoingForPlayer.add(currentPlayer);
     }
 
@@ -131,6 +138,9 @@ public class GameLogic {
                 break;
         }
         tileTurnIsOngoingForPlayer.remove(currentPlayer);
+        canRollDiceToOpenTile = false;
+        canPayToOpenTile = false;
+        notifyOpenTileListeners();
         setNextCurrentPlayer();
     }
 
@@ -150,7 +160,6 @@ public class GameLogic {
      * @param y is the new y coordinate.
      */
     public void movePlayer(int x, int y) {
-        //IPlayer player = currentPlayer.getCurrentPlayer();
         if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
             tileTurnIsOngoingForPlayer.remove(currentPlayer);
         }
@@ -166,34 +175,17 @@ public class GameLogic {
     }
 
     /**
-     * Returns the current player.
-     * @return the current player.
-     */
-    /*
-    public CurrentPlayer getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-     */
-    public int getCurrentPlayerId() {
-        return currentPlayer.getId();
-    }
-
-    public boolean currentPlayerHasMoneyToOpenTile() {
-        return (currentPlayer.getMoneyBalance() >= 1000);
-    }
-
-    /**
      * Iterates through the list of players to find and set the next player to current player.
      */
     private void setNextCurrentPlayer() {
-        boolean referencePlayerIsFound = false;
 
+
+        boolean referencePlayerIsFound = false;
         for (int i = 1; i <= players.size(); i++) {
             if (referencePlayerIsFound) {
                 System.out.println(i);
                 currentPlayer = players.get(i-1);
-                //currentPlayer.setNewCurrentPlayer(players.get(i-1));
+                notifyNewTurn();
                 return;
             }
 
@@ -203,6 +195,27 @@ public class GameLogic {
             if (i >= players.size()) {
                 i = 0;
             }
+        }
+    }
+
+    public void addTurnListener(NewTurnListener newTurnListener) {
+        newTurnListeners.add(newTurnListener);
+    }
+
+    public void addOpenTileListener(OpenTileListener openTileListener) {
+        openTileListeners.add(openTileListener);
+    }
+
+    private void notifyOpenTileListeners() {
+        for (OpenTileListener listener : openTileListeners) {
+            listener.updateDiceToOpenTile(canRollDiceToOpenTile);
+            listener.updatePayToOpenTile(canPayToOpenTile);
+        }
+    }
+
+    private void notifyNewTurn() {
+        for (NewTurnListener newTurnListener : newTurnListeners) {
+            newTurnListener.newTurn(currentPlayer.getId());
         }
     }
 }

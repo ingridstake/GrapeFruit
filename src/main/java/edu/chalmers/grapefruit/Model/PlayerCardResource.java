@@ -10,6 +10,7 @@ import edu.chalmers.grapefruit.Model.Player.PlayerColor;
 
 public class PlayerCardResource {
 
+    //TODO: make private
     IPlayer playerResource;
 
     public PlayerCardResource(IPlayer player) {

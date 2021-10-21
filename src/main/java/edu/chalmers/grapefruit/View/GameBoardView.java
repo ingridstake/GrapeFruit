@@ -1,11 +1,12 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Model.PlayerCardResource;
 import edu.chalmers.grapefruit.Model.ViewEntity;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 
 import edu.chalmers.grapefruit.Utils.Observer;
+import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,18 +25,18 @@ import java.util.List;
  * @author elvinafahlgren
  */
 
-public class GameBoardView implements Observer {
+public class GameBoardView implements Observer, NewTurnListener, OpenTileListener {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
     @FXML Button payToOpenBtn;
     @FXML Button diceToOpenBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
-    List<Node> playerCards = new ArrayList<>();
-    CurrentPlayer currentPlayer;
+    //List<Node> playerCards = new ArrayList<>();
+    HashMap<Integer, Node> playerCards = new HashMap<>();
     private int currentPlayerId;
+    private boolean showPayToOpenBtn;
     private boolean showDiceToOpenBtn;
-    private boolean currentPlayerHasMoneyToOpenTile;
 
     /**
      * Creates a FXMLLoader that represents the game board view.
@@ -52,23 +53,17 @@ public class GameBoardView implements Observer {
      * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler, boolean currentPlayerHasMoneyToOpenTile) throws IOException {
+    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
         payToOpenBtn.setOnAction(payToOpenBtnHandler);
         diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
-        this.currentPlayerHasMoneyToOpenTile = currentPlayerHasMoneyToOpenTile;
 
         redrawChildren();
     }
 
-    /**
-     * Creates a PlayerCardView for each playerCardResource, and makes the gameBoard keep track of which one represents the current player.
-     * @param playerCardResources is the list from which the cards are created.
-     * @param currentPlayerId is the current player's id of the game.
-     * @throws IOException if a node cannot be loaded from a playerCardResource.
-     */
+
     /*
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) {
 
@@ -92,15 +87,20 @@ public class GameBoardView implements Observer {
     }
 
      */
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources, int currentPlayerId) {
+    /**
+     * Creates a PlayerCardView for each playerCardResource, and makes the gameBoard keep track of which one represents the current player.
+     * @param playerCardResources is the list from which the cards are created.
+     * @param ids is a list of all player ids.
+     * @throws IOException if a node cannot be loaded from a playerCardResource.
+     */
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) {
 
-        this.currentPlayerId = currentPlayerId;
 
         int i = 0;
         for (PlayerCardResource playerCardResource : playerCardResources) {
             try {
                 Node card  = PlayerCardView.createPlayerCardNode(playerCardResource);
-                playerCards.add(card);
+                playerCards.put(ids.get(i), card);
                 background.getChildren().add(card);
                 AnchorPane.setBottomAnchor(card, 0.0);
                 AnchorPane.setRightAnchor(card, 10.0 + i * 155);
@@ -163,21 +163,19 @@ public class GameBoardView implements Observer {
             }
         }
 
-        for (Node node : playerCards) {
+        for (Node node : playerCards.values()) {
             updatePlayerCard(node);
             background.getChildren().add(node);
         }
 
-        background.getChildren().add(diceBtn);
-        background.getChildren().add(diceToOpenBtn);
-        /*
-        if (currentPlayer != null && currentPlayer.currentPlayerHasMoneyToTurnTile()) {
+        if (showPayToOpenBtn)
             background.getChildren().add(payToOpenBtn);
-        }
-        */
-        if (currentPlayerHasMoneyToOpenTile) {
-            background.getChildren().add(payToOpenBtn);
-        }
+
+        if(showDiceToOpenBtn)
+            background.getChildren().add(diceToOpenBtn);
+        else
+            background.getChildren().add(diceBtn);
+
     }
 
     /**
@@ -210,5 +208,22 @@ public class GameBoardView implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void newTurn(int id) {
+        this.currentPlayerId = id;
+        //TODO: Kan klicka öppna med pengar och tärning borde stängas av?
+    }
+
+    @Override
+    public void updateDiceToOpenTile(boolean canRollDiceToOpenTile) {
+        showDiceToOpenBtn = canRollDiceToOpenTile;
+    }
+
+    @Override
+    public void updatePayToOpenTile(boolean canPayToOpenTile) {
+        System.out.println("kommer vi hit då???" + canPayToOpenTile);
+        showPayToOpenBtn = canPayToOpenTile;
     }
 }

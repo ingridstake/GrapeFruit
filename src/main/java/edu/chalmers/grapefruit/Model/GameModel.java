@@ -1,10 +1,11 @@
 package edu.chalmers.grapefruit.Model;
 
-import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
+import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,23 +59,32 @@ public class GameModel implements Observable {
     }
 
      */
-    public int getCurrentPlayerId() {
-        return gameLogic.getCurrentPlayerId();
-    }
 
-    public boolean currentPlayerHasMoneyToOpenTile() {
-        return gameLogic.currentPlayerHasMoneyToOpenTile();
+    public List<Integer> getPlayerIds(){
+        List<Integer> ids = new ArrayList<Integer>();
+        for(IPlayer player : players){
+            ids.add(player.getId());
+        }
+        return ids;
     }
 
     /**
      * Returns a list of all positionable objects for the GameBoard
      * @return a list of all positionable objects of the GameBoard
      */
-    public List<ViewEntity> getViewEntities(){
+    public List<ViewEntity> getViewEntities() {
         return ViewEntityFactory.getViewEntities();
     }
 
     public List<PlayerCardResource> getPlayerCardResources() { return PlayerCardResourceFactory.getPlayerCardResources(); }
+
+    public void addNewTurnListener(NewTurnListener listener) {
+        gameLogic.addTurnListener(listener);
+    }
+
+    public void addOpenTileListener(OpenTileListener listener) {
+        gameLogic.addOpenTileListener(listener);
+    }
 
     @Override
     public void addObserver(Observer observer) {
