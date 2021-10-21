@@ -1,6 +1,5 @@
 package edu.chalmers.grapefruit.Model;
 
-import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerColor;
 
@@ -55,7 +54,7 @@ public class PlayerCardResource {
 
     /**
      * Returns true if the parameter holds the same player resource.
-     * @param currentPlayer is the CurrentPlayer that is compared.
+     * @param currentPlayerId is the CurrentPlayer that is compared.
      * @return true if the parameter holds the same player resource.
      */
     public boolean hasSamePlayer(int currentPlayerId) {

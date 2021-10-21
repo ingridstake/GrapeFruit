@@ -34,6 +34,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
     FXMLLoader fxmlLoader;
     //List<Node> playerCards = new ArrayList<>();
     HashMap<Integer, Node> playerCards = new HashMap<>();
+    HashMap<Integer, Node> gamePieces = new HashMap<>();
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
     private boolean showDiceToOpenBtn;
@@ -56,9 +57,9 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
     public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
-        diceBtn.setOnAction(diceHandler);
-        payToOpenBtn.setOnAction(payToOpenBtnHandler);
-        diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
+        this.diceBtn.setOnAction(diceHandler);
+        this.payToOpenBtn.setOnAction(payToOpenBtnHandler);
+        this.diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
 
         redrawChildren();
     }
