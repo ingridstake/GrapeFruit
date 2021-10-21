@@ -16,14 +16,16 @@ public class Player implements IPlayer{
     private final PlayerColor PLAYER_COLOR;
     private Point point;
     private boolean isWinner;
+    private int id;
 
-    protected Player(PlayerColor playerColor){
+    protected Player(PlayerColor playerColor, int id){
         moneyBalance = 3000;
         point = new Point(0,0);
         hasCow = false;
         hasVisa = false;
         isWinner = false;
         PLAYER_COLOR = playerColor;
+        this.id = id;
     }
 
     /**
@@ -119,5 +121,10 @@ public class Player implements IPlayer{
     @Override
     public String getResourceString() throws Exception {
        return PlayerColor.evaluateResourceString(PLAYER_COLOR);
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }

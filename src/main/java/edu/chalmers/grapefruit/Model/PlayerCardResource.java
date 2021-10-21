@@ -57,8 +57,8 @@ public class PlayerCardResource {
      * @param currentPlayer is the CurrentPlayer that is compared.
      * @return true if the parameter holds the same player resource.
      */
-    public boolean hasSamePlayer(CurrentPlayer currentPlayer) {
-        if (currentPlayer.getCurrentPlayer() == this.playerResource) {
+    public boolean hasSamePlayer(int currentPlayerId) {
+        if (currentPlayerId == this.playerResource.getId()) {
             return true;
         }
         return false;

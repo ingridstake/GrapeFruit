@@ -66,8 +66,9 @@ public class GameController {
                 try {
                     model.initialize(view.getSelectedPlayerAmount());
                     view.loadGameBoardPage();
-                    view.populateGameBoardView(model.getViewEntities(), nodeClickEventHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
-                    view.addPlayerCards(model.getPlayerCardResources(), model.getCurrentPlayer());
+                    view.populateGameBoardView(model.getViewEntities(), nodeClickEventHandler, diceHandler,
+                            payToOpenBtnHandler, diceToOpenBtnHandler, model.currentPlayerHasMoneyToOpenTile());
+                    view.addPlayerCards(model.getPlayerCardResources(), model.getCurrentPlayerId());
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }

@@ -25,7 +25,7 @@ public class PlayerFactory {
 
         List<IPlayer> playerList = new ArrayList<>();
         for (int i = 0; i<n; i++){
-            playerList.add(new Player(colorList.get(i)));
+            playerList.add(new Player(colorList.get(i), i));
         }
         return playerList;
     }

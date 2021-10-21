@@ -52,8 +52,18 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
+    /*
     public CurrentPlayer getCurrentPlayer() {
         return gameLogic.getCurrentPlayer();
+    }
+
+     */
+    public int getCurrentPlayerId() {
+        return gameLogic.getCurrentPlayerId();
+    }
+
+    public boolean currentPlayerHasMoneyToOpenTile() {
+        return gameLogic.currentPlayerHasMoneyToOpenTile();
     }
 
     /**

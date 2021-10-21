@@ -29,6 +29,7 @@ public class GameLogicTest {
         assert (players.get(0).isWinner());
     }
 
+    /*
     @Test
     public void logicTypeHorseGivesPlayerMoney(){
         List<IPlayer> players = PlayerFactory.MakePlayers(1);
@@ -40,6 +41,8 @@ public class GameLogicTest {
 
         assert (players.get(0).getMoneyBalance() == 6000);
     }
+
+
 
     @Test
     public void playerFoundVisaAndWonTest(){
@@ -66,5 +69,6 @@ public class GameLogicTest {
         assert (players.get(1).hasVisa());
         assert (players.get(1).isWinner());
     }
+     */
 
 }

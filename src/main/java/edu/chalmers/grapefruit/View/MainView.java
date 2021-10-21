@@ -86,12 +86,17 @@ public class MainView implements Observer {
      * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
-        gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
+    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler, boolean currentPlayerHasMoneyToOpenTile) throws IOException {
+        gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler, currentPlayerHasMoneyToOpenTile);
     }
 
+    /*
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) throws IOException {
         gameBoardView.addPlayerCards(playerCardResources, currentPlayer);
+    }
+    */
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, int currentPlayerId) throws IOException {
+        gameBoardView.addPlayerCards(playerCardResources, currentPlayerId);
     }
 
     private void createStartView () throws IOException {

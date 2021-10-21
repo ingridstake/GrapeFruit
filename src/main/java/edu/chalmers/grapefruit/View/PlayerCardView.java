@@ -63,8 +63,8 @@ public class PlayerCardView {
      * @param currentPlayer is the current player that is compared with.
      * @return true if there is a match.
      */
-    public boolean representsCurrentPlayer(CurrentPlayer currentPlayer) {
-        return playerCardResource.hasSamePlayer(currentPlayer);
+    public boolean representsCurrentPlayer(int currentPlayerId) {
+        return playerCardResource.hasSamePlayer(currentPlayerId);
     }
 
     public boolean representsWinner() {

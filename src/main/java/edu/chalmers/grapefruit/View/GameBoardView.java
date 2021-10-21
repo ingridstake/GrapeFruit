@@ -33,6 +33,9 @@ public class GameBoardView implements Observer {
     FXMLLoader fxmlLoader;
     List<Node> playerCards = new ArrayList<>();
     CurrentPlayer currentPlayer;
+    private int currentPlayerId;
+    private boolean showDiceToOpenBtn;
+    private boolean currentPlayerHasMoneyToOpenTile;
 
     /**
      * Creates a FXMLLoader that represents the game board view.
@@ -49,12 +52,13 @@ public class GameBoardView implements Observer {
      * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
+    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler, boolean currentPlayerHasMoneyToOpenTile) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         diceBtn.setOnAction(diceHandler);
         payToOpenBtn.setOnAction(payToOpenBtnHandler);
         diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
+        this.currentPlayerHasMoneyToOpenTile = currentPlayerHasMoneyToOpenTile;
 
         redrawChildren();
     }
@@ -62,12 +66,35 @@ public class GameBoardView implements Observer {
     /**
      * Creates a PlayerCardView for each playerCardResource, and makes the gameBoard keep track of which one represents the current player.
      * @param playerCardResources is the list from which the cards are created.
-     * @param currentPlayer is the current player of the game.
+     * @param currentPlayerId is the current player's id of the game.
      * @throws IOException if a node cannot be loaded from a playerCardResource.
      */
+    /*
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) {
 
         this.currentPlayer = currentPlayer;
+
+        int i = 0;
+        for (PlayerCardResource playerCardResource : playerCardResources) {
+            try {
+                Node card  = PlayerCardView.createPlayerCardNode(playerCardResource);
+                playerCards.add(card);
+                background.getChildren().add(card);
+                AnchorPane.setBottomAnchor(card, 0.0);
+                AnchorPane.setRightAnchor(card, 10.0 + i * 155);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            i++;
+        }
+    }
+
+     */
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, int currentPlayerId) {
+
+        this.currentPlayerId = currentPlayerId;
 
         int i = 0;
         for (PlayerCardResource playerCardResource : playerCardResources) {
@@ -143,7 +170,12 @@ public class GameBoardView implements Observer {
 
         background.getChildren().add(diceBtn);
         background.getChildren().add(diceToOpenBtn);
+        /*
         if (currentPlayer != null && currentPlayer.currentPlayerHasMoneyToTurnTile()) {
+            background.getChildren().add(payToOpenBtn);
+        }
+        */
+        if (currentPlayerHasMoneyToOpenTile) {
             background.getChildren().add(payToOpenBtn);
         }
     }
@@ -153,13 +185,15 @@ public class GameBoardView implements Observer {
      * @param node should have a fx:controller that is an instance of PlayerCardView.
      */
     private void updatePlayerCard(Node node) {
+        System.out.println(currentPlayerId);
             try {
                 PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
                 playerCardView.update();
+                System.out.println(playerCardView.representsCurrentPlayer(currentPlayerId));
                 if (playerCardView.representsWinner()){
                     AnchorPane.setBottomAnchor(node, 400.0);
                     AnchorPane.setRightAnchor(node, 615.0);
-                } else if (playerCardView.representsCurrentPlayer(currentPlayer)) {
+                } else if (playerCardView.representsCurrentPlayer(currentPlayerId)) {
                     AnchorPane.setBottomAnchor(node, 15.0);
                 } else {
                     AnchorPane.setBottomAnchor(node, 0.0);
