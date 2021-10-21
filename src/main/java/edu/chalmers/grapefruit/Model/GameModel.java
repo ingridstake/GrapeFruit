@@ -1,8 +1,7 @@
 package edu.chalmers.grapefruit.Model;
 
 import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
-import edu.chalmers.grapefruit.Utils.Observable;
-import edu.chalmers.grapefruit.Utils.Observer;
+import edu.chalmers.grapefruit.Utils.*;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 
@@ -56,15 +55,14 @@ public class GameModel implements Observable {
         return gameLogic.getCurrentPlayer();
     }
 
-    /**
-     * Returns a list of all positionable objects for the GameBoard
-     * @return a list of all positionable objects of the GameBoard
-     */
-    public List<ViewEntity> getViewEntities(){
-        return ViewEntityFactory.getViewEntities();
+
+    public List<IPlayer> getPlayers(){
+        return players;
     }
 
-    public List<PlayerCardResource> getPlayerCardResources() { return PlayerCardResourceFactory.getPlayerCardResources(); }
+    public GameLogic getGameLogic(){
+        return gameLogic;
+    }
 
     @Override
     public void addObserver(Observer observer) {

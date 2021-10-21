@@ -1,4 +1,4 @@
-package edu.chalmers.grapefruit.Model;
+package edu.chalmers.grapefruit.Utils;
 
 import edu.chalmers.grapefruit.Utils.ViewEntityResource;
 

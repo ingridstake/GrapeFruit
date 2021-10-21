@@ -1,4 +1,4 @@
-package edu.chalmers.grapefruit.Model;
+package edu.chalmers.grapefruit.Utils;
 
 import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;

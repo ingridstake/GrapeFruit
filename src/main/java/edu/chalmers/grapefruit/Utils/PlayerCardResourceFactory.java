@@ -1,5 +1,6 @@
-package edu.chalmers.grapefruit.Model;
+package edu.chalmers.grapefruit.Utils;
 
+import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 
 import java.util.ArrayList;
@@ -25,6 +26,13 @@ public class PlayerCardResourceFactory {
      * @return the playerCardResourceList.
      */
     public static List<PlayerCardResource> getPlayerCardResources() {
+        return playerCardResources;
+    }
+
+    public static List<PlayerCardResource> createPlayerCardResources(GameModel gameModel){
+        for (IPlayer player : gameModel.getPlayers()) {
+            addPlayerCardResource(player);
+        }
         return playerCardResources;
     }
 }

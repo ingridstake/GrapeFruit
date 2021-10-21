@@ -191,4 +191,8 @@ public class GameLogic {
             }
         }
     }
+
+    public GameBoard getGameBoard(){
+        return gameBoard;
+    }
 }

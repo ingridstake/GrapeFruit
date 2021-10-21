@@ -1,6 +1,8 @@
-package edu.chalmers.grapefruit.Model;
+package edu.chalmers.grapefruit.Utils;
 
-import edu.chalmers.grapefruit.Utils.ViewEntityResource;
+import edu.chalmers.grapefruit.Model.GameModel;
+import edu.chalmers.grapefruit.Model.Player.IPlayer;
+import edu.chalmers.grapefruit.Model.Position.IPosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +33,16 @@ public class ViewEntityFactory {
 
     public static void clearViewEntityFactory(){
         viewEntities = new ArrayList<>();
+    }
+
+    public static List<ViewEntity> createViewEntities(GameModel gameModel){
+
+        for (IPosition position: gameModel.getGameLogic().getGameBoard().getPositionList()) {
+            addEntity(position);
+        }
+        for (IPlayer player: gameModel.getPlayers()) {
+            addEntity(player);
+        }
+        return viewEntities;
     }
 }
