@@ -1,6 +1,6 @@
 import edu.chalmers.grapefruit.Model.GameModel;
-import edu.chalmers.grapefruit.Model.ViewEntity;
-import edu.chalmers.grapefruit.Model.ViewEntityFactory;
+import edu.chalmers.grapefruit.Utils.ViewEntity;
+import edu.chalmers.grapefruit.Utils.ViewEntityFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
 package edu.chalmers.grapefruit.View;
 
 import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
-import edu.chalmers.grapefruit.Model.PlayerCardResource;
-import edu.chalmers.grapefruit.Model.ViewEntity;
+import edu.chalmers.grapefruit.Utils.PlayerCardResource;
+import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
 import edu.chalmers.grapefruit.Utils.Observer;
 import javafx.event.EventHandler;

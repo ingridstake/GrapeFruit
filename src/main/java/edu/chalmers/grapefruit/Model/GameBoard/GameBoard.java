@@ -1,9 +1,9 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
 import edu.chalmers.grapefruit.Model.Dice;
-import edu.chalmers.grapefruit.Model.PlayerCardResourceFactory;
+import edu.chalmers.grapefruit.Utils.PlayerCardResourceFactory;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
-import edu.chalmers.grapefruit.Model.ViewEntityFactory;
+import edu.chalmers.grapefruit.Utils.ViewEntityFactory;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 
 import java.util.ArrayList;
@@ -32,28 +32,7 @@ public class GameBoard {
             player.updatePlayerPosition(position.getPoint().x, position.getPoint().y);
         }
 
-        createViewEntities();
-        createPlayerCardResources();
-
         this.dice = new Dice(6);
-    }
-
-    /**
-     * Add all view elements to the viewEntityFactory.
-     */
-    private void createViewEntities(){
-
-        for (Node node :  map.getAllNodes()) {
-            ViewEntityFactory.addEntity(node.getPosition());
-        }
-        playerPositionHashMap.forEach((k,v) -> ViewEntityFactory.addEntity(k));
-    }
-
-    /**
-     * Add all players to the playerCardResourceFactory.
-     */
-    private void createPlayerCardResources() {
-        playerPositionHashMap.forEach((k,v) -> PlayerCardResourceFactory.addPlayerCardResource(k));
     }
 
     /**
@@ -104,5 +83,13 @@ public class GameBoard {
      */
     public Node getNode(IPlayer player) {
         return playerPositionHashMap.get(player);
+    }
+
+    public List<IPosition> getPositionList(){
+        List<IPosition> positionList = new ArrayList<>();
+        for (Node node: map.getAllNodes()) {
+            positionList.add(node.getPosition());
+        }
+        return positionList;
     }
 }
