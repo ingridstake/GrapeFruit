@@ -17,9 +17,6 @@ public class PlayerFactory {
      * @return a list with length n containing players
      */
     public static List<IPlayer> MakePlayers(int n){
-        if (n>4){
-            return null;
-        }
 
         List<PlayerColor> colorList = PlayerColor.getPlayerColors();
 

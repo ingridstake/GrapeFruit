@@ -3,6 +3,7 @@ package edu.chalmers.grapefruit.Model;
 import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
+import edu.chalmers.grapefruit.Utils.*;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
@@ -26,10 +27,10 @@ public class GameModel implements Observable {
      * @param n is the amount of players.
      */
     public void initialize(int n){
-        players = PlayerFactory.MakePlayers(n);
-        if (players == null) {
+        if (n<1 || n>4){
             throw new IllegalArgumentException("More than 4 players is not allowed");
         }
+        players = PlayerFactory.MakePlayers(n);
         gameLogic = GameLogic.createGameLogic(players);
     }
 
@@ -58,6 +59,7 @@ public class GameModel implements Observable {
         return gameLogic.getCurrentPlayer();
     }
 
+<<<<<<< HEAD
      */
 
     public List<Integer> getPlayerIds(){
@@ -76,7 +78,13 @@ public class GameModel implements Observable {
         return ViewEntityFactory.getViewEntities();
     }
 
-    public List<PlayerCardResource> getPlayerCardResources() { return PlayerCardResourceFactory.getPlayerCardResources(); }
+    public List<IPlayer> getPlayers() {
+        return players;
+    }
+
+    public GameLogic getGameLogic(){
+        return gameLogic;
+    }
 
     public void addNewTurnListener(NewTurnListener listener) {
         gameLogic.addTurnListener(listener);

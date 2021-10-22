@@ -1,4 +1,4 @@
-package edu.chalmers.grapefruit.Model;
+package edu.chalmers.grapefruit.Utils;
 
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerColor;
@@ -40,6 +40,10 @@ public class PlayerCardResource {
         return playerResource.hasVisa();
     }
 
+    /**
+     * Returns true if player returns to start position and has cow or visa.
+     * @return true if player returns to start position and has cow or visa.
+     */
     public boolean isWinner(){
         return playerResource.isWinner();
     }

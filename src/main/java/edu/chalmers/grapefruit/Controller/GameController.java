@@ -2,6 +2,8 @@ package edu.chalmers.grapefruit.Controller;
 
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
+import edu.chalmers.grapefruit.Utils.PlayerCardResourceFactory;
+import edu.chalmers.grapefruit.Utils.ViewEntityFactory;
 import edu.chalmers.grapefruit.View.MainView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -65,9 +67,8 @@ public class GameController {
                 try {
                     model.initialize(view.getSelectedPlayerAmount());
                     view.loadGameBoardPage();
-                    view.populateGameBoardView(model.getViewEntities(), nodeClickEventHandler, diceHandler,
-                            payToOpenBtnHandler, diceToOpenBtnHandler);
-                    view.addPlayerCards(model.getPlayerCardResources(), model.getPlayerIds());
+                    view.populateGameBoardView(ViewEntityFactory.createViewEntities(model), nodeClickEventHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
+                    view.addPlayerCards(PlayerCardResourceFactory.createPlayerCardResources(model), model.getPlayerIds());
                     model.addNewTurnListener(view.getNewTurnListener());
                     model.addOpenTileListener(view.getOpenTileListener());
                 } catch (IOException exception) {

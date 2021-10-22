@@ -216,4 +216,12 @@ public class GameLogic {
             listener.updatePayToOpenTile(canPayToOpenTile);
         }
     }
+
+    /**
+     * Returns the game board.
+     * @return the game board.
+     */
+    public GameBoard getGameBoard(){
+        return gameBoard;
+    }
 }

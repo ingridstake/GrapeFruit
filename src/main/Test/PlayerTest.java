@@ -39,14 +39,14 @@ public class PlayerTest {
     @Test
     public void playerGotMoneyTest(){
         List<IPlayer> players = PlayerFactory.MakePlayers(1);
-        assert (players.get(0).getMoneyBalance() == 5000);
+        assert (players.get(0).getMoneyBalance() == 3000);
     }
 
     @Test
     public void playerGotHorseTest(){
         List<IPlayer> players = PlayerFactory.MakePlayers(1);
         players.get(0).makeHorsePayment();
-        assert (players.get(0).getMoneyBalance() == 6000);
+        assert (players.get(0).getMoneyBalance() == 3900);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class PlayerTest {
     public void playerGotPigTest(){
         List<IPlayer> players = PlayerFactory.MakePlayers(1);
         players.get(0).makePigPayment();
-        assert (players.get(0).getMoneyBalance() == 5500);
+        assert (players.get(0).getMoneyBalance() == 3500);
     }
 
     @Test

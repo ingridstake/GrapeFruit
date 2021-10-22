@@ -1,0 +1,76 @@
+Mötesprotokoll med handledareGrupp: GrapefruitDatum: 211021Lärosäte: Chalmers tekniska högskolaDeltagare: Elvina Fahlgren, Olivia Månström, Tove Nilsson, Ingrid Stake och Felix Oliv
+
+• Mål (5 min)- Få svar på frågor.
+- Få feedback nu när vi nästan är klara,
+• Rapport från tidigare möte (15 min)Vi har en fungerande applikation. • Diskussions ämnen (35 min)
+Frågor till handledare:
+- I RAD, ska vi skriva tasks/acceptanskriterier eller endast user stories under rubriken "Användarberättelser"?
+Både tasks och acceptanskriterier ska vara med.
+
+- Hur var det med att skriva tester till view?
+Behövs inte.
+
+- Ska domänmodellen vara skriven på svenska eller engelska?
+Finns inget krav. Skriv domänmodellen på svenska om resten av rapporten är på svenska. Metoder och klasser på engelska. 
+
+- Be Felix kolla på vår domänmodell.
+Domänmodellen ska vara väldigt ytlig så det är bra. Allt som ska vara med är med. 
+Vi kan ta bort GameLogic och kanske Position. Ha kvar det så men utan GameLogic
+
+- Ska design patterns översättas till svenska när vi skriver om dom?
+Nej.
+
+- Det står att all dokumentation ska vara i pdf, gäller detta våra möten också?
+Det är ok att ha det i txt.
+
+- Är det våran peer review eller den gruppen vi gjorde på som ska ligga i final report?
+Den vi gjorde till den andra gruppen, tror Felix. I SDD och RAD kan vi skriva om feedback från den andra gruppen. 
+
+- Är det bara att kopiera in RAD och SDD i slutrapporten eller hur ska den vara skriven?
+Bara att kopiera in. Ordning? Spelar ingen roll.
+
+- Hur löser vi det med fonten?
+Vet inte om det finns någon lösning. Det verkar vara besvärligt. Vi kan strunta i det. Vi kan lägga en kommentar i README.
+
+- Ska testerna vara 90% på metoder eller line?
+90% linecoverage. Då har vi testat det mesta. Helst skulle vi testa felhantering för att komma upp i 90%
+
+- Bör vi skapa view i HelloApplication?
+Spelar det någon roll med att skapa den i HelloApplication? Det finns ingen störred poäng i det. Lika bra att skapa den i HelloApplication, även fast det det inte finns någon bra anledning.
+
+- Grape-fruit.iml, ligger inte i GitHub-repo? är det därför Felix inte kan köra applikationen?
+Vi ska testa ta bort och köra om. Testa ta bort den från gitignore. 
+Felix får fel, så det skulle kunna vara en konfigurations grej. 
+
+Feedback från handledare:
+
+- Förklara Gameboard-klassen:
+ViewEntities varför ligger den i modellen? Vi borde inte ha createViewEntities och createPlayerCardResources i modellen.
+Vy grejer ska inte ligga direkt i vår core-modell.
+
+- Klassen CurrentPlayer? kan vi inte vara ha en currentplayer som är en player?
+Vi använder den i gameView och när man uppdaterar currentPlayer i gameModel. Vi byter ut den och vill att vyn bara har koll på den som är current player.
+
+Om vi går till GameModel och getCurrentPlayer, vi skapar en variabel och returnerar en IPlayer istället för CurrentPlayer. Det blir snyggare för vi behöver bara ha en referens till interfacet IPlayer. 
+
+Vyn har då en IPlayer? Felix säger att det inte är någon fara. Controllen kan få se player men inte vyn. 
+
+Borde varje player ha en boolean, isCurrentPlayer?
+
+Kanske ha ett ID till varje spelare för att jämföra. Då kan vi returnera currentPlayers ID. Tror inte vi behöver ha Player alls i vyn om vi kör på ID istället. 
+
+
+Lite mer allmänna frågor:
+
+Felix skrev inte om alla User stories, han hade med 9-10 stycken. Han skrev bara om dom som var mest intressanta, vi kan skriva om alla. 
+
+Presentationen? Det finns inget som är rätt/fel. Tänk att vi ska göra en demo, visa upp all funktionalitet (viktigaste) i helhet. Efter det ska vi prata om RAD och SDD, bra ha en powerpoint, bild på domänmodellen. 
+Vi borde prata utifrån det som är objekt orienterat. Hur vi har valt att designa applikationen, struktur mässigt. 
+• Resultat och uppgifter (5 min)
+
+- Kolla på det gällande klassen CurrentPlayer.
+- createViewEntities och createPlayerCardResources borde inte ligga i core-modellen.
+- Försöka skapa MainView i HelloApplication.
+- Testa det vi pratade om gällande Grape-fruit.iml. 
+- Fixa tester 90% line coverage.
+- Uppdatera UML, när vi inte ska röra koden mer. • SummeringDet som inte är fixat än är det under resultat och uppgifter.Nästa möte är fredag 22/10-21.
