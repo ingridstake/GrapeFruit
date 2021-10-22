@@ -50,21 +50,6 @@ public class Node {
     }
 
     /**
-     * Returns a list of all related nodes besides the previous node
-     * @param previousNode is the related node that is not included in the returned list
-     * @return The list of all related nodes but the previousNode
-     */
-    protected List<Node> getNeighbours(Node previousNode){
-        List<Node> nodeList = new ArrayList<>();
-        for (Node node : relatedNodes) {
-            if (node != previousNode) {
-                nodeList.add(node);
-            }
-        }
-        return nodeList;
-    }
-
-    /**
      * Returns the position of the node
      * @return thw position of the node
      */
