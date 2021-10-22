@@ -62,7 +62,7 @@ public enum PlayerColor {
             case TURQUOISE:
                 return "turquoise-player-card.fxml";
             default:
-                return null;
+                return "pink-player-card.fxml";
         }
     }
 }
