@@ -8,7 +8,7 @@ import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
 import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 public class GameLogic {
 
     private List<NewTurnListener> newTurnListeners = new ArrayList<>();
-    private List<OpenTileListener> openTileListeners = new ArrayList<>();
+    private List<OpenTileOperationsListener> openTileOperationsListeners = new ArrayList<>();
     private List<DiceRolledListener> diceRolledListeners = new ArrayList<>();
 
     private Dice dice = new Dice(6);
@@ -204,8 +204,8 @@ public class GameLogic {
         newTurnListeners.add(newTurnListener);
     }
 
-    public void addOpenTileListener(OpenTileListener openTileListener) {
-        openTileListeners.add(openTileListener);
+    public void addOpenTileListener(OpenTileOperationsListener openTileOperationsListener) {
+        openTileOperationsListeners.add(openTileOperationsListener);
     }
 
     public void addDiceListener(DiceRolledListener diceRolledListener) {
@@ -225,7 +225,7 @@ public class GameLogic {
     }
 
     private void notifyOpenTileListeners(boolean canRollDiceToOpenTile, boolean canPayToOpenTile) {
-        for (OpenTileListener listener : openTileListeners) {
+        for (OpenTileOperationsListener listener : openTileOperationsListeners) {
             listener.updateDiceToOpenTile(canRollDiceToOpenTile);
             listener.updatePayToOpenTile(canPayToOpenTile);
         }

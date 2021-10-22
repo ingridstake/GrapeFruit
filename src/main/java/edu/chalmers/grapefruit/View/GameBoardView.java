@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
@@ -25,14 +25,13 @@ import java.util.List;
  * @author elvinafahlgren
  */
 
-public class GameBoardView implements Observer, NewTurnListener, OpenTileListener {
+public class GameBoardView implements Observer, NewTurnListener, OpenTileOperationsListener {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
     @FXML Button payToOpenBtn;
     @FXML Button diceToOpenBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
-    //List<Node> playerCards = new ArrayList<>();
     HashMap<Integer, Node> playerCards = new HashMap<>();
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
@@ -46,9 +45,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
         fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
     }
 
+    //TODO: Kanske byta funktionsnamn till initialize eller init?
     /**
-     * Populates the GameBoardView with all objects in the positionableList.
-     * @param viewEntities is the list of Positionable objects that is displayed.
+     * Sets the GameBoards instance variable viewEntities.
+     * Sets the NodeViews clickHandler.
+     * Sets the dice buttons event handler.
+     * Sets the pay to open buttons event handler.
+     * Sets the dice to open buttons event handler.
+     * Finally draws the GameBoardView children.
+     * @param viewEntities is the list of viewEntityObjects objects that is displayed.
      * @param clickHandler is the event handler for the Nodes.
      * @param payToOpenBtnHandler
      * @param diceToOpenBtnHandler
@@ -149,6 +154,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
             background.getChildren().add(node);
         }
 
+        drawButtons();
+        drawDiceView();
+    }
+
+
+    /**
+     * Renders the buttons that should be visible.
+     */
+    private void drawButtons(){
         if (showPayToOpenBtn)
             background.getChildren().add(payToOpenBtn);
 
@@ -156,8 +170,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
             background.getChildren().add(diceToOpenBtn);
         else
             background.getChildren().add(diceBtn);
+    }
 
+    /**
+     * Adds the diceView to the background, and then renders it
+     */
+    private void drawDiceView() {
         background.getChildren().add(diceView.getNode());
+        AnchorPane.setRightAnchor(diceView.getNode(), 10.0);
+        AnchorPane.setBottomAnchor(diceView.getNode(), 400.0);
     }
 
     /**

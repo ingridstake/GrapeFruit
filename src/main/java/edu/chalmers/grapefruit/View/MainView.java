@@ -1,7 +1,7 @@
 package edu.chalmers.grapefruit.View;
 
 import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
@@ -131,7 +131,7 @@ public class MainView implements Observer {
         return gameBoardView;
     }
 
-    public OpenTileListener getOpenTileListener() {
+    public OpenTileOperationsListener getOpenTileListener() {
         return gameBoardView;
     }
 
