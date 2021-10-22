@@ -29,6 +29,11 @@ public class PlayerCardResourceFactory {
         return playerCardResources;
     }
 
+    /**
+     * Adds players from game model to a list of player card resources.
+     * @param gameModel is the game model.
+     * @return list of player card resources.
+     */
     public static List<PlayerCardResource> createPlayerCardResources(GameModel gameModel){
         for (IPlayer player : gameModel.getPlayers()) {
             addPlayerCardResource(player);

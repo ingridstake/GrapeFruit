@@ -64,11 +64,11 @@ public class Player implements IPlayer{
     }
 
     /**
-     * Gives the player 1000kr.
+     * Gives the player 900kr.
      */
     @Override
     public void makeHorsePayment() {
-        moneyBalance += 1000;
+        moneyBalance += 900;
     }
 
     /**

@@ -1,8 +1,11 @@
+import edu.chalmers.grapefruit.Model.Dice;
 import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
 import edu.chalmers.grapefruit.Model.GameBoard.Node;
 import edu.chalmers.grapefruit.Model.GameLogic;
+import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
+import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.Position;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
@@ -30,41 +33,23 @@ public class GameLogicTest {
     }
 
     @Test
-    public void logicTypeHorseGivesPlayerMoney(){
-        List<IPlayer> players = PlayerFactory.MakePlayers(1);
-        TilePosition tilePosition = new TilePosition(1, 1);
-        tilePosition.setLogicType(LogicType.HORSE);
-        Node node = new Node(tilePosition);
-        GameLogic.gameLogicPlayerAction(players.get(0), node);
-        GameLogic.executeGameLogic(players.get(0), node);
+    public void openTileWithPaymentLowerMoneyBalance(){
 
-        assert (players.get(0).getMoneyBalance() == 6000);
+        List<IPlayer> players = PlayerFactory.MakePlayers(1);
+        GameLogic gameLogic = GameLogic.createGameLogic(players);
+        gameLogic.movePlayer(265,85);
+        gameLogic.openTileWithPayment();
+        //System.out.println(players.get(0).getMoneyBalance());
+        assert (players.get(0).getMoneyBalance() <= 2900);
     }
 
     @Test
-    public void playerFoundVisaAndWonTest(){
+    public void makeGameBoardToHighlight(){
         List<IPlayer> players = PlayerFactory.MakePlayers(2);
+        GameLogic gameLogic = GameLogic.createGameLogic(players);
 
-        TilePosition tilePosition1 = new TilePosition(1, 1);
-        tilePosition1.setLogicType(LogicType.COW);
+        gameLogic.getGameBoard().getPositionList().get(2).highlight();
 
-        TilePosition tilePosition2 = new TilePosition(2, 2);
-        tilePosition2.setLogicType(LogicType.COWBELL);
-
-        Node node1 = new Node(tilePosition1);
-        Node node2 = new Node(tilePosition2);
-
-        GameLogic.gameLogicPlayerAction(players.get(0), node1);
-        GameLogic.executeGameLogic(players.get(0), node1);
-
-        GameLogic.gameLogicPlayerAction(players.get(1), node2);
-        GameLogic.executeGameLogic(players.get(1), node2);
-
-        GameLogic.gameLogicStartPos(players.get(1));
-
-        assert (players.get(0).hasCow());
-        assert (players.get(1).hasVisa());
-        assert (players.get(1).isWinner());
+        assert (gameLogic.getGameBoard().getPositionList().get(2).isHighlighted());
     }
-
 }

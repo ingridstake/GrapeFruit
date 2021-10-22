@@ -192,6 +192,10 @@ public class GameLogic {
         }
     }
 
+    /**
+     * Returns the game board.
+     * @return the game board.
+     */
     public GameBoard getGameBoard(){
         return gameBoard;
     }

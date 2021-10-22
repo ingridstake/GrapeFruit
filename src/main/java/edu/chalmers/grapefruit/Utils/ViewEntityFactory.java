@@ -31,10 +31,18 @@ public class ViewEntityFactory {
         return viewEntities;
     }
 
+    /**
+     * Clears the view entity list.
+     */
     public static void clearViewEntityFactory(){
         viewEntities = new ArrayList<>();
     }
 
+    /**
+     * Adds positions and players from game model and game board to the view entities list.
+     * @param gameModel is the game model.
+     * @return list of view entities.
+     */
     public static List<ViewEntity> createViewEntities(GameModel gameModel){
 
         for (IPosition position: gameModel.getGameLogic().getGameBoard().getPositionList()) {
