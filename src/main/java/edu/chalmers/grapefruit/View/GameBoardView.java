@@ -34,10 +34,10 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
     FXMLLoader fxmlLoader;
     //List<Node> playerCards = new ArrayList<>();
     HashMap<Integer, Node> playerCards = new HashMap<>();
-    HashMap<Integer, Node> gamePieces = new HashMap<>();
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
     private boolean showDiceToOpenBtn;
+    private DiceView diceView;
 
     /**
      * Creates a FXMLLoader that represents the game board view.
@@ -61,33 +61,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
         this.payToOpenBtn.setOnAction(payToOpenBtnHandler);
         this.diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
 
+        try {
+            this.diceView = DiceView.createDiceView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         redrawChildren();
     }
 
-
-    /*
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) {
-
-        this.currentPlayer = currentPlayer;
-
-        int i = 0;
-        for (PlayerCardResource playerCardResource : playerCardResources) {
-            try {
-                Node card  = PlayerCardView.createPlayerCardNode(playerCardResource);
-                playerCards.add(card);
-                background.getChildren().add(card);
-                AnchorPane.setBottomAnchor(card, 0.0);
-                AnchorPane.setRightAnchor(card, 10.0 + i * 155);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            i++;
-        }
-    }
-
-     */
     /**
      * Creates a PlayerCardView for each playerCardResource, and makes the gameBoard keep track of which one represents the current player.
      * @param playerCardResources is the list from which the cards are created.
@@ -95,7 +77,6 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
      * @throws IOException if a node cannot be loaded from a playerCardResource.
      */
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) {
-
 
         int i = 0;
         for (PlayerCardResource playerCardResource : playerCardResources) {
@@ -109,7 +90,6 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             i++;
         }
     }
@@ -177,6 +157,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
         else
             background.getChildren().add(diceBtn);
 
+        background.getChildren().add(diceView.getNode());
     }
 
     /**
@@ -184,11 +165,9 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
      * @param node should have a fx:controller that is an instance of PlayerCardView.
      */
     private void updatePlayerCard(Node node) {
-        System.out.println(currentPlayerId);
             try {
                 PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
                 playerCardView.update();
-                System.out.println(playerCardView.representsCurrentPlayer(currentPlayerId));
                 if (playerCardView.representsWinner()){
                     AnchorPane.setBottomAnchor(node, 400.0);
                     AnchorPane.setRightAnchor(node, 615.0);
@@ -214,7 +193,6 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
     @Override
     public void newTurn(int id) {
         this.currentPlayerId = id;
-        //TODO: Kan klicka öppna med pengar och tärning borde stängas av?
     }
 
     @Override
@@ -224,7 +202,10 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
 
     @Override
     public void updatePayToOpenTile(boolean canPayToOpenTile) {
-        System.out.println("kommer vi hit då???" + canPayToOpenTile);
         showPayToOpenBtn = canPayToOpenTile;
+    }
+
+    public DiceView getDiceView() {
+        return diceView;
     }
 }

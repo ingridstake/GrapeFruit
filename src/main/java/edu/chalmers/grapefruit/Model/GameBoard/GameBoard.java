@@ -20,7 +20,6 @@ public class GameBoard {
 
     private HashMap<IPlayer, Node> playerPositionHashMap;
     private Map map;
-    private Dice dice;
 
     public GameBoard(List<IPlayer> players){
         playerPositionHashMap = new HashMap<>();
@@ -31,8 +30,6 @@ public class GameBoard {
             IPosition position = playerPositionHashMap.get(player).getPosition();
             player.updatePlayerPosition(position.getPoint().x, position.getPoint().y);
         }
-
-        this.dice = new Dice(6);
     }
 
     /**
@@ -41,10 +38,10 @@ public class GameBoard {
      * @param y is the y coordinate of the new position.
      * @param player is the player that is moved.
      */
-    public Node movePlayer(int x, int y, IPlayer player) {
+    public Node movePlayer(int x, int y, IPlayer player, int steps) {
         for (Node node : map.getAllNodes()) {
             if (x == node.getPosition().getPoint().x && y == node.getPosition().getPoint().y) {
-                movePlayer(node, player);
+                movePlayer(node, player, steps);
                 return node;
             }
         }
@@ -57,9 +54,9 @@ public class GameBoard {
      * @param newNode is the new position.
      * @param player is the player that is moved.
      */
-    private void movePlayer(Node newNode, IPlayer player){
+    private void movePlayer(Node newNode, IPlayer player, int steps){
         List<Node> validMoves = new ArrayList<>();
-        playerPositionHashMap.get(player).evaluateValidMoves(validMoves, dice.getValue() + 1);
+        playerPositionHashMap.get(player).evaluateValidMoves(validMoves, steps);
 
         if (validMoves.contains(newNode)){
             playerPositionHashMap.replace(player, newNode);
@@ -72,8 +69,8 @@ public class GameBoard {
     /**
      * Rolls dice and then evaluates which moves are valid and highlights them.
      */
-    public void makeDiceRoll(IPlayer player){
-        playerPositionHashMap.get(player).evaluateValidMoves(new ArrayList<>(), dice.roll());
+    public void makeDiceRoll(IPlayer player, int diceValue){
+        playerPositionHashMap.get(player).evaluateValidMoves(new ArrayList<>(), diceValue);
     }
 
     /**

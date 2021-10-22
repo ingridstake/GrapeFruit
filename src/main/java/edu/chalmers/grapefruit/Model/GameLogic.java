@@ -6,6 +6,7 @@ import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
+import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
 
@@ -21,8 +22,9 @@ public class GameLogic {
 
     private List<NewTurnListener> newTurnListeners = new ArrayList<>();
     private List<OpenTileListener> openTileListeners = new ArrayList<>();
-    private boolean canRollDiceToOpenTile = false;
-    private boolean canPayToOpenTile = false;
+    private List<DiceRolledListener> diceRolledListeners = new ArrayList<>();
+
+    private Dice dice = new Dice(6);
 
     /**
      * Creates a new instance of gameLogic ig there is not already one and returns it.
@@ -88,6 +90,7 @@ public class GameLogic {
     public void openTileWithDice(){
         Dice dice = new Dice(6);
         dice.roll();
+        notifyDiceRolledListeners(dice.getValue());
         if (dice.getValue() >= 4 ){
             executeTileTurn(currentPlayer, gameBoard.getNode(currentPlayer));
         } else {
@@ -162,7 +165,7 @@ public class GameLogic {
         if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
             tileTurnIsOngoingForPlayer.remove(currentPlayer);
         }
-        Node newNode = gameBoard.movePlayer(x,y, currentPlayer);
+        Node newNode = gameBoard.movePlayer(x,y, currentPlayer, dice.getValue());
         executeGameLogic(currentPlayer, newNode);
     }
 
@@ -170,7 +173,8 @@ public class GameLogic {
      * Calls the gameBoard rollDice.
      */
     public void makeDiceRoll() {
-        gameBoard.makeDiceRoll(currentPlayer);
+        gameBoard.makeDiceRoll(currentPlayer, dice.roll());
+        notifyDiceRolledListeners(dice.getValue());
     }
 
     /**
@@ -202,6 +206,16 @@ public class GameLogic {
 
     public void addOpenTileListener(OpenTileListener openTileListener) {
         openTileListeners.add(openTileListener);
+    }
+
+    public void addDiceListener(DiceRolledListener diceRolledListener) {
+        diceRolledListeners.add(diceRolledListener);
+    }
+
+    private void notifyDiceRolledListeners(int diceValue) {
+        for (DiceRolledListener diceRolledListener : diceRolledListeners) {
+            diceRolledListener.updateDiceValue(diceValue);
+        }
     }
 
     private void notifyNewTurn() {
