@@ -1,9 +1,12 @@
 package edu.chalmers.grapefruit.Model;
 
-import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Observable;
+import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Utils.*;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
+import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,17 +54,44 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
+    /*
     public CurrentPlayer getCurrentPlayer() {
         return gameLogic.getCurrentPlayer();
     }
 
+<<<<<<< HEAD
+     */
 
-    public List<IPlayer> getPlayers(){
+    public List<Integer> getPlayerIds(){
+        List<Integer> ids = new ArrayList<Integer>();
+        for(IPlayer player : players){
+            ids.add(player.getId());
+        }
+        return ids;
+    }
+
+    /**
+     * Returns a list of all positionable objects for the GameBoard
+     * @return a list of all positionable objects of the GameBoard
+     */
+    public List<ViewEntity> getViewEntities() {
+        return ViewEntityFactory.getViewEntities();
+    }
+
+    public List<IPlayer> getPlayers() {
         return players;
     }
 
     public GameLogic getGameLogic(){
         return gameLogic;
+    }
+
+    public void addNewTurnListener(NewTurnListener listener) {
+        gameLogic.addTurnListener(listener);
+    }
+
+    public void addOpenTileListener(OpenTileListener listener) {
+        gameLogic.addOpenTileListener(listener);
     }
 
     @Override

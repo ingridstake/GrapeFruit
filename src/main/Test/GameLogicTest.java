@@ -25,7 +25,7 @@ public class GameLogicTest {
     }
 
     @Test
-    public void playerFoundVisaIsWinner(){
+    public void playerFoundVisaIsWinner() {
         List<IPlayer> players = PlayerFactory.MakePlayers(1);
         players.get(0).playerFoundVisa();
         GameLogic.gameLogicStartPos(players.get(0));
@@ -42,6 +42,8 @@ public class GameLogicTest {
         assert (players.get(0).getMoneyBalance() <= 2900);
     }
 
+
+
     @Test
     public void makeGameBoardToHighlight(){
         List<IPlayer> players = PlayerFactory.MakePlayers(2);
@@ -49,4 +51,5 @@ public class GameLogicTest {
         gameLogic.getGameBoard().getPositionList().get(2).highlight();
         assert (gameLogic.getGameBoard().getPositionList().get(2).isHighlighted());
     }
+
 }

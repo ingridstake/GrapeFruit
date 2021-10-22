@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Model.GameBoard.CurrentPlayer;
+
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,11 +60,11 @@ public class PlayerCardView {
     //TODO: detta är inte superelegant lösning, lite för invecklat för en vy kanske?
     /**
      * returns true if the current player matches with the player that the card is representing.
-     * @param currentPlayer is the current player that is compared with.
+     * @param currentPlayerId is the current player that is compared with.
      * @return true if there is a match.
      */
-    public boolean representsCurrentPlayer(CurrentPlayer currentPlayer) {
-        return playerCardResource.hasSamePlayer(currentPlayer);
+    public boolean representsCurrentPlayer(int currentPlayerId) {
+        return playerCardResource.hasSamePlayer(currentPlayerId);
     }
 
     public boolean representsWinner() {
