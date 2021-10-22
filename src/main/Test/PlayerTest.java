@@ -76,7 +76,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test(){
+    public void evaluateCardResourceStringSetsRightString(){
         List<IPlayer> players = PlayerFactory.MakePlayers(4);
         assert (PlayerColor.evaluateCardResourceString(players.get(0).getPlayerColor()).equals("pink-player-card.fxml"));
         assert (PlayerColor.evaluateCardResourceString(players.get(1).getPlayerColor()).equals("purple-player-card.fxml"));
