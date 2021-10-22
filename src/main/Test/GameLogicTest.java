@@ -39,7 +39,6 @@ public class GameLogicTest {
         GameLogic gameLogic = GameLogic.createGameLogic(players);
         gameLogic.movePlayer(265,85);
         gameLogic.openTileWithPayment();
-        //System.out.println(players.get(0).getMoneyBalance());
         assert (players.get(0).getMoneyBalance() <= 2900);
     }
 
@@ -47,9 +46,7 @@ public class GameLogicTest {
     public void makeGameBoardToHighlight(){
         List<IPlayer> players = PlayerFactory.MakePlayers(2);
         GameLogic gameLogic = GameLogic.createGameLogic(players);
-
         gameLogic.getGameBoard().getPositionList().get(2).highlight();
-
         assert (gameLogic.getGameBoard().getPositionList().get(2).isHighlighted());
     }
 }
