@@ -99,10 +99,12 @@ public class GameLogic {
      * Adds the current player to the list of players who are allowed to turn a tile.
      */
     private void beginTurnTileForPlayer(){
-        canRollDiceToOpenTile = true;
-        if (currentPlayer.getMoneyBalance() >= 1000)
-            canPayToOpenTile = true;
-        notifyOpenTileListeners();
+        if (currentPlayer.getMoneyBalance() >= 1000){
+            notifyOpenTileListeners(true, true);
+        }
+        else {
+            notifyOpenTileListeners(true, false);
+        }
         tileTurnIsOngoingForPlayer.add(currentPlayer);
     }
 
@@ -138,9 +140,6 @@ public class GameLogic {
                 break;
         }
         tileTurnIsOngoingForPlayer.remove(currentPlayer);
-        canRollDiceToOpenTile = false;
-        canPayToOpenTile = false;
-        notifyOpenTileListeners();
         setNextCurrentPlayer();
     }
 
@@ -178,8 +177,7 @@ public class GameLogic {
      * Iterates through the list of players to find and set the next player to current player.
      */
     private void setNextCurrentPlayer() {
-
-
+        notifyOpenTileListeners(false, false);
         boolean referencePlayerIsFound = false;
         for (int i = 1; i <= players.size(); i++) {
             if (referencePlayerIsFound) {
@@ -206,16 +204,16 @@ public class GameLogic {
         openTileListeners.add(openTileListener);
     }
 
-    private void notifyOpenTileListeners() {
-        for (OpenTileListener listener : openTileListeners) {
-            listener.updateDiceToOpenTile(canRollDiceToOpenTile);
-            listener.updatePayToOpenTile(canPayToOpenTile);
-        }
-    }
-
     private void notifyNewTurn() {
         for (NewTurnListener newTurnListener : newTurnListeners) {
             newTurnListener.newTurn(currentPlayer.getId());
+        }
+    }
+
+    private void notifyOpenTileListeners(boolean canRollDiceToOpenTile, boolean canPayToOpenTile) {
+        for (OpenTileListener listener : openTileListeners) {
+            listener.updateDiceToOpenTile(canRollDiceToOpenTile);
+            listener.updatePayToOpenTile(canPayToOpenTile);
         }
     }
 }
