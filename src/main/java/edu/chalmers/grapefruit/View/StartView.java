@@ -13,9 +13,9 @@ import javafx.scene.layout.AnchorPane;
  * @author elvinafahlgren
  */
 public class StartView {
-    @FXML AnchorPane startViewPane;
-    @FXML Button startGameButton;
-    @FXML ChoiceBox playerAmountChoiceBox;
+    @FXML private AnchorPane startViewPane;
+    @FXML private Button startGameButton;
+    @FXML private ChoiceBox playerAmountChoiceBox;
     FXMLLoader fxmlLoader;
 
     /**
@@ -51,5 +51,9 @@ public class StartView {
 
     public FXMLLoader getFXMLLoader() {
         return fxmlLoader;
+    }
+
+    public AnchorPane getStartViewPane() {
+        return startViewPane;
     }
 }

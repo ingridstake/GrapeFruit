@@ -2,6 +2,7 @@ package edu.chalmers.grapefruit.Model;
 
 import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
 import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
+import edu.chalmers.grapefruit.Utils.Listeners.WinnerFoundListener;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
@@ -74,6 +75,10 @@ public class GameModel implements Observable {
 
     public void addDiceRolledListener(DiceRolledListener listener) {
         gameLogic.addDiceListener(listener);
+    }
+
+    public void addWinnerFoundListener(WinnerFoundListener listener) {
+        gameLogic.addWinnerFoundListener(listener);
     }
 
     @Override

@@ -10,6 +10,7 @@ import edu.chalmers.grapefruit.Model.Position.TilePosition;
 import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
+import edu.chalmers.grapefruit.Utils.Listeners.WinnerFoundListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class GameLogic {
     private List<NewTurnListener> newTurnListeners = new ArrayList<>();
     private List<OpenTileOperationsListener> openTileOperationsListeners = new ArrayList<>();
     private List<DiceRolledListener> diceRolledListeners = new ArrayList<>();
+    private List<WinnerFoundListener> winnerFoundListeners = new ArrayList<>();
 
     private Dice dice = new Dice(6);
 
@@ -46,6 +48,7 @@ public class GameLogic {
         instance.gameBoard = new GameBoard(instance.players);
         return instance;
     }
+
     private static GameLogic instance = null;
 
     private List<IPlayer> players;
@@ -60,7 +63,6 @@ public class GameLogic {
         currentPlayer = players.get(0);
     }
 
-    //TODO Ta bort? - inte ta bort
     private GameLogic(){ }
 
     /**
@@ -162,9 +164,11 @@ public class GameLogic {
      * Determines if a player that reaches the start position is a valid winner of the game.
      * @param currentPlayer is the player in question.
      */
-    public static void gameLogicStartPos(IPlayer currentPlayer){
+    // TODO byt eventuellt namn på den, svårt att förstå vad den gör
+    public void gameLogicStartPos(IPlayer currentPlayer){
         if (currentPlayer.hasCow() || currentPlayer.hasVisa()){
             currentPlayer.setWinner();
+            notifyWinnerFoundListeners();
         }
     }
 
@@ -223,15 +227,14 @@ public class GameLogic {
         diceRolledListeners.add(diceRolledListener);
     }
 
-    private void notifyDiceRolledListeners(int diceValue) {
-        for (DiceRolledListener diceRolledListener : diceRolledListeners) {
-            diceRolledListener.updateDiceValue(diceValue);
-        }
+    public void addWinnerFoundListener(WinnerFoundListener winnerFoundListener){
+        winnerFoundListeners.add(winnerFoundListener);
     }
 
     private void notifyNewTurn() {
         for (NewTurnListener newTurnListener : newTurnListeners) {
-            newTurnListener.newTurn(currentPlayer.getId());
+            newTurnListener.newPlayer(currentPlayer.getId());
+            newTurnListener.newTurn();
         }
     }
 
@@ -240,6 +243,23 @@ public class GameLogic {
             listener.updateDiceToOpenTile(canRollDiceToOpenTile);
             listener.updatePayToOpenTile(canPayToOpenTile);
         }
+    }
+
+    private void notifyDiceRolledListeners(int diceValue) {
+        for (DiceRolledListener diceRolledListener : diceRolledListeners) {
+            diceRolledListener.updateDiceValue(diceValue);
+        }
+    }
+    private void notifyWinnerFoundListeners() {
+        for (WinnerFoundListener winnerFoundListener : winnerFoundListeners) {
+            winnerFoundListener.updateWinnerFound();
+        }
+    }
+
+    public int getNumberOfListeners(){
+        int n = diceRolledListeners.size() + winnerFoundListeners.size() +
+                newTurnListeners.size() + openTileOperationsListeners.size();
+        return n;
     }
 
     /**

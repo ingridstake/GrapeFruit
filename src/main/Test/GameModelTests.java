@@ -1,15 +1,19 @@
 import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.GameModel;
+import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
+import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
+import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
+import edu.chalmers.grapefruit.Utils.Listeners.WinnerFoundListener;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 
 public class GameModelTests {
     GameModel gameModel = new GameModel();
-    //List<Boolean> assertList = new ArrayList<>();
 
     @Before
     public void before(){
@@ -66,48 +70,65 @@ public class GameModelTests {
         assert (oldUnturnedCount > newUnturnedCount);
     }
 
-   /*
+    @Test
+    public void playerIdGetTest(){
+        gameModel.initialize(1);
+        List<Integer> playerId = gameModel.getPlayerIds();
+        for (IPlayer player : gameModel.getPlayers()) {
+            assert (playerId.contains(player.getId()));
+        }
+        assert (playerId.size() == gameModel.getPlayers().size());
+    }
+
+    @Test
+    public void initializeThrowsException(){
+        assertThrows (IllegalArgumentException.class, () -> { gameModel.initialize(5);} );
+    }
+
     @Test
     public void listenerTest(){
         gameModel.initialize(1);
         GameLogic.resetGameLogic();
 
-        DiceRolledListener  diceRolledListener = new DiceRolledListener() {
-            //public boolean updated = false;
+        DiceRolledListener diceRolledListener = new DiceRolledListener() {
             @Override
             public void updateDiceValue(int diceValue) {
                 assert true;
-                assertList.add(new Boolean(true));
             }
         };
         OpenTileOperationsListener openTileOperationsListener = new OpenTileOperationsListener() {
             @Override
             public void updateDiceToOpenTile(boolean canRollDiceToOpenTile) {
-                assertList.add(new Boolean(true));
+
             }
 
             @Override
             public void updatePayToOpenTile(boolean canPayToOpenTile) {
-                assertList.add(new Boolean(true));
             }
         };
         NewTurnListener newTurnListener = new NewTurnListener() {
             @Override
-            public void newTurn(int currentPlayerId) {
-                assertList.add(new Boolean(true));
+            public void newPlayer(int currentPlayerId) {
+
+            }
+
+            @Override
+            public void newTurn() {
+
             }
         };
+        WinnerFoundListener winnerFoundListener = new WinnerFoundListener() {
+            @Override
+            public void updateWinnerFound() {
+
+            }
+        };
+
         gameModel.addDiceRolledListener(diceRolledListener);
         gameModel.addNewTurnListener(newTurnListener);
         gameModel.addOpenTileListener(openTileOperationsListener);
+        gameModel.addWinnerFoundListener(winnerFoundListener);
 
-        gameModel.makePlayerMove(170, 100);
-        gameModel.makePlayerMove(225, 130);
-        gameModel.makePlayerMove(265, 85);
-
-        gameModel.diceToOpen();
-
-        assert (assertList.size()==4);
+        assert (gameModel.getGameLogic().getNumberOfListeners() == 4);
     }
-    */
 }

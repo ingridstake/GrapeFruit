@@ -36,6 +36,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
     private boolean showDiceToOpenBtn;
+    private boolean showDiceBtn;
     private DiceView diceView;
 
     /**
@@ -65,6 +66,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
         this.diceBtn.setOnAction(diceHandler);
         this.payToOpenBtn.setOnAction(payToOpenBtnHandler);
         this.diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
+        showDiceBtn = true;
 
         try {
             this.diceView = DiceView.createDiceView();
@@ -165,11 +167,12 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
     private void drawButtons(){
         if (showPayToOpenBtn)
             background.getChildren().add(payToOpenBtn);
-
-        if(showDiceToOpenBtn)
+        if (showDiceToOpenBtn)
             background.getChildren().add(diceToOpenBtn);
-        else
+        if (showDiceBtn) {
             background.getChildren().add(diceBtn);
+            showDiceBtn = false;
+        }
     }
 
     /**
@@ -212,8 +215,13 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
     }
 
     @Override
-    public void newTurn(int id) {
+    public void newPlayer(int id) {
         this.currentPlayerId = id;
+    }
+
+    @Override
+    public void newTurn() {
+        showDiceBtn = true;
     }
 
     @Override

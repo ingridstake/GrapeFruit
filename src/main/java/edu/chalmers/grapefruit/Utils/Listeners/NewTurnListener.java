@@ -2,11 +2,17 @@ package edu.chalmers.grapefruit.Utils.Listeners;
 
 /**
  * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public interface NewTurnListener {
     /**
-     * Sets the new current player id.
+     * Updates the current player id.
      * @param currentPlayerId is the new current players id
      */
-    void newTurn(int currentPlayerId);
+    void newPlayer(int currentPlayerId);
+
+    /**
+     * Notifies that it is a new turn.
+     */
+    void newTurn();
 }

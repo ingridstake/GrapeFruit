@@ -15,6 +15,6 @@ public interface ViewEntityResource {
      * name of the view-resource
      * @return name of the view-resource
      */
-    String getResourceString() throws Exception;
+    String getResourceString();
 
 }

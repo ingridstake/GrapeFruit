@@ -83,4 +83,16 @@ public class PlayerTest {
         assert (!PlayerColor.evaluateCardResourceString(players.get(2).getPlayerColor()).equals("yellow-player-card.fxml"));
         assert (!PlayerColor.evaluateCardResourceString(players.get(3).getPlayerColor()).equals("turquoise-player-card.fxml"));
     }
+
+    @Test
+    public void resetPlayerTest(){
+        List<IPlayer> players = PlayerFactory.MakePlayers(1);
+        players.get(0).playerFoundCow();
+        players.get(0).playerFoundVisa();
+        players.get(0).updatePlayerPosition(170, 100);
+        players.get(0).resetPlayer();
+        assert (!players.get(0).hasCow());
+        assert (!players.get(0).hasVisa());
+        assert (players.get(0).getPoint().equals(new Point(0,0)));
+    }
 }
