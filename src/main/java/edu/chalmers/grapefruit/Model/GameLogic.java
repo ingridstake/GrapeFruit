@@ -185,7 +185,6 @@ public class GameLogic {
         boolean referencePlayerIsFound = false;
         for (int i = 1; i <= players.size(); i++) {
             if (referencePlayerIsFound) {
-                System.out.println(i);
                 currentPlayer = players.get(i-1);
                 notifyNewTurn();
                 return;
