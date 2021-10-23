@@ -1,6 +1,7 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
@@ -91,11 +92,6 @@ public class MainView implements Observer {
         gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
-    /*
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) throws IOException {
-        gameBoardView.addPlayerCards(playerCardResources, currentPlayer);
-    }
-    */
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) throws IOException {
         gameBoardView.addPlayerCards(playerCardResources, ids);
     }
@@ -135,8 +131,12 @@ public class MainView implements Observer {
         return gameBoardView;
     }
 
-    public OpenTileListener getOpenTileListener() {
+    public OpenTileOperationsListener getOpenTileListener() {
         return gameBoardView;
+    }
+
+    public DiceRolledListener getDiceListener() {
+        return gameBoardView.getDiceView();
     }
 
     @Override
