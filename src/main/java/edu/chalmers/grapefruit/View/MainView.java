@@ -50,31 +50,31 @@ public class MainView implements Observer, WinnerFoundListener {
         stage.setScene(scene);
         stage.show();
 
+        view.createGameBoardView();
+        view.createStartView();
+        view.createEndView();
+
         return view;
     }
 
     /**
      * Sets the start view to the main view's anchor pane.
-     * @throws IOException
      */
-    public void loadStartPage () throws IOException {
-        createStartView();
-        mainViewPane.getChildren().setAll(startView.startViewPane);
+    public void loadStartView() {
+        mainViewPane.getChildren().setAll(startView.getStartViewPane());
     }
 
     /**
      * Sets the game board view to the main view's anchor pane.
-     * @throws IOException
      */
-    public void loadGameBoardPage () throws IOException {
-        createGameBoardView();
+    public void loadGameBoardView() {
         mainViewPane.getChildren().setAll(gameBoardView.background);
     }
 
-    private void loadEndView() throws IOException {
-        createEndView();
+    private void loadEndView() {
         mainViewPane.getChildren().setAll(endView.getEndPane());
     }
+
     /**
      * Populates the start view by calling the start view's populate method.
      * @param startGameHandler is the event handler that listens to an action to start a game
@@ -98,11 +98,11 @@ public class MainView implements Observer, WinnerFoundListener {
         gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
-    public void populateEndView(EventHandler exitGameHandler, EventHandler reRunGameHandler) throws IOException {
+    public void populateEndView(EventHandler exitGameHandler, EventHandler reRunGameHandler) {
         endView.populate(exitGameHandler, reRunGameHandler);
     }
 
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) throws IOException {
+    public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) {
         gameBoardView.addPlayerCards(playerCardResources, ids);
     }
 
@@ -162,10 +162,6 @@ public class MainView implements Observer, WinnerFoundListener {
 
     @Override
     public void updateWinnerFound() {
-        try {
-            loadEndView();
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
+        loadEndView();
     }
 }

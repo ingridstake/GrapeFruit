@@ -59,20 +59,18 @@ public class GameController {
                 model.diceToOpen();
             }
         };
+
         EventHandler exitGameHandler = new EventHandler() {
             @Override
             public void handle(Event event) {
                 System.exit(0);
             }
         };
+
         EventHandler reRunHandler = new EventHandler() {
             @Override
             public void handle(Event event) {
-                try {
-                    view.loadStartPage();
-                } catch (IOException exception) {
-                    exception.printStackTrace();
-                }
+                view.loadStartView();
             }
         };
 
@@ -82,16 +80,10 @@ public class GameController {
                 //TODO skulle man kunna lägga in och kolla så att comboboxen är ikryssad här?
                 try {
                     model.initialize(view.getSelectedPlayerAmount());
-                    view.loadGameBoardPage();
+                    view.loadGameBoardView();
                     view.populateGameBoardView(ViewEntityFactory.createViewEntities(model), nodeClickEventHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
                     view.addPlayerCards(PlayerCardResourceFactory.createPlayerCardResources(model), model.getPlayerIds());
-                    model.addNewTurnListener(view.getNewTurnListener());
-                    model.addOpenTileListener(view.getOpenTileListener());
-                    model.addDiceRolledListener(view.getDiceListener());
-
-                    model.addWinnerFoundListener(view);
-                    view.populateEndView(exitGameHandler, reRunHandler);
-
+                    addListeners();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -100,9 +92,16 @@ public class GameController {
 
 
         view = MainView.makeMainView(stage);
-        view.loadStartPage();
+        view.loadStartView();
         view.populateStartView(startGameHandler, 4);
-
+        view.populateEndView(exitGameHandler, reRunHandler);
         model.addObserver(view);
+    }
+
+    private void addListeners() {
+        model.addNewTurnListener(view.getNewTurnListener());
+        model.addOpenTileListener(view.getOpenTileListener());
+        model.addDiceRolledListener(view.getDiceListener());
+        model.addWinnerFoundListener(view);
     }
 }
