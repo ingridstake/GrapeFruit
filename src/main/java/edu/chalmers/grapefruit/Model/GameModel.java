@@ -81,7 +81,6 @@ public class GameModel implements Observable {
         gameLogic.addWinnerFoundListener(listener);
     }
 
-
     @Override
     public void addObserver(Observer observer) {
         observerList.add(observer);

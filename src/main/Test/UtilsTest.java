@@ -1,3 +1,4 @@
+import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
@@ -61,7 +62,7 @@ public class UtilsTest {
         GameModel model = new GameModel();
         model.initialize(3);
         PlayerCardResourceFactory.createPlayerCardResources(model);
-        assert (PlayerCardResourceFactory.getPlayerCardResources().size() == 3);
+        assert (PlayerCardResourceFactory.getPlayerCardResources().size() == model.getPlayers().size());
     }
 
     @Test
@@ -86,9 +87,10 @@ public class UtilsTest {
     public void viewEntityFactoryAddsAllEntitiesToList(){
         GameModel model = new GameModel();
         model.initialize(4);
+        GameLogic.resetGameLogic();
         ViewEntityFactory.createViewEntities(model);
         int nPos = model.getGameLogic().getGameBoard().getPositionList().size();
-        assert (ViewEntityFactory.getViewEntities().size() == nPos+4);
+        assert (ViewEntityFactory.getViewEntities().size() == nPos + model.getPlayers().size());
     }
 
     @Test

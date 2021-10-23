@@ -1,9 +1,12 @@
 import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.GameModel;
+import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 import java.util.List;
 
@@ -64,6 +67,21 @@ public class GameModelTests {
         }
 
         assert (oldUnturnedCount > newUnturnedCount);
+    }
+
+    @Test
+    public void playerIdGetTest(){
+        gameModel.initialize(1);
+        List<Integer> playerId = gameModel.getPlayerIds();
+        for (IPlayer player : gameModel.getPlayers()) {
+            assert (playerId.contains(player.getId()));
+        }
+        assert (playerId.size() == gameModel.getPlayers().size());
+    }
+
+    @Test
+    public void initializeThrowsException(){
+        assertThrows (IllegalArgumentException.class, () -> { gameModel.initialize(5);} );
     }
 
    /*

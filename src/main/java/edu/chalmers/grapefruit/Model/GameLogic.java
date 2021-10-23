@@ -62,7 +62,6 @@ public class GameLogic {
         currentPlayer = players.get(0);
     }
 
-    //TODO Ta bort? - inte ta bort
     private GameLogic(){ }
 
     /**
@@ -168,7 +167,7 @@ public class GameLogic {
     public void gameLogicStartPos(IPlayer currentPlayer){
         if (currentPlayer.hasCow() || currentPlayer.hasVisa()){
             currentPlayer.setWinner();
-            resetGameLogic();
+            //resetGameLogic();
             notifyWinnerFoundListeners();
         }
     }
