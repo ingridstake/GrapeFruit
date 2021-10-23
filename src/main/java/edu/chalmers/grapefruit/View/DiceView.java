@@ -1,16 +1,12 @@
 package edu.chalmers.grapefruit.View;
 
 import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
-import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +80,6 @@ public class DiceView implements DiceRolledListener {
     private void updateDiceValueImage(int diceValue) {
         diceValueImage.setImage(diceImages.get(diceValue - 1));
         diceValueImage.setVisible(true);
-
     }
 
     public Node getNode() {

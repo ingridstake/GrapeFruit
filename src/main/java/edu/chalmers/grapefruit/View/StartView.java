@@ -10,11 +10,10 @@ import javafx.scene.layout.AnchorPane;
 
 /**
  * The start view.
- * @author olimanstorm
- * @author elvinafahlgren
+ * @author Olivia Månström
+ * @author Elvina Fahlgren
  */
 public class StartView {
-
 
     @FXML private AnchorPane startViewPane;
     @FXML private Button startGameButton;

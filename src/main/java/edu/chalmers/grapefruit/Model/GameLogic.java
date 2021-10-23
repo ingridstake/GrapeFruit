@@ -41,6 +41,10 @@ public class GameLogic {
         return instance;
     }
 
+    /**
+     * Resets the gameLogic.
+     * @return
+     */
     public static GameLogic resetGameLogic(){
         for (IPlayer player: instance.players) {
             player.resetPlayer();
@@ -97,7 +101,7 @@ public class GameLogic {
 
     /**
      * Turns the current tile if the dice's value is grater than 4. Else the turn is passed on to the next player.
-     * @return
+     * @return true and turns the tile if the dice's value is grater than 4.
      */
     public boolean openTileWithDice(){
         Dice dice = new Dice(6);

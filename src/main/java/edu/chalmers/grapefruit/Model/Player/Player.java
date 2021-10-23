@@ -53,7 +53,6 @@ public class Player implements IPlayer{
         return isWinner;
     }
 
-
     @Override
     public boolean hasCow() {
         return hasCow;

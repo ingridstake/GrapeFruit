@@ -11,15 +11,12 @@ import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-
-import static edu.chalmers.grapefruit.View.ViewUtils.getController;
 
 /**
  * This is the main view that is created by the Controller.

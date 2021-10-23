@@ -161,7 +161,6 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
         return diceView;
     }
 
-    //TODO: Städa upp och snygga till
     /**
      * Repopulates the background with new children to update the view.
      * @throws IOException if any of the fxml objects can't be loaded.

@@ -1,12 +1,11 @@
 package edu.chalmers.grapefruit.View;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.EventHandler;
-
-import java.io.IOException;
 
 public class EndView {
 

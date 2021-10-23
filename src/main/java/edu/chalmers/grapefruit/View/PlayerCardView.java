@@ -1,6 +1,5 @@
 package edu.chalmers.grapefruit.View;
 
-
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

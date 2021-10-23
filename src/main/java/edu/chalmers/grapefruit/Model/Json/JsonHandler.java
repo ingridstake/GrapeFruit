@@ -9,14 +9,13 @@ import java.util.Scanner;
 /**
  * This class uses Gson for converting a Json String into a Java "game board map" object.
  *
- * @author elvina.fahlgren
+ * @author Elvina Fahlgren
  */
 public class JsonHandler {
    private JsonBoardReader boardReader;
    private static Gson gson = new Gson();
 
    /**
-    *
     * @param filePath is the filepath to the json file
     */
    public JsonHandler(String filePath){
@@ -39,7 +38,6 @@ public class JsonHandler {
 
       if (boardReader.Neighbours.size() != boardReader.PositionList.size())
          throw new IllegalArgumentException("Neighbour list and PositionList in json file doesn't match!");
-
    }
 
    public JsonBoardReader getJsonBoardReader(){

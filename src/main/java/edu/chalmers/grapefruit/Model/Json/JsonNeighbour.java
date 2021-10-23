@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Represent the json neighbour list.
  *
- * @author elvina.fahlgren
+ * @author Elvina Fahlgren
  */
 public class JsonNeighbour {
     public int id;
