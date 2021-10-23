@@ -74,7 +74,6 @@ public class DiceView implements DiceRolledListener {
             }catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("File dice" + i + ".png could not be found!");
             }
-
         }
     }
 
