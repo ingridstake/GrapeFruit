@@ -3,6 +3,7 @@ package edu.chalmers.grapefruit.Model;
 import edu.chalmers.grapefruit.Model.GameBoard.GameBoard;
 import edu.chalmers.grapefruit.Model.GameBoard.Node;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
+import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
@@ -30,13 +31,21 @@ public class GameLogic {
 
     /**
      * Creates a new instance of gameLogic ig there is not already one and returns it.
-     * @param players is the list of players for the game.
+     * @param nPlayers is the number of players for the game.
      * @return the instance of the class, if there is already one this is the instance that is returned.
      */
-    public static GameLogic createGameLogic(List<IPlayer> players){
+    public static GameLogic createGameLogic(int nPlayers){
         if (instance == null){
-            instance = new GameLogic(players);
+            instance = new GameLogic(nPlayers);
         }
+        return instance;
+    }
+
+    public static GameLogic resetGameLogic(){
+        for (IPlayer player: instance.players) {
+            player.resetPlayer();
+        }
+        instance.gameBoard = new GameBoard(instance.players);
         return instance;
     }
     private static GameLogic instance = null;
@@ -47,13 +56,13 @@ public class GameLogic {
     private boolean cowIsFound = false;
     private GameBoard gameBoard;
 
-    private GameLogic(List<IPlayer> players){
-        this.players = players;
+    private GameLogic(int nPlayers){
+        this.players = PlayerFactory.MakePlayers(nPlayers);
         this.gameBoard = new GameBoard(players);
         currentPlayer = players.get(0);
     }
 
-    //TODO Ta bort?
+    //TODO Ta bort? - inte ta bort
     private GameLogic(){ }
 
     /**
@@ -88,16 +97,19 @@ public class GameLogic {
 
     /**
      * Turns the current tile if the dice's value is grater than 4. Else the turn is passed on to the next player.
+     * @return
      */
-    public void openTileWithDice(){
+    public boolean openTileWithDice(){
         Dice dice = new Dice(6);
         dice.roll();
         notifyDiceRolledListeners(dice.getValue());
         if (dice.getValue() >= 4 ){
             executeTileTurn(currentPlayer, gameBoard.getNode(currentPlayer));
+            return true;
         } else {
             setNextCurrentPlayer();
         }
+        return false;
     }
 
     /**
@@ -249,5 +261,17 @@ public class GameLogic {
      */
     public GameBoard getGameBoard(){
         return gameBoard;
+    }
+
+    public List<Integer> getPlayerIds() {
+        List<Integer> ids = new ArrayList<>();
+        for(IPlayer player : players){
+            ids.add(player.getId());
+        }
+        return ids;
+    }
+
+    public List<IPlayer> getPlayers() {
+        return players;
     }
 }
