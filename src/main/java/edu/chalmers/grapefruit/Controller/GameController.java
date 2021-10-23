@@ -71,7 +71,8 @@ public class GameController {
                     view.addPlayerCards(PlayerCardResourceFactory.createPlayerCardResources(model), model.getPlayerIds());
                     model.addNewTurnListener(view.getNewTurnListener());
                     model.addOpenTileListener(view.getOpenTileListener());
-                } catch (IOException exception) {
+                    model.addDiceRolledListener(view.getDiceListener());
+                } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }

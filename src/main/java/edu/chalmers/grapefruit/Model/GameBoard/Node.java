@@ -73,7 +73,7 @@ public class Node {
      * @param diceValue is the valid move range based on the dice.
      */
     protected void evaluateValidMoves(List<Node> validMoves, int diceValue) {
-        if(diceValue >= -1 && !validMoves.contains(this)) {
+        if(diceValue >= 0 && !validMoves.contains(this)) {
             validMoves.add(this);
             position.highlight();
             for (Node node : relatedNodes) {

@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit.View;
 
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
@@ -25,19 +25,18 @@ import java.util.List;
  * @author elvinafahlgren
  */
 
-public class GameBoardView implements Observer, NewTurnListener, OpenTileListener {
+public class GameBoardView implements Observer, NewTurnListener, OpenTileOperationsListener {
     @FXML AnchorPane background;
     @FXML Button diceBtn;
     @FXML Button payToOpenBtn;
     @FXML Button diceToOpenBtn;
     List<ViewEntity> viewEntities;
     FXMLLoader fxmlLoader;
-    //List<Node> playerCards = new ArrayList<>();
     HashMap<Integer, Node> playerCards = new HashMap<>();
-    HashMap<Integer, Node> gamePieces = new HashMap<>();
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
     private boolean showDiceToOpenBtn;
+    private DiceView diceView;
 
     /**
      * Creates a FXMLLoader that represents the game board view.
@@ -46,9 +45,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
         fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
     }
 
+    //TODO: Kanske byta funktionsnamn till initialize eller init?
     /**
-     * Populates the GameBoardView with all objects in the positionableList.
-     * @param viewEntities is the list of Positionable objects that is displayed.
+     * Sets the GameBoards instance variable viewEntities.
+     * Sets the NodeViews clickHandler.
+     * Sets the dice buttons event handler.
+     * Sets the pay to open buttons event handler.
+     * Sets the dice to open buttons event handler.
+     * Finally draws the GameBoardView children.
+     * @param viewEntities is the list of viewEntityObjects objects that is displayed.
      * @param clickHandler is the event handler for the Nodes.
      * @param payToOpenBtnHandler
      * @param diceToOpenBtnHandler
@@ -61,33 +66,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
         this.payToOpenBtn.setOnAction(payToOpenBtnHandler);
         this.diceToOpenBtn.setOnAction(diceToOpenBtnHandler);
 
+        try {
+            this.diceView = DiceView.createDiceView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         redrawChildren();
     }
 
-
-    /*
-    public void addPlayerCards(List<PlayerCardResource> playerCardResources, CurrentPlayer currentPlayer) {
-
-        this.currentPlayer = currentPlayer;
-
-        int i = 0;
-        for (PlayerCardResource playerCardResource : playerCardResources) {
-            try {
-                Node card  = PlayerCardView.createPlayerCardNode(playerCardResource);
-                playerCards.add(card);
-                background.getChildren().add(card);
-                AnchorPane.setBottomAnchor(card, 0.0);
-                AnchorPane.setRightAnchor(card, 10.0 + i * 155);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            i++;
-        }
-    }
-
-     */
     /**
      * Creates a PlayerCardView for each playerCardResource, and makes the gameBoard keep track of which one represents the current player.
      * @param playerCardResources is the list from which the cards are created.
@@ -95,7 +82,6 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
      * @throws IOException if a node cannot be loaded from a playerCardResource.
      */
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) {
-
 
         int i = 0;
         for (PlayerCardResource playerCardResource : playerCardResources) {
@@ -109,7 +95,6 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             i++;
         }
     }
@@ -169,6 +154,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
             background.getChildren().add(node);
         }
 
+        drawButtons();
+        drawDiceView();
+    }
+
+
+    /**
+     * Renders the buttons that should be visible.
+     */
+    private void drawButtons(){
         if (showPayToOpenBtn)
             background.getChildren().add(payToOpenBtn);
 
@@ -176,7 +170,15 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
             background.getChildren().add(diceToOpenBtn);
         else
             background.getChildren().add(diceBtn);
+    }
 
+    /**
+     * Adds the diceView to the background, and then renders it
+     */
+    private void drawDiceView() {
+        background.getChildren().add(diceView.getNode());
+        AnchorPane.setRightAnchor(diceView.getNode(), 10.0);
+        AnchorPane.setBottomAnchor(diceView.getNode(), 400.0);
     }
 
     /**
@@ -184,11 +186,9 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
      * @param node should have a fx:controller that is an instance of PlayerCardView.
      */
     private void updatePlayerCard(Node node) {
-        System.out.println(currentPlayerId);
             try {
                 PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
                 playerCardView.update();
-                System.out.println(playerCardView.representsCurrentPlayer(currentPlayerId));
                 if (playerCardView.representsWinner()){
                     AnchorPane.setBottomAnchor(node, 400.0);
                     AnchorPane.setRightAnchor(node, 615.0);
@@ -214,7 +214,6 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
     @Override
     public void newTurn(int id) {
         this.currentPlayerId = id;
-        //TODO: Kan klicka öppna med pengar och tärning borde stängas av?
     }
 
     @Override
@@ -224,7 +223,10 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileListene
 
     @Override
     public void updatePayToOpenTile(boolean canPayToOpenTile) {
-        System.out.println("kommer vi hit då???" + canPayToOpenTile);
         showPayToOpenBtn = canPayToOpenTile;
+    }
+
+    public DiceView getDiceView() {
+        return diceView;
     }
 }

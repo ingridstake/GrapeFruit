@@ -1,6 +1,7 @@
 package edu.chalmers.grapefruit.Model;
 
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Utils.*;
@@ -54,14 +55,6 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
-    /*
-    public CurrentPlayer getCurrentPlayer() {
-        return gameLogic.getCurrentPlayer();
-    }
-
-<<<<<<< HEAD
-     */
-
     public List<Integer> getPlayerIds(){
         List<Integer> ids = new ArrayList<Integer>();
         for(IPlayer player : players){
@@ -90,8 +83,12 @@ public class GameModel implements Observable {
         gameLogic.addTurnListener(listener);
     }
 
-    public void addOpenTileListener(OpenTileListener listener) {
+    public void addOpenTileListener(OpenTileOperationsListener listener) {
         gameLogic.addOpenTileListener(listener);
+    }
+
+    public void addDiceRolledListener(DiceRolledListener listener) {
+        gameLogic.addDiceListener(listener);
     }
 
     @Override

@@ -6,8 +6,9 @@ import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import edu.chalmers.grapefruit.Model.Position.TilePosition;
+import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
+import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,10 @@ import java.util.List;
 public class GameLogic {
 
     private List<NewTurnListener> newTurnListeners = new ArrayList<>();
-    private List<OpenTileListener> openTileListeners = new ArrayList<>();
-    private boolean canRollDiceToOpenTile = false;
-    private boolean canPayToOpenTile = false;
+    private List<OpenTileOperationsListener> openTileOperationsListeners = new ArrayList<>();
+    private List<DiceRolledListener> diceRolledListeners = new ArrayList<>();
+
+    private Dice dice = new Dice(6);
 
     /**
      * Creates a new instance of gameLogic ig there is not already one and returns it.
@@ -88,6 +90,7 @@ public class GameLogic {
     public void openTileWithDice(){
         Dice dice = new Dice(6);
         dice.roll();
+        notifyDiceRolledListeners(dice.getValue());
         if (dice.getValue() >= 4 ){
             executeTileTurn(currentPlayer, gameBoard.getNode(currentPlayer));
         } else {
@@ -162,7 +165,7 @@ public class GameLogic {
         if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
             tileTurnIsOngoingForPlayer.remove(currentPlayer);
         }
-        Node newNode = gameBoard.movePlayer(x,y, currentPlayer);
+        Node newNode = gameBoard.movePlayer(x,y, currentPlayer, dice.getValue());
         executeGameLogic(currentPlayer, newNode);
     }
 
@@ -170,7 +173,8 @@ public class GameLogic {
      * Calls the gameBoard rollDice.
      */
     public void makeDiceRoll() {
-        gameBoard.makeDiceRoll(currentPlayer);
+        gameBoard.makeDiceRoll(currentPlayer, dice.roll());
+        notifyDiceRolledListeners(dice.getValue());
     }
 
     /**
@@ -181,7 +185,6 @@ public class GameLogic {
         boolean referencePlayerIsFound = false;
         for (int i = 1; i <= players.size(); i++) {
             if (referencePlayerIsFound) {
-                System.out.println(i);
                 currentPlayer = players.get(i-1);
                 notifyNewTurn();
                 return;
@@ -200,8 +203,18 @@ public class GameLogic {
         newTurnListeners.add(newTurnListener);
     }
 
-    public void addOpenTileListener(OpenTileListener openTileListener) {
-        openTileListeners.add(openTileListener);
+    public void addOpenTileListener(OpenTileOperationsListener openTileOperationsListener) {
+        openTileOperationsListeners.add(openTileOperationsListener);
+    }
+
+    public void addDiceListener(DiceRolledListener diceRolledListener) {
+        diceRolledListeners.add(diceRolledListener);
+    }
+
+    private void notifyDiceRolledListeners(int diceValue) {
+        for (DiceRolledListener diceRolledListener : diceRolledListeners) {
+            diceRolledListener.updateDiceValue(diceValue);
+        }
     }
 
     private void notifyNewTurn() {
@@ -211,7 +224,7 @@ public class GameLogic {
     }
 
     private void notifyOpenTileListeners(boolean canRollDiceToOpenTile, boolean canPayToOpenTile) {
-        for (OpenTileListener listener : openTileListeners) {
+        for (OpenTileOperationsListener listener : openTileOperationsListeners) {
             listener.updateDiceToOpenTile(canRollDiceToOpenTile);
             listener.updatePayToOpenTile(canPayToOpenTile);
         }
