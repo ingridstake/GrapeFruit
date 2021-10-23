@@ -1,6 +1,5 @@
 package edu.chalmers.grapefruit.Model.Player;
 
-import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.ViewEntityResource;
 
 import java.awt.*;
@@ -42,7 +41,6 @@ public interface IPlayer extends ViewEntityResource {
 
     boolean hasVisa();
 
-
     void makePigPayment();
 
     void makeHorsePayment();
@@ -56,4 +54,6 @@ public interface IPlayer extends ViewEntityResource {
     void makeTurnPayment();
 
     int getId();
+
+    void resetPlayer();
 }

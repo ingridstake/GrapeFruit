@@ -28,6 +28,8 @@ public class GameLogicTest {
     @Test
     public void openTileWithPaymentLowerMoneyBalance(){
         gameLogic = GameLogic.createGameLogic(1);
+        gameLogic.movePlayer(170, 100);
+        gameLogic.movePlayer(225, 130);
         gameLogic.movePlayer(265,85);
         gameLogic.openTileWithPayment();
         assert (gameLogic.getPlayers().get(0).getMoneyBalance() <= 2900);

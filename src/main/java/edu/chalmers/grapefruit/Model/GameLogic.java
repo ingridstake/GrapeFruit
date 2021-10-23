@@ -38,6 +38,14 @@ public class GameLogic {
         }
         return instance;
     }
+
+    public static GameLogic resetGameLogic(){
+        for (IPlayer player: instance.players) {
+            player.resetPlayer();
+        }
+        instance.gameBoard = new GameBoard(instance.players);
+        return instance;
+    }
     private static GameLogic instance = null;
 
     private List<IPlayer> players;
