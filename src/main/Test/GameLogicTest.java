@@ -35,13 +35,10 @@ public class GameLogicTest {
         assert (gameLogic.getPlayers().get(0).getMoneyBalance() <= 2900);
     }
 
-
-
     @Test
     public void makeGameBoardToHighlight(){
         gameLogic = GameLogic.createGameLogic(1);
         gameLogic.getGameBoard().getPositionList().get(2).highlight();
         assert (gameLogic.getGameBoard().getPositionList().get(2).isHighlighted());
     }
-
 }

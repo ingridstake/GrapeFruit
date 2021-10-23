@@ -1,13 +1,8 @@
-
 import edu.chalmers.grapefruit.Model.GameLogic;
 import edu.chalmers.grapefruit.Model.GameModel;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
 import edu.chalmers.grapefruit.Model.Position.LogicType;
-import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
-import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
-import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -117,6 +112,5 @@ public class GameModelTests {
 
         assert (assertList.size()==4);
     }
-
     */
 }
