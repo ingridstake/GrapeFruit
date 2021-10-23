@@ -28,11 +28,6 @@ public class ViewEntity {
      * @return the resourceString of the resource.
      */
     public String getResourceString() {
-        try {
-            return resource.getResourceString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return resource.getResourceString();
     }
 }

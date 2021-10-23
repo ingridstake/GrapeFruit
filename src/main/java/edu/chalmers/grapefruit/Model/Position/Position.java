@@ -36,7 +36,7 @@ public class Position implements IPosition{
     }
 
     @Override
-    public String getResourceString() throws Exception {
+    public String getResourceString() {
          return LogicType.evaluatePositionResource(this.getLogicType(), isHighlighted);
     }
 

@@ -18,19 +18,16 @@ public enum LogicType {
      * @param logicType is the logic type that is to be evaluated
      * @param isHighLighted determines which version of the resource is to be returned.
      * @return the evaluated resourceString.
-     * @throws Exception Throws exception if the logicType has no resource.
      */
-    public static String evaluatePositionResource (LogicType logicType, boolean isHighLighted) throws Exception {
+    public static String evaluatePositionResource (LogicType logicType, boolean isHighLighted) {
         if (isHighLighted){
             return getHighLightedResource(logicType);
         }
         return getNormalResource(logicType);
     }
 
-    private static String getHighLightedResource(LogicType logicType) throws Exception {
+    private static String getHighLightedResource(LogicType logicType) {
         switch (logicType){
-            case NONE:
-                return "node-view-highlighted.fxml";
             case COW :
                 return "cow-tile-highlighted.fxml";
             case PIG :
@@ -48,15 +45,12 @@ public enum LogicType {
             case UNTURNED_TILE:
                 return "tile-view-highlighted.fxml";
             default :
-                throw new Exception("Could not find resourceString for highlighted " + logicType.toString());
+                return "node-view-highlighted.fxml";
         }
     }
 
-    private static String getNormalResource(LogicType logicType) throws Exception {
-
+    private static String getNormalResource(LogicType logicType) {
         switch (logicType){
-            case NONE:
-                return "node-view.fxml";
             case COW :
                 return "cow-tile.fxml";
             case PIG :
@@ -74,7 +68,7 @@ public enum LogicType {
             case UNTURNED_TILE:
                 return "tile-unturned.fxml";
             default :
-                throw new Exception("Could not find resourceString for " + logicType.toString());
+                return "node-view.fxml";
         }
     }
 
@@ -83,7 +77,6 @@ public enum LogicType {
      * @param nTiles is the number of tiles that needs to be returned.
      * @return a list of tiles.
      */
-    //TODO Kan möjligtvis göras snyggare
     public static List<LogicType> getTileTypes(int nTiles) {
         List<LogicType> tileTypes = new ArrayList<>();
 

@@ -255,6 +255,12 @@ public class GameLogic {
         }
     }
 
+    public int getNumberOfListeners(){
+        int n = diceRolledListeners.size() + winnerFoundListeners.size() +
+                newTurnListeners.size() + openTileOperationsListeners.size();
+        return n;
+    }
+
     /**
      * Returns the game board.
      * @return the game board.

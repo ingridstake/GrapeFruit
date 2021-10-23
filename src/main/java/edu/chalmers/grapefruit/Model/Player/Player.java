@@ -119,7 +119,7 @@ public class Player implements IPlayer{
     }
 
     @Override
-    public String getResourceString() throws Exception {
+    public String getResourceString() {
        return PlayerColor.evaluateResourceString(PLAYER_COLOR);
     }
 
