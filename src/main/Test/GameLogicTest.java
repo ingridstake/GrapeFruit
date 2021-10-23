@@ -16,6 +16,7 @@ import java.util.List;
 
 public class GameLogicTest {
 
+    /*
     @Test
     public void playerFoundCowIsWinner(){
         List<IPlayer> players = PlayerFactory.MakePlayers(1);
@@ -31,6 +32,8 @@ public class GameLogicTest {
         GameLogic.gameLogicStartPos(players.get(0));
         assert (players.get(0).isWinner());
     }
+
+     */
 
     @Test
     public void openTileWithPaymentLowerMoneyBalance(){

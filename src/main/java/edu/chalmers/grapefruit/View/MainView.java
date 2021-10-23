@@ -2,6 +2,7 @@ package edu.chalmers.grapefruit.View;
 
 import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
 import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
+import edu.chalmers.grapefruit.Utils.Listeners.WinnerFoundListener;
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
@@ -25,11 +26,12 @@ import java.util.List;
  * @author olimanstorm
  * @author elvinafahlgren
  */
-public class MainView implements Observer {
+public class MainView implements Observer, WinnerFoundListener {
     //TODO LÄGG TILL HASHMAP
     private @FXML AnchorPane mainViewPane;
     private GameBoardView gameBoardView = new GameBoardView();
     private StartView startView = new StartView();
+    private EndView endView = new EndView();
 
     /**
      * Creates a static main view of the game.
@@ -69,6 +71,10 @@ public class MainView implements Observer {
         mainViewPane.getChildren().setAll(gameBoardView.background);
     }
 
+    private void loadEndView() throws IOException {
+        createEndView();
+        mainViewPane.getChildren().setAll(endView.getEndPane());
+    }
     /**
      * Populates the start view by calling the start view's populate method.
      * @param startGameHandler is the event handler that listens to an action to start a game
@@ -92,6 +98,10 @@ public class MainView implements Observer {
         gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
+    public void populateEndView(EventHandler exitGameHandler, EventHandler reRunGameHandler) throws IOException {
+        endView.populate(exitGameHandler, reRunGameHandler);
+    }
+
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) throws IOException {
         gameBoardView.addPlayerCards(playerCardResources, ids);
     }
@@ -108,6 +118,12 @@ public class MainView implements Observer {
         mainViewPane.getChildren().add(gameBoardView.getFXMLLoader().load());
         javafx.scene.Node child = mainViewPane.getChildren().get(0);
         gameBoardView = (GameBoardView) getController(child);
+    }
+    private void createEndView () throws IOException {
+        mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
+        mainViewPane.getChildren().add(endView.getFXMLLoader().load());
+        javafx.scene.Node child = mainViewPane.getChildren().get(0);
+        endView = (EndView) getController(child);
     }
 
     private static Object getController(Node node) {
@@ -142,5 +158,14 @@ public class MainView implements Observer {
     @Override
     public void update() {
         gameBoardView.update();
+    }
+
+    @Override
+    public void updateWinnerFound() {
+        try {
+            loadEndView();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 }

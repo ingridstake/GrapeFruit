@@ -59,6 +59,22 @@ public class GameController {
                 model.diceToOpen();
             }
         };
+        EventHandler exitGameHandler = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                System.exit(0);
+            }
+        };
+        EventHandler reRunHandler = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                try {
+                    view.loadStartPage();
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
+        };
 
         EventHandler startGameHandler = new EventHandler() {
             @Override
@@ -72,15 +88,21 @@ public class GameController {
                     model.addNewTurnListener(view.getNewTurnListener());
                     model.addOpenTileListener(view.getOpenTileListener());
                     model.addDiceRolledListener(view.getDiceListener());
+
+                    model.addWinnerFoundListener(view);
+                    view.populateEndView(exitGameHandler, reRunHandler);
+
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
         };
 
+
         view = MainView.makeMainView(stage);
         view.loadStartPage();
         view.populateStartView(startGameHandler, 4);
+
         model.addObserver(view);
     }
 }
