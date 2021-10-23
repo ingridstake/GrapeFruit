@@ -5,12 +5,11 @@ import edu.chalmers.grapefruit.Model.Position.LogicType;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameModelTests {
     GameModel gameModel = new GameModel();
-    List<Boolean> assertList = new ArrayList<>();
+    //List<Boolean> assertList = new ArrayList<>();
 
     @Before
     public void before(){
@@ -52,11 +51,9 @@ public class GameModelTests {
             }
         }
         while (true){
-            System.out.println("fuck det här");
             gameModel.makePlayerMove(225, 130);
             gameModel.makePlayerMove(265, 85);
             if (gameModel.diceToOpen()){
-                System.out.println("nu gick det");
                 break;
             }
         }
