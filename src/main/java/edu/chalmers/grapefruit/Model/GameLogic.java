@@ -168,7 +168,6 @@ public class GameLogic {
     public void gameLogicStartPos(IPlayer currentPlayer){
         if (currentPlayer.hasCow() || currentPlayer.hasVisa()){
             currentPlayer.setWinner();
-            //resetGameLogic();
             notifyWinnerFoundListeners();
         }
     }

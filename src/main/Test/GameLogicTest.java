@@ -25,7 +25,6 @@ public class GameLogicTest {
         assert (gameLogic.getPlayers().get(0).isWinner());
     }
 
-
     @Test
     public void openTileWithPaymentLowerMoneyBalance(){
         gameLogic = GameLogic.createGameLogic(1);
@@ -56,6 +55,5 @@ public class GameLogicTest {
         GameLogic.resetGameLogic();
         assert (gameLogic.getPlayers().get(0).getMoneyBalance() == 3000);
         assert (gameLogic.getPlayers().get(0).getPoint().equals(new Point(45,30)));
-
     }
 }

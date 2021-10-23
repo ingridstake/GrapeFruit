@@ -10,8 +10,6 @@ import edu.chalmers.grapefruit.Utils.Listeners.WinnerFoundListener;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-
 import java.util.List;
 
 public class GameModelTests {
@@ -86,7 +84,6 @@ public class GameModelTests {
     public void initializeThrowsException(){
         assertThrows (IllegalArgumentException.class, () -> { gameModel.initialize(5);} );
     }
-
 
     @Test
     public void listenerTest(){
