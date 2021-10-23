@@ -68,7 +68,12 @@ public class MainView implements Observer, WinnerFoundListener {
      * Sets the game board view to the main view's anchor pane.
      */
     public void loadGameBoardView() {
-        mainViewPane.getChildren().setAll(gameBoardView.background);
+        try {
+            this.gameBoardView = GameBoardView.createGameBoardView();
+            mainViewPane.getChildren().setAll(gameBoardView.getBackground());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadEndView() {

@@ -26,13 +26,13 @@ import java.util.List;
  */
 
 public class GameBoardView implements Observer, NewTurnListener, OpenTileOperationsListener {
-    @FXML AnchorPane background;
-    @FXML Button diceBtn;
-    @FXML Button payToOpenBtn;
-    @FXML Button diceToOpenBtn;
-    List<ViewEntity> viewEntities;
-    FXMLLoader fxmlLoader;
-    HashMap<Integer, Node> playerCards = new HashMap<>();
+    @FXML private AnchorPane background;
+    @FXML private Button diceBtn;
+    @FXML private Button payToOpenBtn;
+    @FXML private Button diceToOpenBtn;
+    private List<ViewEntity> viewEntities;
+    private FXMLLoader fxmlLoader;
+    private HashMap<Integer, Node> playerCards = new HashMap<>();
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
     private boolean showDiceToOpenBtn;
@@ -46,7 +46,16 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
         fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
     }
 
-    //TODO: Kanske byta funktionsnamn till initialize eller init?
+    public static GameBoardView createGameBoardView() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
+        AnchorPane background = fxmlLoader.load();
+
+        GameBoardView gameBoardView = getGameBoardViewController(background);
+        gameBoardView.background = background;
+
+        return gameBoardView;
+    }
+
     /**
      * Sets the GameBoards instance variable viewEntities.
      * Sets the NodeViews clickHandler.
@@ -104,6 +113,9 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
     public FXMLLoader getFXMLLoader() {
         return fxmlLoader;
     }
+    public Node getBackground() {
+        return background;
+    }
 
     //TODO: creda den smarta fan som klurade ut hur man gör detta: https://stackoverflow.com/questions/40754454/get-controller-instance-from-node
     /**
@@ -118,6 +130,16 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
             node = node.getParent();
         } while (controller == null && node != null);
         return controller;
+    }
+
+    public static GameBoardView getGameBoardViewController(Node node) throws Exception {
+        Object controller = getController(node);
+        GameBoardView gameBoardView = controller instanceof GameBoardView ? (GameBoardView) controller : null;
+
+        if (gameBoardView == null) {
+            throw new Exception("The argument node's fx:controller is not an instance of GameBoardView");
+        }
+        return gameBoardView;
     }
 
     //TODO: Städa upp och snygga till
