@@ -48,6 +48,7 @@ public class GameLogic {
         instance.gameBoard = new GameBoard(instance.players);
         return instance;
     }
+
     private static GameLogic instance = null;
 
     private List<IPlayer> players;
@@ -233,7 +234,8 @@ public class GameLogic {
 
     private void notifyNewTurn() {
         for (NewTurnListener newTurnListener : newTurnListeners) {
-            newTurnListener.newTurn(currentPlayer.getId());
+            newTurnListener.newPlayer(currentPlayer.getId());
+            newTurnListener.newTurn();
         }
     }
 

@@ -16,7 +16,6 @@ import java.util.List;
 
 public class GameModelTests {
     GameModel gameModel = new GameModel();
-    //List<Boolean> assertList = new ArrayList<>();
 
     @Before
     public void before(){
@@ -112,7 +111,12 @@ public class GameModelTests {
         };
         NewTurnListener newTurnListener = new NewTurnListener() {
             @Override
-            public void newTurn(int currentPlayerId) {
+            public void newPlayer(int currentPlayerId) {
+
+            }
+
+            @Override
+            public void newTurn() {
 
             }
         };

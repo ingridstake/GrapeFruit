@@ -98,8 +98,8 @@ public class MainView implements Observer, WinnerFoundListener {
         gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
-    public void populateEndView(EventHandler exitGameHandler, EventHandler reRunGameHandler) {
-        endView.populate(exitGameHandler, reRunGameHandler);
+    public void populateEndView(EventHandler exitGameHandler) {
+        endView.populate(exitGameHandler);
     }
 
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) {

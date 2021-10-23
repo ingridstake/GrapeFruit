@@ -67,17 +67,9 @@ public class GameController {
             }
         };
 
-        EventHandler reRunHandler = new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                view.loadStartView();
-            }
-        };
-
         EventHandler startGameHandler = new EventHandler() {
             @Override
             public void handle(Event event) {
-                //TODO skulle man kunna lägga in och kolla så att comboboxen är ikryssad här?
                 try {
                     model.initialize(view.getSelectedPlayerAmount());
                     view.loadGameBoardView();
@@ -90,11 +82,10 @@ public class GameController {
             }
         };
 
-
         view = MainView.makeMainView(stage);
         view.loadStartView();
         view.populateStartView(startGameHandler, 4);
-        view.populateEndView(exitGameHandler, reRunHandler);
+        view.populateEndView(exitGameHandler);
         model.addObserver(view);
     }
 

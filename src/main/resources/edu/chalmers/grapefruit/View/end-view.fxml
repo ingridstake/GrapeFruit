@@ -8,7 +8,6 @@
 <AnchorPane fx:id="endPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.chalmers.grapefruit.View.EndView">
    <children>
       <Text layoutX="253.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vi har en vinnare!" />
-      <Button fx:id="reRunButton" layoutX="473.0" layoutY="309.0" mnemonicParsing="false" text="Starta om" />
       <Button fx:id="exitButton" layoutX="270.0" layoutY="309.0" mnemonicParsing="false" text="Avsluta" />
    </children>
    <userData>

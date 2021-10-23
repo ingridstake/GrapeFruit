@@ -13,7 +13,6 @@ public class EndView {
 
     @FXML private AnchorPane endPane;
     @FXML Button exitButton;
-    @FXML private Button reRunButton;
     private FXMLLoader fxmlLoader;
 
 
@@ -21,9 +20,8 @@ public class EndView {
         fxmlLoader = new FXMLLoader(EndView.class.getResource("end-view.fxml"));
     }
 
-    public void populate(EventHandler exitGameHandler, EventHandler reRunGameHandler){
+    public void populate(EventHandler exitGameHandler){
         exitButton.setOnAction(exitGameHandler);
-        reRunButton.setOnAction(reRunGameHandler);
     }
 
     public FXMLLoader getFXMLLoader() {
