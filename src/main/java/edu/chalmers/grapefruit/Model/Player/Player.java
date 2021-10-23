@@ -127,4 +127,13 @@ public class Player implements IPlayer{
     public int getId() {
         return id;
     }
+
+    @Override
+    public void resetPlayer() {
+        moneyBalance = 3000;
+        point = new Point(0,0);
+        hasCow = false;
+        hasVisa = false;
+        isWinner = false;
+    }
 }
