@@ -19,15 +19,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+import static edu.chalmers.grapefruit.View.ViewUtils.getController;
+
 /**
  * This is the main view that is created by the Controller.
  * The class holds the views of the game. Can switch between the views.
  *
- * @author olimanstorm
- * @author elvinafahlgren
+ * @author Olivia Månström
+ * @author Elvina Fahlgren
  */
 public class MainView implements Observer, WinnerFoundListener {
     //TODO LÄGG TILL HASHMAP
+
+    //TODO: lägga till javadoc?
     private @FXML AnchorPane mainViewPane;
     private GameBoardView gameBoardView = new GameBoardView();
     private StartView startView = new StartView();
@@ -39,7 +43,7 @@ public class MainView implements Observer, WinnerFoundListener {
      * @return the main view of the game
      * @throws IOException
      */
-    static public MainView makeMainView (Stage stage) throws IOException {
+    static public MainView makeMainView (Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(MainView.class.getResource("main-view.fxml"));
         System.setProperty("javafx.sg.warn", "true"); // Förhindrar exception vid scene loading, (https://stackoverflow.com/questions/44684605/javafx-applications-throw-nullpointerexceptions-but-run-anyway)
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
@@ -50,34 +54,25 @@ public class MainView implements Observer, WinnerFoundListener {
         stage.setScene(scene);
         stage.show();
 
-        view.createGameBoardView();
-        view.createStartView();
-        view.createEndView();
+        view.gameBoardView = GameBoardView.createGameBoardView();
+        view.startView = StartView.createStartView();
+        view.endView = EndView.createEndView();
 
         return view;
     }
 
     /**
-     * Sets the start view to the main view's anchor pane.
+     * Loads the start view to the main view's anchor pane.
      */
     public void loadStartView() {
         mainViewPane.getChildren().setAll(startView.getStartViewPane());
     }
 
     /**
-     * Sets the game board view to the main view's anchor pane.
+     * Loads the game board view to the main view's anchor pane.
      */
     public void loadGameBoardView() {
-        try {
-            this.gameBoardView = GameBoardView.createGameBoardView();
-            mainViewPane.getChildren().setAll(gameBoardView.getBackground());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadEndView() {
-        mainViewPane.getChildren().setAll(endView.getEndPane());
+        mainViewPane.getChildren().setAll(gameBoardView.getBackground());
     }
 
     /**
@@ -99,7 +94,10 @@ public class MainView implements Observer, WinnerFoundListener {
      * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
+    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler,
+                                      EventHandler diceHandler, EventHandler payToOpenBtnHandler,
+                                      EventHandler diceToOpenBtnHandler) throws IOException {
+
         gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
@@ -109,35 +107,6 @@ public class MainView implements Observer, WinnerFoundListener {
 
     public void addPlayerCards(List<PlayerCardResource> playerCardResources, List<Integer> ids) {
         gameBoardView.addPlayerCards(playerCardResources, ids);
-    }
-
-    private void createStartView () throws IOException {
-        mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
-        mainViewPane.getChildren().add(startView.getFXMLLoader().load());
-        javafx.scene.Node child = mainViewPane.getChildren().get(0);
-        startView = (StartView) getController(child);
-    }
-
-    private void createGameBoardView () throws IOException {
-        mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
-        mainViewPane.getChildren().add(gameBoardView.getFXMLLoader().load());
-        javafx.scene.Node child = mainViewPane.getChildren().get(0);
-        gameBoardView = (GameBoardView) getController(child);
-    }
-    private void createEndView () throws IOException {
-        mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
-        mainViewPane.getChildren().add(endView.getFXMLLoader().load());
-        javafx.scene.Node child = mainViewPane.getChildren().get(0);
-        endView = (EndView) getController(child);
-    }
-
-    private static Object getController(Node node) {
-        Object controller = null;
-        do {
-            controller = node.getUserData();
-            node = node.getParent();
-        } while (controller == null && node != null);
-        return controller;
     }
 
     /**
@@ -168,5 +137,12 @@ public class MainView implements Observer, WinnerFoundListener {
     @Override
     public void updateWinnerFound() {
         loadEndView();
+    }
+
+    /**
+     * Loads the EndView to the main view.
+     */
+    private void loadEndView() {
+        mainViewPane.getChildren().setAll(endView.getEndPane());
     }
 }

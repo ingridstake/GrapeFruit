@@ -19,19 +19,19 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author olimanstorm
- * @author elvinafahlgren
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Olivia Månström
+ * @author Elvina Fahlgren
  */
 
 public class GameBoardView implements Observer, NewTurnListener, OpenTileOperationsListener {
+
     @FXML private AnchorPane background;
     @FXML private Button diceBtn;
     @FXML private Button payToOpenBtn;
     @FXML private Button diceToOpenBtn;
     private List<ViewEntity> viewEntities;
-    private FXMLLoader fxmlLoader;
     private HashMap<Integer, Node> playerCards = new HashMap<>();
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
@@ -40,12 +40,10 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
     private DiceView diceView;
 
     /**
-     * Creates a FXMLLoader that represents the game board view.
+     * Creates and returns a Gameboard view with an anchorpane.
+     * @return a GameBoardView.
+     * @throws Exception if the resource is incorrect.
      */
-    public GameBoardView(){
-        fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
-    }
-
     public static GameBoardView createGameBoardView() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
         AnchorPane background = fxmlLoader.load();
@@ -53,6 +51,22 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
         GameBoardView gameBoardView = getGameBoardViewController(background);
         gameBoardView.background = background;
 
+        return gameBoardView;
+    }
+
+    /**
+     * Returns the fxController of a node parsed to a GameBoarView.
+     * @param node is the node whose controller is of interest.
+     * @return the fxController of a node parsed to a GameBoarView.
+     * @throws Exception if the fxController of the node cannot be parsed to a GameBoardView,
+     */
+    public static GameBoardView getGameBoardViewController(Node node) throws Exception {
+        Object controller = ViewUtils.getController(node);
+        GameBoardView gameBoardView = controller instanceof GameBoardView ? (GameBoardView) controller : null;
+
+        if (gameBoardView == null) {
+            throw new Exception("The argument node's fx:controller is not an instance of GameBoardView");
+        }
         return gameBoardView;
     }
 
@@ -110,36 +124,41 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
         }
     }
 
-    public FXMLLoader getFXMLLoader() {
-        return fxmlLoader;
-    }
     public Node getBackground() {
         return background;
     }
 
-    //TODO: creda den smarta fan som klurade ut hur man gör detta: https://stackoverflow.com/questions/40754454/get-controller-instance-from-node
-    /**
-     * Finds and returns the fx:controller of a Node.
-     * @param node is the node of interest.
-     * @return the fx:controller of the node.
-     */
-    public static Object getController(Node node) {
-        Object controller = null;
-        do {
-            controller = node.getUserData();
-            node = node.getParent();
-        } while (controller == null && node != null);
-        return controller;
+    @Override
+    public void update() {
+        try {
+            redrawChildren();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static GameBoardView getGameBoardViewController(Node node) throws Exception {
-        Object controller = getController(node);
-        GameBoardView gameBoardView = controller instanceof GameBoardView ? (GameBoardView) controller : null;
+    @Override
+    public void newPlayer(int id) {
+        this.currentPlayerId = id;
+    }
 
-        if (gameBoardView == null) {
-            throw new Exception("The argument node's fx:controller is not an instance of GameBoardView");
-        }
-        return gameBoardView;
+    @Override
+    public void newTurn() {
+        showDiceBtn = true;
+    }
+
+    @Override
+    public void updateDiceToOpenTile(boolean canRollDiceToOpenTile) {
+        showDiceToOpenBtn = canRollDiceToOpenTile;
+    }
+
+    @Override
+    public void updatePayToOpenTile(boolean canPayToOpenTile) {
+        showPayToOpenBtn = canPayToOpenTile;
+    }
+
+    public DiceView getDiceView() {
+        return diceView;
     }
 
     //TODO: Städa upp och snygga till
@@ -159,7 +178,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
             int x = viewEntities.get(i).getX();
             int y = viewEntities.get(i).getY();
 
-            Object obj = getController(child);
+            Object obj = ViewUtils.getController(child);
             NodeView nodeView = obj instanceof NodeView ? (NodeView) obj : null;
 
             if (nodeView != null) {
@@ -225,38 +244,5 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
             } catch (Exception e) {
                 e.printStackTrace();
             }
-    }
-
-    @Override
-    public void update() {
-        try {
-            redrawChildren();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void newPlayer(int id) {
-        this.currentPlayerId = id;
-    }
-
-    @Override
-    public void newTurn() {
-        showDiceBtn = true;
-    }
-
-    @Override
-    public void updateDiceToOpenTile(boolean canRollDiceToOpenTile) {
-        showDiceToOpenBtn = canRollDiceToOpenTile;
-    }
-
-    @Override
-    public void updatePayToOpenTile(boolean canPayToOpenTile) {
-        showPayToOpenBtn = canPayToOpenTile;
-    }
-
-    public DiceView getDiceView() {
-        return diceView;
     }
 }

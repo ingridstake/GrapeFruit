@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that graphically represent a dice.
+ * Class that graphically represents a dice.
  * @author Elvina Fahlgren
  */
 public class DiceView implements DiceRolledListener {
@@ -45,7 +45,7 @@ public class DiceView implements DiceRolledListener {
      * @throws Exception if argument diceNode's fx:controller is not an instance of DiceView.
      */
     private static DiceView getDiceViewController(Node diceNode) throws Exception {
-        Object controllerObject = GameBoardView.getController(diceNode);
+        Object controllerObject = ViewUtils.getController(diceNode);
         DiceView diceView = controllerObject instanceof DiceView ? (DiceView) controllerObject : null;
 
         if (diceView == null) {

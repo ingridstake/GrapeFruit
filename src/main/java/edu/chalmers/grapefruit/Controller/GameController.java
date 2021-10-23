@@ -82,11 +82,15 @@ public class GameController {
             }
         };
 
-        view = MainView.makeMainView(stage);
-        view.loadStartView();
-        view.populateStartView(startGameHandler, 4);
-        view.populateEndView(exitGameHandler);
-        model.addObserver(view);
+        try {
+            view = MainView.makeMainView(stage);
+            view.loadStartView();
+            view.populateStartView(startGameHandler, 4);
+            view.populateEndView(exitGameHandler);
+            model.addObserver(view);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addListeners() {
