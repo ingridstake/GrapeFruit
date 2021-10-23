@@ -3,7 +3,6 @@ package edu.chalmers.grapefruit.Model;
 import edu.chalmers.grapefruit.Utils.Listeners.OpenTileListener;
 import edu.chalmers.grapefruit.Utils.Observable;
 import edu.chalmers.grapefruit.Utils.Observer;
-import edu.chalmers.grapefruit.Utils.*;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerFactory;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
@@ -19,7 +18,7 @@ import java.util.List;
 public class GameModel implements Observable {
 
     private GameLogic gameLogic;
-    private List<IPlayer> players;
+    //private List<IPlayer> players;
     private List<Observer> observerList = new ArrayList<>();
 
     /**
@@ -30,8 +29,8 @@ public class GameModel implements Observable {
         if (n<1 || n>4){
             throw new IllegalArgumentException("More than 4 players is not allowed");
         }
-        players = PlayerFactory.MakePlayers(n);
-        gameLogic = GameLogic.createGameLogic(players);
+        //players = PlayerFactory.MakePlayers(n);
+        gameLogic = GameLogic.createGameLogic(n);
     }
 
     public void makePlayerMove(int x, int y){
@@ -49,37 +48,18 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
-    public void diceToOpen(){
-        gameLogic.openTileWithDice();
+    public boolean diceToOpen(){
+        boolean turnCouldBeDone = gameLogic.openTileWithDice();
         notifyObservers();
+        return turnCouldBeDone;
     }
-
-    /*
-    public CurrentPlayer getCurrentPlayer() {
-        return gameLogic.getCurrentPlayer();
-    }
-
-<<<<<<< HEAD
-     */
 
     public List<Integer> getPlayerIds(){
-        List<Integer> ids = new ArrayList<Integer>();
-        for(IPlayer player : players){
-            ids.add(player.getId());
-        }
-        return ids;
-    }
-
-    /**
-     * Returns a list of all positionable objects for the GameBoard
-     * @return a list of all positionable objects of the GameBoard
-     */
-    public List<ViewEntity> getViewEntities() {
-        return ViewEntityFactory.getViewEntities();
+        return gameLogic.getPlayerIds();
     }
 
     public List<IPlayer> getPlayers() {
-        return players;
+        return gameLogic.getPlayers();
     }
 
     public GameLogic getGameLogic(){
