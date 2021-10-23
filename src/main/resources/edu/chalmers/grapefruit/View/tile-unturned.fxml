@@ -3,7 +3,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Circle fill="DODGERBLUE" layoutX="28.0" layoutY="29.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #336E2F; -fx-stroke: #1B3B19; -fx-stroke-width: 6;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
