@@ -1,10 +1,8 @@
 package edu.chalmers.grapefruit.Utils;
 
-import edu.chalmers.grapefruit.Utils.ViewEntityResource;
-
 /**
- * @author ingrid.stake
- * @author tovenilsson
+ * @author Ingrid Stake
+ * @author Tove Nilsson
  */
 
 public class ViewEntity {

@@ -3,15 +3,15 @@ package edu.chalmers.grapefruit.Model.Position;
 import java.awt.*;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class Position implements IPosition{
 
     private Point point;
-    boolean isHighlighted;
+    private boolean isHighlighted;
     private LogicType logicType;
 
     public Position(int x, int y){

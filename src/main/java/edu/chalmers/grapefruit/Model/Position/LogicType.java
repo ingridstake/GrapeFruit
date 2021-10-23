@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tovenilsson
+ * @author Ingrid Stake
+ * @author Tove Nilssonm
  */
 
 public enum LogicType {

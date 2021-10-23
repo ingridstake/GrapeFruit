@@ -5,7 +5,7 @@ package edu.chalmers.grapefruit.Model;
  * Can generate a random number in range [1... number of sides of the dice].
  * Number of sides of the dice is selected when the dice is initialized.
  *
- * @author elvinafahlgren
+ * @author Elvina Fahlgren
  */
 public class Dice {
     private int sides;

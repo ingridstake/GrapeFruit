@@ -11,10 +11,10 @@ import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class GameModel implements Observable {
 

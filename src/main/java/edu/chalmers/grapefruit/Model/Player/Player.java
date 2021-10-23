@@ -3,11 +3,10 @@ package edu.chalmers.grapefruit.Model.Player;
 import java.awt.*;
 
 /**
- * The Player class contains the functionality of a Player.
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class Player implements IPlayer{
     private int moneyBalance;
@@ -18,7 +17,7 @@ public class Player implements IPlayer{
     private boolean isWinner;
     private int id;
 
-    protected Player(PlayerColor playerColor, int id){
+    public Player(PlayerColor playerColor, int id){
         moneyBalance = 3000;
         point = new Point(0,0);
         hasCow = false;

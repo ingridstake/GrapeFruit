@@ -4,7 +4,7 @@ import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerColor;
 
 /**
- * @author ingrid.stake
+ * @author Ingrid Stake
  */
 
 public class PlayerCardResource {

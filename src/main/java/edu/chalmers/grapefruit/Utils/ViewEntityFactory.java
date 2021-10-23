@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tovenilsson
+ * @author Ingrid Stake
+ * @author Tove Nilsson
  */
-
 public class ViewEntityFactory {
 
     /**

@@ -1,8 +1,8 @@
 package edu.chalmers.grapefruit.Model.Position;
 
 /**
- * @author tovenilsson
- * @author ingrid.stake
+ * @author Ingrid Stake
+ * @author Tove Nilsson
  */
 
 public class TilePosition extends Position{

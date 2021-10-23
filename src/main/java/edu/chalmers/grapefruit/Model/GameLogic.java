@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author tovenilsson
- * @author olimanstrom
+ * @author Tove Nilsson
+ * @author Olivia Månström
  */
 
 public class GameLogic {
@@ -182,6 +182,7 @@ public class GameLogic {
             tileTurnIsOngoingForPlayer.remove(currentPlayer);
         }
         Node newNode = gameBoard.movePlayer(x,y, currentPlayer, dice.getValue());
+
         executeGameLogic(currentPlayer, newNode);
     }
 

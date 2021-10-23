@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ingrid.stake
+ * @author Ingrid Stake
  */
 public class PlayerCardResourceFactory {
 

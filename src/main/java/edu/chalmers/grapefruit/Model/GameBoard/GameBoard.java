@@ -1,9 +1,6 @@
 package edu.chalmers.grapefruit.Model.GameBoard;
 
-import edu.chalmers.grapefruit.Model.Dice;
-import edu.chalmers.grapefruit.Utils.PlayerCardResourceFactory;
 import edu.chalmers.grapefruit.Model.Position.IPosition;
-import edu.chalmers.grapefruit.Utils.ViewEntityFactory;
 import edu.chalmers.grapefruit.Model.Player.IPlayer;
 
 import java.util.ArrayList;
@@ -11,10 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class GameBoard {
 
@@ -45,7 +42,7 @@ public class GameBoard {
                 return node;
             }
         }
-        return null;
+        return null; // TODO: borde läggas till hantering få denna returneras som null
     }
 
     /**
@@ -63,7 +60,7 @@ public class GameBoard {
             player.updatePlayerPosition(newNode.getPosition().getPoint().x, newNode.getPosition().getPoint().y);
         }
 
-        map.deHighlight();
+        map.deHighlightAllNodes();
     }
 
     /**

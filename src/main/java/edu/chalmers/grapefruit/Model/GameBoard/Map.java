@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class Map {
+
     private final Node startNode;
     private int size;
 
-    protected Map(Node startNode){
+    public Map(Node startNode){
         this.startNode = startNode;
     }
 
-    protected Node getStartNode(){
+    public Node getStartNode(){
         return startNode;
     }
 
@@ -50,7 +51,7 @@ public class Map {
     /**
      * Dehighlights all nodes in the map
      */
-    public void deHighlight() {
+    public void deHighlightAllNodes() {
         for (Node node : getAllNodes()) {
             node.getPosition().deHighlight();
         }

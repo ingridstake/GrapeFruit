@@ -5,12 +5,14 @@ import edu.chalmers.grapefruit.Utils.ViewEntityResource;
 import java.awt.*;
 
 /**
-     * @author ingrid.stake
-     * @author tove.nilsson
-     * @author elvina.fahlgren
-     * @author olivia.månström
-     */
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
+ */
 public interface IPlayer extends ViewEntityResource {
+
+    //TODO: detta kanske borde göras till flera mindre interfaces, kan hända att det orsakar problem med catsning osv. men vora snyggt!
     /**
      * Returns the color of the player.
      * @return the color of the player.
