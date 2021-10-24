@@ -6,18 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class Node {
-    private List<Node> relatedNodes;
+
     private final IPosition position;
+    private List<Node> relatedNodes;
 
     public Node(IPosition position) {
         this.position = position;
         relatedNodes = null;
+    }
+
+    /**
+     * Returns the position of the node
+     * @return thw position of the node
+     */
+    public IPosition getPosition(){
+        return position;
     }
 
     /**
@@ -47,14 +56,6 @@ public class Node {
      */
     protected List<Node> getNeighbours(){
         return relatedNodes;
-    }
-
-    /**
-     * Returns the position of the node
-     * @return thw position of the node
-     */
-    public IPosition getPosition(){
-        return position;
     }
 
     protected List<Node> getAllNodes(List<Node> nodes) {

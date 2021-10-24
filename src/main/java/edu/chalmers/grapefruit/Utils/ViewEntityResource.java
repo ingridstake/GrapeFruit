@@ -3,8 +3,8 @@ package edu.chalmers.grapefruit.Utils;
 import java.awt.*;
 
 /**
- * @author ingrid.stake
- * @author tovenilsson
+ * @author Ingrid Stake
+ * @author Tove Nilsson
  */
 
 public interface ViewEntityResource {
@@ -12,9 +12,8 @@ public interface ViewEntityResource {
     Point getPoint();
 
     /**
-     * name of the view-resource
+     * Name of the view-resource
      * @return name of the view-resource
      */
     String getResourceString();
-
 }

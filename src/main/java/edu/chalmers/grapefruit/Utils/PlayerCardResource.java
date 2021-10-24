@@ -4,13 +4,12 @@ import edu.chalmers.grapefruit.Model.Player.IPlayer;
 import edu.chalmers.grapefruit.Model.Player.PlayerColor;
 
 /**
- * @author ingrid.stake
+ * @author Ingrid Stake
  */
 
 public class PlayerCardResource {
 
-    //TODO: make private
-    IPlayer playerResource;
+    private IPlayer playerResource;
 
     public PlayerCardResource(IPlayer player) {
         this.playerResource = player;
@@ -38,14 +37,6 @@ public class PlayerCardResource {
      */
     public boolean hasVisa() {
         return playerResource.hasVisa();
-    }
-
-    /**
-     * Returns true if player returns to start position and has cow or visa.
-     * @return true if player returns to start position and has cow or visa.
-     */
-    public boolean isWinner(){
-        return playerResource.isWinner();
     }
 
     /**

@@ -11,10 +11,10 @@ import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class GameModel implements Observable {
 
@@ -24,6 +24,7 @@ public class GameModel implements Observable {
     /**
      * Creates n players and a game board depending on the created players.
      * @param n is the amount of players.
+     * @throws IllegalArgumentException if n isn't in the range of [1,4].
      */
     public void initialize(int n){
         if (n<1 || n>4){

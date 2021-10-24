@@ -12,10 +12,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public class GameController {
 
@@ -23,10 +23,10 @@ public class GameController {
     private MainView view;
 
     /**
-     * Creates and sets up the GameBoardView with background and positions
+     * Creates and sets up the GameBoardView with background and positions.
      * @param model the model of the controller
      * @param stage is the stage of the application
-     * @throws IOException if the gameboard cannot be created.
+     * @throws IOException if the game board cannot be created.
      */
     public GameController(GameModel model, Stage stage) throws IOException {
 
@@ -82,11 +82,15 @@ public class GameController {
             }
         };
 
-        view = MainView.makeMainView(stage);
-        view.loadStartView();
-        view.populateStartView(startGameHandler, 4);
-        view.populateEndView(exitGameHandler);
-        model.addObserver(view);
+        try {
+            view = MainView.makeMainView(stage);
+            view.loadStartView();
+            view.populateStartView(startGameHandler, 4);
+            view.populateEndView(exitGameHandler);
+            model.addObserver(view.getObserver());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addListeners() {

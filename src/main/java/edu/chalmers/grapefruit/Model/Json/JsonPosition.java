@@ -1,12 +1,11 @@
 package edu.chalmers.grapefruit.Model.Json;
 
 /**
- * Represent the json position list.
+ * Represent the JSON position list.
  *
- * @author elvina.fahlgren
+ * @author Elvina Fahlgren
  */
 public class JsonPosition {
-    public int positionID;
     public String positionType;
     public int X;
     public int Y;

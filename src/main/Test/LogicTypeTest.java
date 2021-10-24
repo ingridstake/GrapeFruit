@@ -1,8 +1,6 @@
 import edu.chalmers.grapefruit.Model.Position.LogicType;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 public class LogicTypeTest {
     @Test
     public void highLightedTest() throws Exception {

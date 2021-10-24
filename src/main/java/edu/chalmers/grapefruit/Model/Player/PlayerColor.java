@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
 public enum PlayerColor {
 
@@ -26,16 +26,13 @@ public enum PlayerColor {
     }
 
     /**
-     * Evaluate the player color and match it with the right view-resource.
-     * @param PLAYER_COLOR is the color of the player.
-     * @return the view-resource.
+     * Evaluate the player color and match it with the right view-resource for a gam piece, if the player color is pink, the default resource string is returned.
+     * @param playerColor is the color of the player.
+     * @return the view-resource string.
      */
-    public static String evaluateResourceString(PlayerColor PLAYER_COLOR){
+    public static String evaluateResourceString(PlayerColor playerColor){
         String resourceString;
-        switch (PLAYER_COLOR) {
-            case PINK:
-                resourceString = "pink-player-view.fxml";
-                break;
+        switch (playerColor) {
             case PURPLE:
                 resourceString = "purple-player-view.fxml";
                 break;
@@ -51,10 +48,13 @@ public enum PlayerColor {
         return resourceString;
     }
 
+    /**
+     * Evaluate the player color and match it with the right view-resource for a player card, if the player color is pink, the default resource string is returned.
+     * @param playerColor is the color of the player.
+     * @return the view-resource string.
+     */
     public static String evaluateCardResourceString(PlayerColor playerColor) {
         switch (playerColor) {
-            case PINK:
-                return "pink-player-card.fxml";
             case PURPLE:
                 return "purple-player-card.fxml";
             case YELLOW:

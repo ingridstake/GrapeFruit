@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane fx:id="endPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.chalmers.grapefruit.View.EndView">
    <children>
       <Text layoutX="253.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vi har en vinnare!" />

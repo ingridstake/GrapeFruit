@@ -3,37 +3,37 @@ import edu.chalmers.grapefruit.Model.Json.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
-class JsonTests {
+class JsonTest {
 
     @Test
     public void testCreateJsonHandler(){
-        JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/Model/board.json");
+        new JsonHandler("edu/chalmers/grapefruit/Model/board.json");
     }
 
     @Test
     public void testReadWrongJsonFilePath() {
         assertThrows(IllegalArgumentException.class, () -> {
-            JsonHandler handler = new JsonHandler("notAFilePath");
+            new JsonHandler("notAFilePath");
         });
     }
 
     @Test
     public void testCreateJsonMap(){
         JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/Model/board.json");
-        JsonBoardReader map = handler.getJsonBoardReader();
+        handler.getJsonBoardReader();
     }
 
     @Test
     public void testCreateJsonHandlerWithWrongStructure(){
         assertThrows(IllegalArgumentException.class, () -> {
-            JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/ForTesting/incorrectBoard.json");
+            new JsonHandler("edu/chalmers/grapefruit/ForTesting/incorrectBoard.json");
         });
     }
 
     @Test
     public void testCreateJsonHandlerWithDifferentListSizes(){
         assertThrows(IllegalArgumentException.class, () -> {
-            JsonHandler handler = new JsonHandler("edu/chalmers/grapefruit/ForTesting/incorrectBoardDiffSizeList.json");
+            new JsonHandler("edu/chalmers/grapefruit/ForTesting/incorrectBoardDiffSizeList.json");
         });
     }
 }

@@ -1,8 +1,8 @@
 package edu.chalmers.grapefruit.Utils;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
+ * @author Ingrid Stake
+ * @author Tove Nilsson
  */
 
 public interface NodeClickHandler {

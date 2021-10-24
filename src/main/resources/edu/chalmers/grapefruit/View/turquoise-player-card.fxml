@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="145.0" style="-fx-background-color: #21f6ff; -fx-border-color: #21f6ff; -fx-border-radius: 15px; -fx-background-radius: 15px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.chalmers.grapefruit.View.PlayerCardView">
    <children>
       <AnchorPane prefHeight="250.0" prefWidth="145.0" style="-fx-background-color: #21f6ff; -fx-background-radius: 15;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

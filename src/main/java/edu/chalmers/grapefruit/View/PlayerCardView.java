@@ -1,6 +1,5 @@
 package edu.chalmers.grapefruit.View;
 
-
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +10,16 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 
 /**
- * @author ingrid.stake
+ * @author Ingrid Stake
  */
 
 public class PlayerCardView {
+
+    private PlayerCardResource playerCardResource;
+
+    @FXML private Label moneyBalanceLabel1;
+    @FXML private ImageView cowImage1;
+    @FXML private ImageView cowbellImage1;
 
     /**
      * Creates a Node from the playerCardResource.
@@ -39,7 +44,7 @@ public class PlayerCardView {
      * @throws Exception if the fx:controller of the node cannot be cast to a PlayerCardView.
      */
     public static PlayerCardView getPlayerCardController(Node node) throws Exception {
-        Object controllerObject = GameBoardView.getController(node);
+        Object controllerObject = ViewUtils.getController(node);
 
         PlayerCardView playerCardView = controllerObject instanceof PlayerCardView ? (PlayerCardView) controllerObject : null;
 
@@ -50,14 +55,6 @@ public class PlayerCardView {
         return playerCardView;
     }
 
-    private PlayerCardResource playerCardResource;
-
-    @FXML private Label moneyBalanceLabel1;
-    @FXML private ImageView cowImage1;
-    @FXML private ImageView cowbellImage1;
-
-
-    //TODO: detta är inte superelegant lösning, lite för invecklat för en vy kanske?
     /**
      * returns true if the current player matches with the player that the card is representing.
      * @param currentPlayerId is the current player that is compared with.
@@ -65,10 +62,6 @@ public class PlayerCardView {
      */
     public boolean representsCurrentPlayer(int currentPlayerId) {
         return playerCardResource.hasSamePlayer(currentPlayerId);
-    }
-
-    public boolean representsWinner() {
-        return playerCardResource.isWinner();
     }
 
     private void setPlayerCardResource(PlayerCardResource playerCardResource) {

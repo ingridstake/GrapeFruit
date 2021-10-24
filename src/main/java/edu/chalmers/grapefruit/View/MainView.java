@@ -11,7 +11,6 @@ import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -23,11 +22,11 @@ import java.util.List;
  * This is the main view that is created by the Controller.
  * The class holds the views of the game. Can switch between the views.
  *
- * @author olimanstorm
- * @author elvinafahlgren
+ * @author Olivia Månström
+ * @author Elvina Fahlgren
  */
-public class MainView implements Observer, WinnerFoundListener {
-    //TODO LÄGG TILL HASHMAP
+public class MainView implements WinnerFoundListener {
+
     private @FXML AnchorPane mainViewPane;
     private GameBoardView gameBoardView = new GameBoardView();
     private StartView startView = new StartView();
@@ -37,9 +36,10 @@ public class MainView implements Observer, WinnerFoundListener {
      * Creates a static main view of the game.
      * @param stage is the stage of the application
      * @return the main view of the game
-     * @throws IOException
+     * @throws Exception if the FXMLLoader cannot be loaded or if GameBoardView, StartView or EndView cannot be
+     * created.
      */
-    static public MainView makeMainView (Stage stage) throws IOException {
+    static public MainView makeMainView (Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(MainView.class.getResource("main-view.fxml"));
         System.setProperty("javafx.sg.warn", "true"); // Förhindrar exception vid scene loading, (https://stackoverflow.com/questions/44684605/javafx-applications-throw-nullpointerexceptions-but-run-anyway)
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
@@ -50,38 +50,33 @@ public class MainView implements Observer, WinnerFoundListener {
         stage.setScene(scene);
         stage.show();
 
-        view.createGameBoardView();
-        view.createStartView();
-        view.createEndView();
+        view.gameBoardView = GameBoardView.createGameBoardView();
+        view.startView = StartView.createStartView();
+        view.endView = EndView.createEndView();
 
         return view;
     }
 
     /**
-     * Sets the start view to the main view's anchor pane.
+     * Loads the start view to the main view's anchor pane.
      */
     public void loadStartView() {
         mainViewPane.getChildren().setAll(startView.getStartViewPane());
     }
 
     /**
-     * Sets the game board view to the main view's anchor pane.
+     * Loads the game board view to the main view's anchor pane.
      */
     public void loadGameBoardView() {
-        mainViewPane.getChildren().setAll(gameBoardView.background);
-    }
-
-    private void loadEndView() {
-        mainViewPane.getChildren().setAll(endView.getEndPane());
+        mainViewPane.getChildren().setAll(gameBoardView.getBackground());
     }
 
     /**
      * Populates the start view by calling the start view's populate method.
      * @param startGameHandler is the event handler that listens to an action to start a game
      * @param playerAmount is the amount of players
-     * @throws IOException
      */
-    public void populateStartView (EventHandler startGameHandler, int playerAmount) throws IOException {
+    public void populateStartView (EventHandler startGameHandler, int playerAmount) {
         startView.populate(startGameHandler, playerAmount);
     }
 
@@ -90,11 +85,14 @@ public class MainView implements Observer, WinnerFoundListener {
      * @param viewEntities is the list of viewEntities components in game board
      * @param clickHandler is the event handler that listens to an action from a click on the game board
      * @param diceHandler is the event handler that listens to an action roll the dice
-     * @param payToOpenBtnHandler
-     * @param diceToOpenBtnHandler
-     * @throws IOException
+     * @param payToOpenBtnHandler is the event handler that listens to an action open tile with money
+     * @param diceToOpenBtnHandler is the event handler that listens to an action open tile with dive
+     * @throws IOException if the GameBoardView cannot be populated.
      */
-    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
+    public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler,
+                                      EventHandler diceHandler, EventHandler payToOpenBtnHandler,
+                                      EventHandler diceToOpenBtnHandler) throws IOException {
+
         gameBoardView.populate(viewEntities, clickHandler, diceHandler, payToOpenBtnHandler, diceToOpenBtnHandler);
     }
 
@@ -106,41 +104,16 @@ public class MainView implements Observer, WinnerFoundListener {
         gameBoardView.addPlayerCards(playerCardResources, ids);
     }
 
-    private void createStartView () throws IOException {
-        mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
-        mainViewPane.getChildren().add(startView.getFXMLLoader().load());
-        javafx.scene.Node child = mainViewPane.getChildren().get(0);
-        startView = (StartView) getController(child);
-    }
-
-    private void createGameBoardView () throws IOException {
-        mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
-        mainViewPane.getChildren().add(gameBoardView.getFXMLLoader().load());
-        javafx.scene.Node child = mainViewPane.getChildren().get(0);
-        gameBoardView = (GameBoardView) getController(child);
-    }
-    private void createEndView () throws IOException {
-        mainViewPane.getChildren().removeAll(mainViewPane.getChildren());
-        mainViewPane.getChildren().add(endView.getFXMLLoader().load());
-        javafx.scene.Node child = mainViewPane.getChildren().get(0);
-        endView = (EndView) getController(child);
-    }
-
-    private static Object getController(Node node) {
-        Object controller = null;
-        do {
-            controller = node.getUserData();
-            node = node.getParent();
-        } while (controller == null && node != null);
-        return controller;
-    }
-
     /**
      * Returns the selected amount of players.
      * @return the selected amount of players.
      */
     public int getSelectedPlayerAmount(){
         return startView.getSelectedPlayerAmount();
+    }
+
+    public Observer getObserver() {
+        return gameBoardView;
     }
 
     public NewTurnListener getNewTurnListener() {
@@ -156,12 +129,14 @@ public class MainView implements Observer, WinnerFoundListener {
     }
 
     @Override
-    public void update() {
-        gameBoardView.update();
-    }
-
-    @Override
     public void updateWinnerFound() {
         loadEndView();
+    }
+
+    /**
+     * Loads the EndView to the main view.
+     */
+    private void loadEndView() {
+        mainViewPane.getChildren().setAll(endView.getEndPane());
     }
 }

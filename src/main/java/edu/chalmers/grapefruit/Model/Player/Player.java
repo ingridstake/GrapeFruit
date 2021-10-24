@@ -3,13 +3,13 @@ package edu.chalmers.grapefruit.Model.Player;
 import java.awt.*;
 
 /**
- * The Player class contains the functionality of a Player.
- * @author ingrid.stake
- * @author tove.nilsson
- * @author elvina.fahlgren
- * @author olivia.månström
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
  */
-public class Player implements IPlayer{
+public class Player implements IPlayer {
+
     private int moneyBalance;
     private boolean hasCow;
     private boolean hasVisa;
@@ -18,7 +18,7 @@ public class Player implements IPlayer{
     private boolean isWinner;
     private int id;
 
-    protected Player(PlayerColor playerColor, int id){
+    public Player(PlayerColor playerColor, int id) {
         moneyBalance = 3000;
         point = new Point(0,0);
         hasCow = false;
@@ -53,7 +53,6 @@ public class Player implements IPlayer{
     public boolean isWinner() {
         return isWinner;
     }
-
 
     @Override
     public boolean hasCow() {
@@ -104,6 +103,7 @@ public class Player implements IPlayer{
         point.y = y;
     }
 
+    @Override
     public Point getPoint() {
         return point;
     }
@@ -113,6 +113,9 @@ public class Player implements IPlayer{
         return moneyBalance;
     }
 
+    /**
+     * Reduces moneyBalance with 1000 when player pays to open tile.
+     */
     @Override
     public void makeTurnPayment() {
         moneyBalance -= 1000;

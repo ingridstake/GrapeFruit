@@ -33,14 +33,6 @@ public class UtilsTest {
     }
 
     @Test
-    public void playerCardResourceGetsWinner(){
-        List<IPlayer> players = PlayerFactory.MakePlayers(1);
-        PlayerCardResource playerCardResource = new PlayerCardResource(players.get(0));
-        players.get(0).setWinner();
-        assert (playerCardResource.isWinner());
-    }
-
-    @Test
     public void playerCardResourceGetsString(){
         List<IPlayer> players = PlayerFactory.MakePlayers(1);
         PlayerCardResource playerCardResource = new PlayerCardResource(players.get(0));

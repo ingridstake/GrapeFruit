@@ -4,7 +4,6 @@ import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
-
 import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import javafx.event.EventHandler;
@@ -13,26 +12,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author ingrid.stake
- * @author tove.nilsson
- * @author olimanstorm
- * @author elvinafahlgren
+ * @author Ingrid Stake
+ * @author Tove Nilsson
+ * @author Olivia Månström
+ * @author Elvina Fahlgren
  */
 
 public class GameBoardView implements Observer, NewTurnListener, OpenTileOperationsListener {
-    @FXML AnchorPane background;
-    @FXML Button diceBtn;
-    @FXML Button payToOpenBtn;
-    @FXML Button diceToOpenBtn;
-    List<ViewEntity> viewEntities;
-    FXMLLoader fxmlLoader;
-    HashMap<Integer, Node> playerCards = new HashMap<>();
+
+    @FXML private AnchorPane background;
+    @FXML private Button diceBtn;
+    @FXML private Button payToOpenBtn;
+    @FXML private Button diceToOpenBtn;
+    private List<ViewEntity> viewEntities;
+    private HashMap<Integer, Node> playerCards = new HashMap<>();
     private int currentPlayerId;
     private boolean showPayToOpenBtn;
     private boolean showDiceToOpenBtn;
@@ -40,13 +38,36 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
     private DiceView diceView;
 
     /**
-     * Creates a FXMLLoader that represents the game board view.
+     * Creates and returns a Gameboard view with an anchorpane.
+     * @return a GameBoardView.
+     * @throws Exception if the resource is incorrect.
      */
-    public GameBoardView(){
-        fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
+    public static GameBoardView createGameBoardView() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("background.fxml"));
+        AnchorPane background = fxmlLoader.load();
+
+        GameBoardView gameBoardView = getGameBoardViewController(background);
+        gameBoardView.background = background;
+
+        return gameBoardView;
     }
 
-    //TODO: Kanske byta funktionsnamn till initialize eller init?
+    /**
+     * Returns the fxController of a node parsed to a GameBoardView.
+     * @param node is the node whose controller is of interest.
+     * @return the fxController of a node parsed to a GameBoarView.
+     * @throws Exception if the fxController of the node cannot be parsed to a GameBoardView.
+     */
+    public static GameBoardView getGameBoardViewController(Node node) throws Exception {
+        Object controller = ViewUtils.getController(node);
+        GameBoardView gameBoardView = controller instanceof GameBoardView ? (GameBoardView) controller : null;
+
+        if (gameBoardView == null) {
+            throw new Exception("The argument node's fx:controller is not an instance of GameBoardView");
+        }
+        return gameBoardView;
+    }
+
     /**
      * Sets the GameBoards instance variable viewEntities.
      * Sets the NodeViews clickHandler.
@@ -60,7 +81,8 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
      * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
+    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler,
+                         EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         this.diceBtn.setOnAction(diceHandler);
@@ -101,108 +123,8 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
         }
     }
 
-    public FXMLLoader getFXMLLoader() {
-        return fxmlLoader;
-    }
-
-    //TODO: creda den smarta fan som klurade ut hur man gör detta: https://stackoverflow.com/questions/40754454/get-controller-instance-from-node
-    /**
-     * Finds and returns the fx:controller of a Node.
-     * @param node is the node of interest.
-     * @return the fx:controller of the node.
-     */
-    public static Object getController(Node node) {
-        Object controller = null;
-        do {
-            controller = node.getUserData();
-            node = node.getParent();
-        } while (controller == null && node != null);
-        return controller;
-    }
-
-    //TODO: Städa upp och snygga till
-    /**
-     * Repopulates the background with new children to update the view.
-     * @throws IOException if any of the fxml objects can't be loaded.
-     */
-    private void redrawChildren() throws IOException {
-        background.getChildren().removeAll(background.getChildren());
-        for (ViewEntity viewEntity : viewEntities) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(viewEntity.getResourceString()));
-            background.getChildren().add(fxmlLoader.load());
-        }
-
-        int i = 0;
-        for (javafx.scene.Node child : background.getChildren()) {
-            int x = viewEntities.get(i).getX();
-            int y = viewEntities.get(i).getY();
-
-            Object obj = getController(child);
-            NodeView nodeView = obj instanceof NodeView ? (NodeView) obj : null;
-
-            if (nodeView != null) {
-                nodeView.initialize(x, y);
-            }
-            child.relocate(x, y);
-
-            i++;
-            if (i >= viewEntities.size()) {
-                break;
-            }
-        }
-
-        for (Node node : playerCards.values()) {
-            updatePlayerCard(node);
-            background.getChildren().add(node);
-        }
-
-        drawButtons();
-        drawDiceView();
-    }
-
-
-    /**
-     * Renders the buttons that should be visible.
-     */
-    private void drawButtons(){
-        if (showPayToOpenBtn)
-            background.getChildren().add(payToOpenBtn);
-        if (showDiceToOpenBtn)
-            background.getChildren().add(diceToOpenBtn);
-        if (showDiceBtn) {
-            background.getChildren().add(diceBtn);
-            showDiceBtn = false;
-        }
-    }
-
-    /**
-     * Adds the diceView to the background, and then renders it
-     */
-    private void drawDiceView() {
-        background.getChildren().add(diceView.getNode());
-        AnchorPane.setRightAnchor(diceView.getNode(), 10.0);
-        AnchorPane.setBottomAnchor(diceView.getNode(), 400.0);
-    }
-
-    /**
-     * Updates the parameter node so that it represents its player's current state.
-     * @param node should have a fx:controller that is an instance of PlayerCardView.
-     */
-    private void updatePlayerCard(Node node) {
-            try {
-                PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
-                playerCardView.update();
-                if (playerCardView.representsWinner()){
-                    AnchorPane.setBottomAnchor(node, 400.0);
-                    AnchorPane.setRightAnchor(node, 615.0);
-                } else if (playerCardView.representsCurrentPlayer(currentPlayerId)) {
-                    AnchorPane.setBottomAnchor(node, 15.0);
-                } else {
-                    AnchorPane.setBottomAnchor(node, 0.0);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public Node getBackground() {
+        return background;
     }
 
     @Override
@@ -236,5 +158,90 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
 
     public DiceView getDiceView() {
         return diceView;
+    }
+
+    /**
+     * Repopulates the background with new children to update the view.
+     * @throws IOException if any of the fxml objects can't be loaded.
+     */
+    private void redrawChildren() throws IOException {
+        background.getChildren().removeAll(background.getChildren());
+        for (ViewEntity viewEntity : viewEntities) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(viewEntity.getResourceString()));
+            background.getChildren().add(fxmlLoader.load());
+        }
+
+        drawViewEntities();
+
+        for (Node node : playerCards.values()) {
+            updatePlayerCard(node);
+            background.getChildren().add(node);
+        }
+
+        drawButtons();
+        drawDiceView();
+    }
+
+    /**
+     * Draws all ViewEntities.
+     */
+    private void drawViewEntities() {
+        for (int i = 0; i < background.getChildren().size(); i++) {
+            int x = viewEntities.get(i).getX();
+            int y = viewEntities.get(i).getY();
+
+            Object obj = ViewUtils.getController(background.getChildren().get(i));
+            NodeView nodeView = obj instanceof NodeView ? (NodeView) obj : null;
+
+            if (nodeView != null) {
+                nodeView.initialize(x, y);
+            }
+            background.getChildren().get(i).relocate(x, y);
+
+            if (i >= viewEntities.size()) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Renders the buttons that should be visible.
+     */
+    private void drawButtons(){
+        if (showPayToOpenBtn)
+            background.getChildren().add(payToOpenBtn);
+        if (showDiceToOpenBtn)
+            background.getChildren().add(diceToOpenBtn);
+        if (showDiceBtn) {
+            background.getChildren().add(diceBtn);
+            showDiceBtn = false;
+        }
+    }
+
+    /**
+     * Adds the diceView to the background, and then renders it
+     */
+    private void drawDiceView() {
+        background.getChildren().add(diceView.getNode());
+        AnchorPane.setRightAnchor(diceView.getNode(), 10.0);
+        AnchorPane.setBottomAnchor(diceView.getNode(), 400.0);
+    }
+
+    /**
+     * Updates the parameter node so that it represents its player's current state.
+     * @param node should have a fx:controller that is an instance of PlayerCardView.
+     */
+    private void updatePlayerCard(Node node) {
+            try {
+                PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
+                playerCardView.update();
+                if (playerCardView.representsCurrentPlayer(currentPlayerId)) {
+                    AnchorPane.setBottomAnchor(node, 15.0);
+                } else {
+                    AnchorPane.setBottomAnchor(node, 0.0);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 }

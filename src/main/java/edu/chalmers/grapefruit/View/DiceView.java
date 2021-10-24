@@ -1,24 +1,21 @@
 package edu.chalmers.grapefruit.View;
 
 import edu.chalmers.grapefruit.Utils.Listeners.DiceRolledListener;
-import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that graphically represent a dice.
+ * Class that graphically represents a dice.
  * @author Elvina Fahlgren
  */
 public class DiceView implements DiceRolledListener {
+
     private @FXML ImageView diceValueImage;
     private List<Image> diceImages;
     private Node node;
@@ -38,6 +35,15 @@ public class DiceView implements DiceRolledListener {
         return diceView;
     }
 
+    public Node getNode() {
+        return node;
+    }
+
+    @Override
+    public void updateDiceValue(int diceValue) {
+        updateDiceValueImage(diceValue);
+    }
+
     /**
      * Retrieves a specific dice view fx:controller and returns it.
      * @param diceNode is the Node that represent
@@ -45,7 +51,7 @@ public class DiceView implements DiceRolledListener {
      * @throws Exception if argument diceNode's fx:controller is not an instance of DiceView.
      */
     private static DiceView getDiceViewController(Node diceNode) throws Exception {
-        Object controllerObject = GameBoardView.getController(diceNode);
+        Object controllerObject = ViewUtils.getController(diceNode);
         DiceView diceView = controllerObject instanceof DiceView ? (DiceView) controllerObject : null;
 
         if (diceView == null) {
@@ -64,7 +70,7 @@ public class DiceView implements DiceRolledListener {
     }
 
     /**
-     * Initializes the diceimages list, and adds the 6 different dice imaages to it.
+     * Initializes the dice images list, and adds the 6 different dice images to it.
      */
     private void setDiceImages() throws IllegalArgumentException {
         diceImages = new ArrayList<>();
@@ -84,15 +90,5 @@ public class DiceView implements DiceRolledListener {
     private void updateDiceValueImage(int diceValue) {
         diceValueImage.setImage(diceImages.get(diceValue - 1));
         diceValueImage.setVisible(true);
-
-    }
-
-    public Node getNode() {
-        return node;
-    }
-
-    @Override
-    public void updateDiceValue(int diceValue) {
-        updateDiceValueImage(diceValue);
     }
 }
