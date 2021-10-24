@@ -1,0 +1,19 @@
+MötesprotokollGrupp: GrapefruitDatum: 241021Lärosäte: Chalmers tekniska högskolaDeltagare: Olivia Månström, Tove Nilsson, Ingrid Stake och Elvina Fahlgren
+• Mål (5 min)- Göra klart det sista inför inlämning.
+- Göra en plan iför dagen.• Rapport från tidigare möte (15 min)Vi är nästan klara med allt. Vi har fixat allt som vi pratade om på förra mötet. 
+• Diskussions ämnen (35 min)Vi diskuterade vad om ska vara klart idag.
+• Resultat och uppgifter (5 min)Koden: 
+Elvina och Olivia ska gå igenom den en sista gång. 
+Ingrid gör så man kan köra applikation på en annan dator.
+Gå igenom TODOs.
+
+SDD:
+Försöka köra STAN och filehippo.
+Elvina försöker köra stan.
+Vi ska lista alla kända problem under punkt 4, Quality.
+Bild på designmodellen under punkt 3.
+
+RAD:
+En bild till.
+
+I eftermiddag ska vi skapa presentationen.• SummeringDet här var sista mötet.
