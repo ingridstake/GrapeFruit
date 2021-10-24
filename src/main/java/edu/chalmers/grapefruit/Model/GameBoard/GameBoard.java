@@ -34,6 +34,7 @@ public class GameBoard {
      * @param x is the x coordinate of the new position.
      * @param y is the y coordinate of the new position.
      * @param player is the player that is moved.
+     * @param steps is the amount of steps from the dice.
      */
     public Node movePlayer(int x, int y, IPlayer player, int steps) {
         for (Node node : map.getAllNodes()) {
@@ -50,6 +51,7 @@ public class GameBoard {
      * Then the all positions on the map are dehighlighted.
      * @param newNode is the new position.
      * @param player is the player that is moved.
+     * @param steps is the amount of steps from the dice.
      */
     private void movePlayer(Node newNode, IPlayer player, int steps){
         List<Node> validMoves = new ArrayList<>();

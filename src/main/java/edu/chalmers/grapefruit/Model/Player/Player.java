@@ -102,6 +102,7 @@ public class Player implements IPlayer{
         point.y = y;
     }
 
+    @Override
     public Point getPoint() {
         return point;
     }
@@ -111,6 +112,9 @@ public class Player implements IPlayer{
         return moneyBalance;
     }
 
+    /**
+     * Reduces moneyBalance with 1000 when player pays to open tile.
+     */
     @Override
     public void makeTurnPayment() {
         moneyBalance -= 1000;

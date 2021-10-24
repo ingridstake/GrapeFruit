@@ -58,7 +58,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
      * Returns the fxController of a node parsed to a GameBoarView.
      * @param node is the node whose controller is of interest.
      * @return the fxController of a node parsed to a GameBoarView.
-     * @throws Exception if the fxController of the node cannot be parsed to a GameBoardView,
+     * @throws Exception if the fxController of the node cannot be parsed to a GameBoardView.
      */
     public static GameBoardView getGameBoardViewController(Node node) throws Exception {
         Object controller = ViewUtils.getController(node);

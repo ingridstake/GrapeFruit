@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// TODO: behövs det här testet? ta bort?
 public class GameBoardTests {
     GameBoard gameBoard;
     @BeforeEach

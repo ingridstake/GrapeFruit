@@ -24,6 +24,7 @@ public class GameModel implements Observable {
     /**
      * Creates n players and a game board depending on the created players.
      * @param n is the amount of players.
+     * @throws IllegalArgumentException if n isn't in the range of [1,4].
      */
     public void initialize(int n){
         if (n<1 || n>4){

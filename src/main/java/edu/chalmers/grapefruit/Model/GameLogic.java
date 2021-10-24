@@ -43,7 +43,7 @@ public class GameLogic {
 
     /**
      * Resets the gameLogic.
-     * @return
+     * @return the instance of the class.
      */
     public static GameLogic resetGameLogic(){
         for (IPlayer player: instance.players) {
@@ -255,12 +255,17 @@ public class GameLogic {
             diceRolledListener.updateDiceValue(diceValue);
         }
     }
+
     private void notifyWinnerFoundListeners() {
         for (WinnerFoundListener winnerFoundListener : winnerFoundListeners) {
             winnerFoundListener.updateWinnerFound();
         }
     }
 
+    /**
+     * Returns number of listeners. Method made for testing.
+     * @return number of listeners.
+     */
     public int getNumberOfListeners(){
         int n = diceRolledListeners.size() + winnerFoundListeners.size() +
                 newTurnListeners.size() + openTileOperationsListeners.size();

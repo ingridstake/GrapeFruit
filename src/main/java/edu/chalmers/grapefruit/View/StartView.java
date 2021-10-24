@@ -19,6 +19,11 @@ public class StartView {
     @FXML private Button startGameButton;
     @FXML private ChoiceBox playerAmountChoiceBox;
 
+    /**
+     * Creates and returns the start view.
+     * @return a start view.
+     * @throws Exception if the resource is incorrect.
+     */
     public static StartView createStartView() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(GameBoardView.class.getResource("start-view.fxml"));
         AnchorPane view = fxmlLoader.load();
@@ -29,6 +34,12 @@ public class StartView {
         return startView;
     }
 
+    /**
+     * Returns the fxController of a node parsed to a StartView.
+     * @param node is the node whose controller is of interest.
+     * @return the fxController of a node parsed to a StartView.
+     * @throws Exception if the fxController of the node cannot be parsed to a StartView.
+     */
     private static StartView getStartViewController(Node node) throws Exception {
         Object fxController = ViewUtils.getController(node);
         StartView startView = fxController instanceof StartView ? (StartView) fxController : null;

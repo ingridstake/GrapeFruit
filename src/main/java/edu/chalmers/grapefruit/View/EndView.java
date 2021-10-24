@@ -7,14 +7,18 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.EventHandler;
 
+/**
+ * @author Elvina Fahlgren
+ * @author Olivia Månström
+ */
 public class EndView {
 
     @FXML private AnchorPane endPane;
-    @FXML Button exitButton;
+    @FXML private Button exitButton;
 
     /**
      * Creates and returns an instance of EndView containing a loaded AnchorPane.
-     * @return an EndView
+     * @return an EndView.
      * @throws Exception if the filepath for the anchor pane is incorrect.
      */
     public static EndView createEndView() throws Exception {
@@ -46,7 +50,7 @@ public class EndView {
 
     /**
      * Lets the exitGameHandler listen to a click on the exitbutton.
-     * @param exitGameHandler
+     * @param exitGameHandler is the EventHandler.
      */
     public void populate(EventHandler exitGameHandler){
         exitButton.setOnAction(exitGameHandler);

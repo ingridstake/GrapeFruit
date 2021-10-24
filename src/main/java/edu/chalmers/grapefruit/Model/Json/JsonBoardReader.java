@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Represent the json map object and is used when parsing json object into java object.
  *
- * @author elvina.fahlgren
+ * @author Elvina Fahlgren
  */
 public class JsonBoardReader {
     public List<JsonPosition> PositionList;
