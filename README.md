@@ -36,8 +36,7 @@ För att en JSON fil skall kunna läsas in som spelets spelbräde måste den var
 
     - JSONObject som har
       - en JSONArray *PositionList* vilken består av 
-         - positionID : int
-          - positionType : String 
+         - positionType : String 
          - X : int
          - Y : int
 
