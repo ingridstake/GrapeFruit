@@ -26,9 +26,7 @@ import java.util.List;
  * @author Elvina Fahlgren
  */
 public class MainView implements WinnerFoundListener {
-    //TODO LÄGG TILL HASHMAP
 
-    //TODO: lägga till javadoc?
     private @FXML AnchorPane mainViewPane;
     private GameBoardView gameBoardView = new GameBoardView();
     private StartView startView = new StartView();

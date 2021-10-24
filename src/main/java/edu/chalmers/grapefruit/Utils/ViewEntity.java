@@ -7,7 +7,7 @@ package edu.chalmers.grapefruit.Utils;
 
 public class ViewEntity {
 
-    ViewEntityResource resource;
+    private ViewEntityResource resource;
 
     public ViewEntity (ViewEntityResource resource){
         this.resource = resource;

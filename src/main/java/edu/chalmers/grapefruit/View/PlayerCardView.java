@@ -55,7 +55,6 @@ public class PlayerCardView {
         return playerCardView;
     }
 
-    //TODO: detta är inte superelegant lösning, lite för invecklat för en vy kanske? används detta fortfarande????
     /**
      * returns true if the current player matches with the player that the card is representing.
      * @param currentPlayerId is the current player that is compared with.

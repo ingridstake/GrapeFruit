@@ -12,7 +12,6 @@ import java.awt.*;
  */
 public interface IPlayer extends ViewEntityResource {
 
-    //TODO: detta kanske borde göras till flera mindre interfaces, kan hända att det orsakar problem med catsning osv. men vora snyggt!
     /**
      * Returns the color of the player.
      * @return the color of the player.
