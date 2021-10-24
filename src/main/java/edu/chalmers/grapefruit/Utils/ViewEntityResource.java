@@ -1,6 +1,6 @@
 package edu.chalmers.grapefruit.Utils;
 
-import java.awt.*;
+import java.awt.Point;
 
 /**
  * @author Ingrid Stake
