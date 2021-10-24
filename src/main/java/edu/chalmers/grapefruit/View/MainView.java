@@ -25,7 +25,7 @@ import java.util.List;
  * @author Olivia Månström
  * @author Elvina Fahlgren
  */
-public class MainView implements Observer, WinnerFoundListener {
+public class MainView implements WinnerFoundListener {
     //TODO LÄGG TILL HASHMAP
 
     //TODO: lägga till javadoc?
@@ -114,6 +114,10 @@ public class MainView implements Observer, WinnerFoundListener {
         return startView.getSelectedPlayerAmount();
     }
 
+    public Observer getObserver() {
+        return gameBoardView;
+    }
+
     public NewTurnListener getNewTurnListener() {
         return gameBoardView;
     }
@@ -124,11 +128,6 @@ public class MainView implements Observer, WinnerFoundListener {
 
     public DiceRolledListener getDiceListener() {
         return gameBoardView.getDiceView();
-    }
-
-    @Override
-    public void update() {
-        gameBoardView.update();
     }
 
     @Override

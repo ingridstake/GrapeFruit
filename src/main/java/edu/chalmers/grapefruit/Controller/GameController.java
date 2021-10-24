@@ -87,7 +87,7 @@ public class GameController {
             view.loadStartView();
             view.populateStartView(startGameHandler, 4);
             view.populateEndView(exitGameHandler);
-            model.addObserver(view);
+            model.addObserver(view.getObserver());
         } catch (Exception e) {
             e.printStackTrace();
         }
