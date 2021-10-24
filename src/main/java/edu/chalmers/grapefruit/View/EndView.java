@@ -32,6 +32,22 @@ public class EndView {
     }
 
     /**
+     * Returns the endPane.
+     * @return the endPane.
+     */
+    public AnchorPane getEndPane() {
+        return endPane;
+    }
+
+    /**
+     * Lets the exitGameHandler listen to a click on the exitbutton.
+     * @param exitGameHandler is the EventHandler.
+     */
+    public void populate(EventHandler exitGameHandler){
+        exitButton.setOnAction(exitGameHandler);
+    }
+
+    /**
      * Returns a fxcontroller parsed to a EndView.
      * @param node is the node that holds the fxcontroller that should be an instance of EndView.
      * @return a fxcontroller parsed to a EndView.
@@ -46,21 +62,5 @@ public class EndView {
         }
 
         return endView;
-    }
-
-    /**
-     * Lets the exitGameHandler listen to a click on the exitbutton.
-     * @param exitGameHandler is the EventHandler.
-     */
-    public void populate(EventHandler exitGameHandler){
-        exitButton.setOnAction(exitGameHandler);
-    }
-
-    /**
-     * Returns the endPane.
-     * @return the endPane.
-     */
-    public AnchorPane getEndPane() {
-        return endPane;
     }
 }

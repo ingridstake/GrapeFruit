@@ -41,14 +41,6 @@ public class PlayerCardResource {
     }
 
     /**
-     * Returns true if player returns to start position and has cow or visa.
-     * @return true if player returns to start position and has cow or visa.
-     */
-    public boolean isWinner(){
-        return playerResource.isWinner();
-    }
-
-    /**
      * Evaluates and returns the resource string of the player resource's color.
      * @return the resource string of the player resource's color.
      */

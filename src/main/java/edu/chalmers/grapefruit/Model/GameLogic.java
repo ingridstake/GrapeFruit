@@ -22,11 +22,16 @@ import java.util.List;
 
 public class GameLogic {
 
+    private static GameLogic instance = null;
+    private List<IPlayer> players;
+    private IPlayer currentPlayer;
+    private List<IPlayer> tileTurnIsOngoingForPlayer = new ArrayList<>();
+    private boolean cowIsFound = false;
+    private GameBoard gameBoard;
     private List<NewTurnListener> newTurnListeners = new ArrayList<>();
     private List<OpenTileOperationsListener> openTileOperationsListeners = new ArrayList<>();
     private List<DiceRolledListener> diceRolledListeners = new ArrayList<>();
     private List<WinnerFoundListener> winnerFoundListeners = new ArrayList<>();
-
     private Dice dice = new Dice(6);
 
     /**
@@ -53,40 +58,67 @@ public class GameLogic {
         return instance;
     }
 
-    private static GameLogic instance = null;
-
-    private List<IPlayer> players;
-    private IPlayer currentPlayer;
-    private List<IPlayer> tileTurnIsOngoingForPlayer = new ArrayList<>();
-    private boolean cowIsFound = false;
-    private GameBoard gameBoard;
-
-    private GameLogic(int nPlayers){
-        this.players = PlayerFactory.MakePlayers(nPlayers);
-        this.gameBoard = new GameBoard(players);
-        currentPlayer = players.get(0);
+    /**
+     * Returns number of listeners. Method made for testing.
+     * @return number of listeners.
+     */
+    public int getNumberOfListeners(){
+        int n = diceRolledListeners.size() + winnerFoundListeners.size() +
+                newTurnListeners.size() + openTileOperationsListeners.size();
+        return n;
     }
 
-    private GameLogic(){ }
+    /**
+     * Returns the game board.
+     * @return the game board.
+     */
+    public GameBoard getGameBoard(){
+        return gameBoard;
+    }
+
+    public List<IPlayer> getPlayers() {
+        return players;
+    }
+
+    public List<Integer> getPlayerIds() {
+        List<Integer> ids = new ArrayList<>();
+        for(IPlayer player : players){
+            ids.add(player.getId());
+        }
+        return ids;
+    }
 
     /**
-     * Determines what game logic should be executed for the current node and player.
-     * @param currentPlayer is the current player.
-     * @param newNode is the new position of the player.
+     * Adds a NewTurnListener to the list of NewTurnListeners.
+     * @param newTurnListener is a NewTurnListener that should be listening to when there is a new turn.
      */
-    private void executeGameLogic(IPlayer currentPlayer, Node newNode) {
-        IPosition position = newNode.getPosition();
-        if (position.getLogicType() == LogicType.UNTURNED_TILE) {
-            if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
-                    executeTileTurn(currentPlayer, newNode);
-            } else {
-                beginTurnTileForPlayer();
-            }
-        } else if (newNode.getPosition().getLogicType() == LogicType.START){
-            gameLogicStartPos(currentPlayer);
-        } else {
-            setNextCurrentPlayer();
-        }
+    public void addTurnListener(NewTurnListener newTurnListener) {
+        newTurnListeners.add(newTurnListener);
+    }
+
+    /**
+     * Adds a OpenTileOperationsListener to the list of OpenTileOperationsListeners.
+     * @param openTileOperationsListener is a OpenTileOperationsListener that should be listening to
+     *                                   if a tile could be open in some way.
+     */
+    public void addOpenTileListener(OpenTileOperationsListener openTileOperationsListener) {
+        openTileOperationsListeners.add(openTileOperationsListener);
+    }
+
+    /**
+     * Adds a DiceRolledListener to the list of DiceRolledListeners.
+     * @param diceRolledListener is a DiceRolledListener that should be listening to when the dice has been rolled.
+     */
+    public void addDiceListener(DiceRolledListener diceRolledListener) {
+        diceRolledListeners.add(diceRolledListener);
+    }
+
+    /**
+     * Adds a WinnerFoundListener to the list of WinnerFoundListeners.
+     * @param winnerFoundListener is a WinnerFoundListener that should be listening to when someone has won.
+     */
+    public void addWinnerFoundListener(WinnerFoundListener winnerFoundListener){
+        winnerFoundListeners.add(winnerFoundListener);
     }
 
     /**
@@ -114,6 +146,70 @@ public class GameLogic {
             setNextCurrentPlayer();
         }
         return false;
+    }
+
+    /**
+     * Determines if a player that reaches the start position is a valid winner of the game.
+     * @param currentPlayer is the player in question.
+     */
+    // TODO byt eventuellt namn på den, svårt att förstå vad den gör
+    public void gameLogicStartPos(IPlayer currentPlayer){
+        if (currentPlayer.hasCow() || currentPlayer.hasVisa()){
+            currentPlayer.setWinner();
+            notifyWinnerFoundListeners();
+        }
+        else
+            setNextCurrentPlayer();
+    }
+
+    /**
+     * Calls the gameBoard to update the players position.
+     * @param x is the new x coordinate.
+     * @param y is the new y coordinate.
+     */
+    public void movePlayer(int x, int y) {
+        if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
+            tileTurnIsOngoingForPlayer.remove(currentPlayer);
+        }
+        Node newNode = gameBoard.movePlayer(x,y, currentPlayer, dice.getValue());
+
+        executeGameLogic(currentPlayer, newNode);
+    }
+
+    /**
+     * Calls the gameBoard rollDice.
+     */
+    public void makeDiceRoll() {
+        gameBoard.makeDiceRoll(currentPlayer, dice.roll());
+        notifyDiceRolledListeners(dice.getValue());
+    }
+
+    private GameLogic(int nPlayers){
+        this.players = PlayerFactory.MakePlayers(nPlayers);
+        this.gameBoard = new GameBoard(players);
+        currentPlayer = players.get(0);
+    }
+
+    private GameLogic(){ }
+
+    /**
+     * Determines what game logic should be executed for the current node and player.
+     * @param currentPlayer is the current player.
+     * @param newNode is the new position of the player.
+     */
+    private void executeGameLogic(IPlayer currentPlayer, Node newNode) {
+        IPosition position = newNode.getPosition();
+        if (position.getLogicType() == LogicType.UNTURNED_TILE) {
+            if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
+                    executeTileTurn(currentPlayer, newNode);
+            } else {
+                beginTurnTileForPlayer();
+            }
+        } else if (newNode.getPosition().getLogicType() == LogicType.START){
+            gameLogicStartPos(currentPlayer);
+        } else {
+            setNextCurrentPlayer();
+        }
     }
 
     /**
@@ -165,40 +261,6 @@ public class GameLogic {
     }
 
     /**
-     * Determines if a player that reaches the start position is a valid winner of the game.
-     * @param currentPlayer is the player in question.
-     */
-    // TODO byt eventuellt namn på den, svårt att förstå vad den gör
-    public void gameLogicStartPos(IPlayer currentPlayer){
-        if (currentPlayer.hasCow() || currentPlayer.hasVisa()){
-            currentPlayer.setWinner();
-            notifyWinnerFoundListeners();
-        }
-    }
-
-    /**
-     * Calls the gameBoard to update the players position.
-     * @param x is the new x coordinate.
-     * @param y is the new y coordinate.
-     */
-    public void movePlayer(int x, int y) {
-        if (tileTurnIsOngoingForPlayer.contains(currentPlayer)){
-            tileTurnIsOngoingForPlayer.remove(currentPlayer);
-        }
-        Node newNode = gameBoard.movePlayer(x,y, currentPlayer, dice.getValue());
-
-        executeGameLogic(currentPlayer, newNode);
-    }
-
-    /**
-     * Calls the gameBoard rollDice.
-     */
-    public void makeDiceRoll() {
-        gameBoard.makeDiceRoll(currentPlayer, dice.roll());
-        notifyDiceRolledListeners(dice.getValue());
-    }
-
-    /**
      * Iterates through the list of players to find and set the next player to current player.
      */
     private void setNextCurrentPlayer() {
@@ -220,22 +282,9 @@ public class GameLogic {
         }
     }
 
-    public void addTurnListener(NewTurnListener newTurnListener) {
-        newTurnListeners.add(newTurnListener);
-    }
-
-    public void addOpenTileListener(OpenTileOperationsListener openTileOperationsListener) {
-        openTileOperationsListeners.add(openTileOperationsListener);
-    }
-
-    public void addDiceListener(DiceRolledListener diceRolledListener) {
-        diceRolledListeners.add(diceRolledListener);
-    }
-
-    public void addWinnerFoundListener(WinnerFoundListener winnerFoundListener){
-        winnerFoundListeners.add(winnerFoundListener);
-    }
-
+    /**
+     * Notifies all NewTurnListeners that there is a new turn.
+     */
     private void notifyNewTurn() {
         for (NewTurnListener newTurnListener : newTurnListeners) {
             newTurnListener.newPlayer(currentPlayer.getId());
@@ -243,6 +292,11 @@ public class GameLogic {
         }
     }
 
+    /**
+     * Notifies all OpenTileOperationsListeners that if a tile could be open in some way.
+     * @param canRollDiceToOpenTile tells whether the player can open a tile with the dice or not.
+     * @param canPayToOpenTile tells whether the player can open a tile with money or not.
+     */
     private void notifyOpenTileListeners(boolean canRollDiceToOpenTile, boolean canPayToOpenTile) {
         for (OpenTileOperationsListener listener : openTileOperationsListeners) {
             listener.updateDiceToOpenTile(canRollDiceToOpenTile);
@@ -250,45 +304,22 @@ public class GameLogic {
         }
     }
 
+    /**
+     * Notifies all DiceRolledListeners that the dice has been rolled.
+     * @param diceValue is the current value of the dice.
+     */
     private void notifyDiceRolledListeners(int diceValue) {
         for (DiceRolledListener diceRolledListener : diceRolledListeners) {
             diceRolledListener.updateDiceValue(diceValue);
         }
     }
 
+    /**
+     * Notifies all WinnerFoundListener that someone has won.
+     */
     private void notifyWinnerFoundListeners() {
         for (WinnerFoundListener winnerFoundListener : winnerFoundListeners) {
             winnerFoundListener.updateWinnerFound();
         }
-    }
-
-    /**
-     * Returns number of listeners. Method made for testing.
-     * @return number of listeners.
-     */
-    public int getNumberOfListeners(){
-        int n = diceRolledListeners.size() + winnerFoundListeners.size() +
-                newTurnListeners.size() + openTileOperationsListeners.size();
-        return n;
-    }
-
-    /**
-     * Returns the game board.
-     * @return the game board.
-     */
-    public GameBoard getGameBoard(){
-        return gameBoard;
-    }
-
-    public List<Integer> getPlayerIds() {
-        List<Integer> ids = new ArrayList<>();
-        for(IPlayer player : players){
-            ids.add(player.getId());
-        }
-        return ids;
-    }
-
-    public List<IPlayer> getPlayers() {
-        return players;
     }
 }

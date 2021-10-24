@@ -17,17 +17,9 @@ import java.util.*;
 public class MapFactory {
 
     /**
-     * Uses JsonHandler to create a map based on a json file.
-     * The json file must be structured in the following way:
-     *      - Have a JSONArray named "PositionList" which contains
-     *              - int positionID
-     *              - String positionType
-     *              - int X
-     *              - int Y
-     *      - Have a JSONObject named "Neighbours" which contains
-     *              - int id
-     *              - List<Integer> neighbours
+     * Uses JsonHandler to create a map based on a JSON file.
      * Creates Nodes and connect neighbours to each node.
+     * @param filePath is the path to the json file
      * @return a Map object
      */
     protected static Map createMap(String filePath) {

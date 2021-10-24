@@ -12,7 +12,7 @@ public interface ViewEntityResource {
     Point getPoint();
 
     /**
-     * name of the view-resource
+     * Name of the view-resource
      * @return name of the view-resource
      */
     String getResourceString();

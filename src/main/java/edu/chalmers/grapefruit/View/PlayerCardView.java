@@ -65,10 +65,6 @@ public class PlayerCardView {
         return playerCardResource.hasSamePlayer(currentPlayerId);
     }
 
-    public boolean representsWinner() {
-        return playerCardResource.isWinner();
-    }
-
     private void setPlayerCardResource(PlayerCardResource playerCardResource) {
         this.playerCardResource = playerCardResource;
         update();

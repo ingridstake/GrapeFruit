@@ -15,6 +15,7 @@ import java.util.List;
  * @author Elvina Fahlgren
  */
 public class DiceView implements DiceRolledListener {
+
     private @FXML ImageView diceValueImage;
     private List<Image> diceImages;
     private Node node;
@@ -32,6 +33,15 @@ public class DiceView implements DiceRolledListener {
         diceView.setDiceImages();
 
         return diceView;
+    }
+
+    public Node getNode() {
+        return node;
+    }
+
+    @Override
+    public void updateDiceValue(int diceValue) {
+        updateDiceValueImage(diceValue);
     }
 
     /**
@@ -60,7 +70,7 @@ public class DiceView implements DiceRolledListener {
     }
 
     /**
-     * Initializes the diceimages list, and adds the 6 different dice imaages to it.
+     * Initializes the dice images list, and adds the 6 different dice images to it.
      */
     private void setDiceImages() throws IllegalArgumentException {
         diceImages = new ArrayList<>();
@@ -80,14 +90,5 @@ public class DiceView implements DiceRolledListener {
     private void updateDiceValueImage(int diceValue) {
         diceValueImage.setImage(diceImages.get(diceValue - 1));
         diceValueImage.setVisible(true);
-    }
-
-    public Node getNode() {
-        return node;
-    }
-
-    @Override
-    public void updateDiceValue(int diceValue) {
-        updateDiceValueImage(diceValue);
     }
 }

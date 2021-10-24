@@ -38,7 +38,8 @@ public class MainView implements Observer, WinnerFoundListener {
      * Creates a static main view of the game.
      * @param stage is the stage of the application
      * @return the main view of the game
-     * @throws IOException
+     * @throws Exception if the FXMLLoader cannot be loaded or if GameBoardView, StartView or EndView cannot be
+     * created.
      */
     static public MainView makeMainView (Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(MainView.class.getResource("main-view.fxml"));
@@ -76,9 +77,8 @@ public class MainView implements Observer, WinnerFoundListener {
      * Populates the start view by calling the start view's populate method.
      * @param startGameHandler is the event handler that listens to an action to start a game
      * @param playerAmount is the amount of players
-     * @throws IOException
      */
-    public void populateStartView (EventHandler startGameHandler, int playerAmount) throws IOException {
+    public void populateStartView (EventHandler startGameHandler, int playerAmount) {
         startView.populate(startGameHandler, playerAmount);
     }
 
@@ -87,9 +87,9 @@ public class MainView implements Observer, WinnerFoundListener {
      * @param viewEntities is the list of viewEntities components in game board
      * @param clickHandler is the event handler that listens to an action from a click on the game board
      * @param diceHandler is the event handler that listens to an action roll the dice
-     * @param payToOpenBtnHandler
-     * @param diceToOpenBtnHandler
-     * @throws IOException
+     * @param payToOpenBtnHandler is the event handler that listens to an action open tile with money
+     * @param diceToOpenBtnHandler is the event handler that listens to an action open tile with dive
+     * @throws IOException if the GameBoardView cannot be populated.
      */
     public void populateGameBoardView(List<ViewEntity> viewEntities, NodeClickHandler clickHandler,
                                       EventHandler diceHandler, EventHandler payToOpenBtnHandler,

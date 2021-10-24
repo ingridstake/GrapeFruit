@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 
-public class GameModelTests {
+public class GameModelTest {
     GameModel gameModel = new GameModel();
 
     @Before

@@ -7,7 +7,15 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * This class uses Gson for converting a Json String into a Java "game board map" object.
+ * This class uses GSON for converting a JSON String into a Java "game board map" object.
+ * The JSON String must be structured in the following way:
+ * - Have a JSONArray named "PositionList" which contains
+ *       - String positionType
+ *       - int X
+ *       - int Y
+ * - Have a JSONArray named "Neighbours" which contains
+ *       - int id
+ *       - List<Integer> neighbours
  *
  * @author Elvina Fahlgren
  */
@@ -22,9 +30,13 @@ public class JsonHandler {
       readJson(filePath);
    }
 
+   public JsonBoardReader getJsonBoardReader(){
+      return boardReader;
+   }
+
    /**
-    * Reads filePath and parses json string.
-    * @param filePath is the filepath to the json file
+    * Reads filePath and parses JSON string.
+    * @param filePath is the filepath to the JSON file
     */
    private void readJson(String filePath){
       Scanner s = new Scanner(getJSONFile(filePath)).useDelimiter("\\A");
@@ -40,15 +52,11 @@ public class JsonHandler {
          throw new IllegalArgumentException("Neighbour list and PositionList in json file doesn't match!");
    }
 
-   public JsonBoardReader getJsonBoardReader(){
-      return boardReader;
-   }
-
    /**
-    * Returns the stream that holds the json file, which sets up the game's board.
-    * Finds the json file by using the right path.
-    * If the json file couldn't be found, the method will throw an IllegalArgumentException.
-    * @return the stream that holds the json file
+    * Returns the stream that holds the JSON file, which sets up the game's board.
+    * Finds the JSON file by using the right path.
+    * If the JSON file couldn't be found, the method will throw an IllegalArgumentException.
+    * @return the stream that holds the JSON file
     */
    private InputStream getJSONFile(String filePath) {
       ClassLoader classLoader = getClass().getClassLoader();

@@ -8,7 +8,7 @@ import java.awt.*;
  * @author Elvina Fahlgren
  * @author Olivia Månström
  */
-public class Position implements IPosition{
+public class Position implements IPosition {
 
     private Point point;
     private boolean isHighlighted;

@@ -8,7 +8,8 @@ import java.awt.*;
  * @author Elvina Fahlgren
  * @author Olivia Månström
  */
-public class Player implements IPlayer{
+public class Player implements IPlayer {
+
     private int moneyBalance;
     private boolean hasCow;
     private boolean hasVisa;
@@ -17,7 +18,7 @@ public class Player implements IPlayer{
     private boolean isWinner;
     private int id;
 
-    public Player(PlayerColor playerColor, int id){
+    public Player(PlayerColor playerColor, int id) {
         moneyBalance = 3000;
         point = new Point(0,0);
         hasCow = false;

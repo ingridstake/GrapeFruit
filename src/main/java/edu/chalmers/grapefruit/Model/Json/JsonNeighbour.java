@@ -3,7 +3,7 @@ package edu.chalmers.grapefruit.Model.Json;
 import java.util.List;
 
 /**
- * Represent the json neighbour list.
+ * Represent the JSON neighbour list.
  *
  * @author Elvina Fahlgren
  */

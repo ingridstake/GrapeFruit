@@ -8,6 +8,7 @@ package edu.chalmers.grapefruit.Model;
  * @author Elvina Fahlgren
  */
 public class Dice {
+
     private int sides;
     private int value;
 

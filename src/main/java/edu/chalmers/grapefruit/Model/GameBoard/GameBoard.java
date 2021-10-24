@@ -30,6 +30,35 @@ public class GameBoard {
     }
 
     /**
+     * Returns the corresponding node from the player position map.
+     * @param player is the player whose node is wanted.
+     * @return the corresponding node.
+     */
+    public Node getNode(IPlayer player) {
+        return playerPositionHashMap.get(player);
+    }
+
+    /**
+     * Returns a list of the corresponding positions from every node.
+     * @return a list of the corresponding positions.
+     */
+    public List<IPosition> getPositionList(){
+        List<IPosition> positionList = new ArrayList<>();
+        for (Node node: map.getAllNodes()) {
+            positionList.add(node.getPosition());
+        }
+        return positionList;
+    }
+
+    // TODO : döpa om denna då den inte längre rullar en tärning, kanske också till "evaluateValidMoves"?
+    /**
+     * Rolls dice and then evaluates which moves are valid and highlights them.
+     */
+    public void makeDiceRoll(IPlayer player, int diceValue){
+        playerPositionHashMap.get(player).evaluateValidMoves(new ArrayList<>(), diceValue);
+    }
+
+    /**
      * Gives the current player the position with the current values of x and y.
      * @param x is the x coordinate of the new position.
      * @param y is the y coordinate of the new position.
@@ -63,29 +92,5 @@ public class GameBoard {
         }
 
         map.deHighlightAllNodes();
-    }
-
-    /**
-     * Rolls dice and then evaluates which moves are valid and highlights them.
-     */
-    public void makeDiceRoll(IPlayer player, int diceValue){
-        playerPositionHashMap.get(player).evaluateValidMoves(new ArrayList<>(), diceValue);
-    }
-
-    /**
-     * Returns the corresponding node from the player position map.
-     * @param player is the player whose node is wanted.
-     * @return the corresponding node.
-     */
-    public Node getNode(IPlayer player) {
-        return playerPositionHashMap.get(player);
-    }
-
-    public List<IPosition> getPositionList(){
-        List<IPosition> positionList = new ArrayList<>();
-        for (Node node: map.getAllNodes()) {
-            positionList.add(node.getPosition());
-        }
-        return positionList;
     }
 }

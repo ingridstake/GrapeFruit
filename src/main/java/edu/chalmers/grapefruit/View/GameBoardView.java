@@ -4,7 +4,6 @@ import edu.chalmers.grapefruit.Utils.Listeners.OpenTileOperationsListener;
 import edu.chalmers.grapefruit.Utils.PlayerCardResource;
 import edu.chalmers.grapefruit.Utils.ViewEntity;
 import edu.chalmers.grapefruit.Utils.NodeClickHandler;
-
 import edu.chalmers.grapefruit.Utils.Observer;
 import edu.chalmers.grapefruit.Utils.Listeners.NewTurnListener;
 import javafx.event.EventHandler;
@@ -13,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +53,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
     }
 
     /**
-     * Returns the fxController of a node parsed to a GameBoarView.
+     * Returns the fxController of a node parsed to a GameBoardView.
      * @param node is the node whose controller is of interest.
      * @return the fxController of a node parsed to a GameBoarView.
      * @throws Exception if the fxController of the node cannot be parsed to a GameBoardView.
@@ -83,7 +81,8 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
      * @param diceToOpenBtnHandler
      * @throws IOException
      */
-    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler, EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
+    public void populate(List<ViewEntity> viewEntities, NodeClickHandler clickHandler, EventHandler diceHandler,
+                         EventHandler payToOpenBtnHandler, EventHandler diceToOpenBtnHandler) throws IOException {
         this.viewEntities = viewEntities;
         NodeView.setClickHandler(clickHandler);
         this.diceBtn.setOnAction(diceHandler);
@@ -172,24 +171,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
             background.getChildren().add(fxmlLoader.load());
         }
 
-        int i = 0;
-        for (javafx.scene.Node child : background.getChildren()) {
-            int x = viewEntities.get(i).getX();
-            int y = viewEntities.get(i).getY();
-
-            Object obj = ViewUtils.getController(child);
-            NodeView nodeView = obj instanceof NodeView ? (NodeView) obj : null;
-
-            if (nodeView != null) {
-                nodeView.initialize(x, y);
-            }
-            child.relocate(x, y);
-
-            i++;
-            if (i >= viewEntities.size()) {
-                break;
-            }
-        }
+        drawViewEntities();
 
         for (Node node : playerCards.values()) {
             updatePlayerCard(node);
@@ -200,6 +182,27 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
         drawDiceView();
     }
 
+    /**
+     * Draws all ViewEntities.
+     */
+    private void drawViewEntities() {
+        for (int i = 0; i < background.getChildren().size(); i++) {
+            int x = viewEntities.get(i).getX();
+            int y = viewEntities.get(i).getY();
+
+            Object obj = ViewUtils.getController(background.getChildren().get(i));
+            NodeView nodeView = obj instanceof NodeView ? (NodeView) obj : null;
+
+            if (nodeView != null) {
+                nodeView.initialize(x, y);
+            }
+            background.getChildren().get(i).relocate(x, y);
+
+            if (i >= viewEntities.size()) {
+                break;
+            }
+        }
+    }
 
     /**
      * Renders the buttons that should be visible.
@@ -232,10 +235,7 @@ public class GameBoardView implements Observer, NewTurnListener, OpenTileOperati
             try {
                 PlayerCardView playerCardView = PlayerCardView.getPlayerCardController(node);
                 playerCardView.update();
-                if (playerCardView.representsWinner()){
-                    AnchorPane.setBottomAnchor(node, 400.0);
-                    AnchorPane.setRightAnchor(node, 615.0);
-                } else if (playerCardView.representsCurrentPlayer(currentPlayerId)) {
+                if (playerCardView.representsCurrentPlayer(currentPlayerId)) {
                     AnchorPane.setBottomAnchor(node, 15.0);
                 } else {
                     AnchorPane.setBottomAnchor(node, 0.0);

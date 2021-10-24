@@ -23,10 +23,10 @@ public class GameController {
     private MainView view;
 
     /**
-     * Creates and sets up the GameBoardView with background and positions
+     * Creates and sets up the GameBoardView with background and positions.
      * @param model the model of the controller
      * @param stage is the stage of the application
-     * @throws IOException if the gameboard cannot be created.
+     * @throws IOException if the game board cannot be created.
      */
     public GameController(GameModel model, Stage stage) throws IOException {
 

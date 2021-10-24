@@ -25,6 +25,41 @@ public enum LogicType {
         }
         return getNormalResource(logicType);
     }
+    
+    /**
+     * Returns a shuffled list of tile logicTypes with the right split between them.
+     * @param nTiles is the number of tiles that needs to be returned.
+     * @return a list of tiles.
+     */
+    public static List<LogicType> getTileTypes(int nTiles) {
+        List<LogicType> tileTypes = new ArrayList<>();
+
+        tileTypes.add(LogicType.COW);
+
+        for (int i = 0; i < nTiles * 2 / 15; i++) {
+            tileTypes.add(LogicType.HORSE);
+        }
+
+        for (int i = 0; i < nTiles / 5; i++) {
+            tileTypes.add(LogicType.PIG);
+        }
+
+        for (int i = 0; i < 4 * nTiles / 15; i++) {
+            tileTypes.add(LogicType.COWBELL);
+        }
+
+        for (int i = 0; i < nTiles / 5; i++) {
+            tileTypes.add(LogicType.POOP);
+        }
+
+        while (tileTypes.size() < nTiles) {
+            tileTypes.add(LogicType.BLANK);
+        }
+
+        Collections.shuffle(tileTypes);
+
+        return tileTypes;
+    }
 
     private static String getHighLightedResource(LogicType logicType) {
         switch (logicType){
@@ -70,40 +105,5 @@ public enum LogicType {
             default :
                 return "node-view.fxml";
         }
-    }
-
-    /**
-     * Returns a shuffled list of tile logicTypes with the right split between them.
-     * @param nTiles is the number of tiles that needs to be returned.
-     * @return a list of tiles.
-     */
-    public static List<LogicType> getTileTypes(int nTiles) {
-        List<LogicType> tileTypes = new ArrayList<>();
-
-        tileTypes.add(LogicType.COW);
-
-        for (int i = 0; i < nTiles * 2 / 15; i++) {
-            tileTypes.add(LogicType.HORSE);
-        }
-
-        for (int i = 0; i < nTiles / 5; i++) {
-            tileTypes.add(LogicType.PIG);
-        }
-
-        for (int i = 0; i < 4 * nTiles / 15; i++) {
-            tileTypes.add(LogicType.COWBELL);
-        }
-
-        for (int i = 0; i < nTiles / 5; i++) {
-            tileTypes.add(LogicType.POOP);
-        }
-
-        while (tileTypes.size() < nTiles) {
-            tileTypes.add(LogicType.BLANK);
-        }
-
-        Collections.shuffle(tileTypes);
-
-        return tileTypes;
     }
 }

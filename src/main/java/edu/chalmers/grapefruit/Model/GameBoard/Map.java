@@ -22,6 +22,19 @@ public class Map {
         return startNode;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * Dehighlights all nodes in the map
+     */
+    public void deHighlightAllNodes() {
+        for (Node node : getAllNodes()) {
+            node.getPosition().deHighlight();
+        }
+    }
+
     /**
      * Adds a node to the map structure
      * @param node is the new node that is integrated in the map.
@@ -37,23 +50,10 @@ public class Map {
 
     /**
      * Returns a list containing all nodes of the map.
-     * @return a List of Nodes.
+     * @return a list of Nodes.
      */
     protected List<Node> getAllNodes(){
         List<Node> allNodes = new ArrayList<>();
         return startNode.getAllNodes(allNodes);
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    /**
-     * Dehighlights all nodes in the map
-     */
-    public void deHighlightAllNodes() {
-        for (Node node : getAllNodes()) {
-            node.getPosition().deHighlight();
-        }
     }
 }

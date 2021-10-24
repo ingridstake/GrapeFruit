@@ -3,7 +3,7 @@ package edu.chalmers.grapefruit.Model.Json;
 import java.util.List;
 
 /**
- * Represent the json map object and is used when parsing json object into java object.
+ * Represent the JSON map object and is used when parsing JSON object into Java object.
  *
  * @author Elvina Fahlgren
  */
