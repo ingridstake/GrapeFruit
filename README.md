@@ -46,20 +46,20 @@ För att en JSON fil skall kunna läsas in som spelets spelbräde måste den var
     
 ### Exempel
 
-{
-  "PositionList": [
     {
-        "positionID": 0,
-        "positionType": "NormalPosition",
-        "X": 1,
-        "Y": 1
+      "PositionList": [
+        {
+            "positionID": 0,
+            "positionType": "NormalPosition",
+            "X": 1,
+            "Y": 1
+        }
+      ],
+        "Neighbours": 
+        {
+          "id": 0,
+          "neighbours": [...]
+        }
+      ]
     }
-  ],
-    "Neighbours": 
-    {
-      "id": 0,
-      "neighbours": [...]
-    }
-  ]
-}
 
