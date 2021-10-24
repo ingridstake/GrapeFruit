@@ -55,7 +55,7 @@ För att en JSON fil skall kunna läsas in som spelets spelbräde måste den var
             "Y": 1
         }
       ],
-        "Neighbours": 
+        "Neighbours": [
         {
           "id": 0,
           "neighbours": [...]
